@@ -16,8 +16,7 @@ namespace WoodMasters2.Core.Data.Entities
         [Required]
         [StringLength(85)]
         public string PlaceName { get; set; } = null!;
-        [Required]
-        [StringLength(56)]
+        [Required]        
         [ForeignKey(nameof(Country))]
         public int CountryId { get; set; }
         [Required]

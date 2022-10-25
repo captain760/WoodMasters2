@@ -14,8 +14,7 @@ namespace WoodMasters2.Core.Data.Entities
         [Required]
         [StringLength(50)]
         public string Name { get; set; } = null!;
-        public int? AddressId { get; set; }
-        public virtual Address Address { get; set; } = null!;
+        
         public virtual List<WoodSupplier> WoodsSuppliers { get; set; } = new List<WoodSupplier>();
     }
 }

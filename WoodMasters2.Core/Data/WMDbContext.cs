@@ -30,8 +30,7 @@ namespace WoodMasters2.Core.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<MasterMasterPiece>()
-                .HasKey(x => new { x.MasterId, x.MasterPieceId });
+            
             builder.Entity<MasterAddress>()
                 .HasKey(x => new { x.MasterId, x.AddressId });
             builder.Entity<MasterPieceCategory>()

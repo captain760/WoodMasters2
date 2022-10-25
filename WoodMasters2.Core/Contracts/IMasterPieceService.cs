@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Models;
 
 namespace WoodMasters2.Core.Contracts
@@ -17,7 +18,12 @@ namespace WoodMasters2.Core.Contracts
         /// Gets all MasterPieces
         /// </summary>
         /// <returns>List of MasterPieces</returns>
-        Task<IEnumerable<MasterPieceViewModel>> GetAll();
+        Task<IEnumerable<MasterPieceViewModel>> GetAllMasterPiecesAsync();
+
+        Task<IEnumerable<Wood>> GetWoodsAsync();
+        Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task AddMasterPieceAsync(AddMasterPieceViewModel model);
+
     }
 }
 

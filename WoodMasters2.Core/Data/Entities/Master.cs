@@ -11,9 +11,16 @@ namespace WoodMasters2.Core.Data.Entities
 {
     public class Master: IdentityUser
     {
-       
+        [Required]
+        [StringLength(20)]
+        public string FirstName { get; set; } = null!;
+
+        [Required]
+        [StringLength(20)]
+        public string LastName { get; set; } = null!;
+
         public Experience Experience { get; set; }
-        public virtual List<MasterMasterPiece> MastersMasterPieces{ get; set; } = new List<MasterMasterPiece>();
+        public virtual List<MasterPiece> MasterPieces{ get; set; } = new List<MasterPiece>();
         public virtual List<MasterAddress> MastersAddresses { get; set; } = new List<MasterAddress>();
     }
 }

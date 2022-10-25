@@ -42,7 +42,7 @@ namespace WoodMasters2.Core.Models
         /// <summary>
         /// MasterPiece wood type
         /// </summary>
-        public string? WoodType { get; set; }
+        public string? Wood { get; set; }
         /// <summary>
         /// MasterPiece craft type
         /// </summary>

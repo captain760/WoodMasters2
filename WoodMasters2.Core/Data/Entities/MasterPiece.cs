@@ -25,6 +25,7 @@ namespace WoodMasters2.Core.Data.Entities
         [Range(typeof(decimal), "0.1", "1000.0")]
         public double Depth { get; set; }
         [Required]
+        [StringLength(256, MinimumLength = 5)]
         public string ImageURL { get; set; } = null!;
         
         [Required]
@@ -37,10 +38,14 @@ namespace WoodMasters2.Core.Data.Entities
         [Range(typeof(decimal), "0.1", "10.0")]
         public decimal Rating { get; set; }
 
-        
-        
+        [Required]
+        [ForeignKey(nameof(Master))]
+        public string MasterId { get; set; } = null!;
+        [Required]
+        public virtual Master Master { get; set; } = null!;
+
         public bool IsDeleted { get; set; } = false;
-        public virtual List<MasterMasterPiece> MastersMasterPieces { get; set; } = new List<MasterMasterPiece>();
+        
         public virtual List<MasterPieceCategory> MasterPiecesCategories { get; set; } = new List<MasterPieceCategory>();
         public virtual List<MasterPieceWood> MasterPiecesWoods { get; set; } = new List<MasterPieceWood>();
     }
