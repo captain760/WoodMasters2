@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,12 @@ namespace WoodMasters2.Core.Data.Entities
         [StringLength(20)]
         public string LastName { get; set; } = null!;
 
+        [Required]
+        public DateTime CreatedOn { get; private set; } = DateTime.Now;
+
+
         public Experience Experience { get; set; }
-        public virtual List<MasterPiece> MasterPieces{ get; set; } = new List<MasterPiece>();
+        
         public virtual List<MasterAddress> MastersAddresses { get; set; } = new List<MasterAddress>();
     }
 }

@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<MasterPieceViewModel>
+
+@{
+    ViewBag.Title = "All Masterpieces";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var mp in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@mp.ImageURL" alt="Masterpiece Image">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@mp.Name</h5>
+                <p class="mb-0">Master: @mp.Master</p>
+                <p class="mb-0">Rating: @mp.Rating</p>
+                <p>Category: @mp.Category</p>
+            </div>
+            @if (User?.Identity?.Name!= mp.Master)
+            {
+                <form class="input-group-sm" asp-controller="MasterPiece" asp-action="AddToBasket" asp-route-masterPieceId="@mp.Id">
+                    <input type="submit" value="Add to Basket" class="fs-6 btn btn-success mb-3 p-2" />
+                </form>
+
+                <form class="input-group-sm" asp-controller="MasterPiece" asp-action="Rate" asp-route-masterPieceId="@mp.Id">
+                    <input type="button" value="Rate Me!" class="fs-6 btn btn-success mb-3 p-2" />
+                </form>
+
+               
+            }
+            else{
+                 
+            }
+        </div>
+    }
+</div>

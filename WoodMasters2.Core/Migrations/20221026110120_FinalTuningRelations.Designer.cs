@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WoodMasters2.Core.Data;
 
@@ -11,9 +12,10 @@ using WoodMasters2.Core.Data;
 namespace WoodMasters2.Core.Migrations
 {
     [DbContext(typeof(WMDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221026110120_FinalTuningRelations")]
+    partial class FinalTuningRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,53 +200,6 @@ namespace WoodMasters2.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Woodcarving"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Woodturning"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Pyrography"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Intarsia"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Scrow Sawing"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Cabinetry and Furniture"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Carpentry and Joinery"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Construction"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Miscelaneous"
-                        });
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Country", b =>
@@ -263,58 +218,6 @@ namespace WoodMasters2.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Bulgaria"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Romania"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Greece"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Serbia"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Turkey"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Brazil"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Russia"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Ukraine"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "USA"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Canada"
-                        });
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Master", b =>
@@ -328,9 +231,6 @@ namespace WoodMasters2.Core.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -423,9 +323,6 @@ namespace WoodMasters2.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Depth")
                         .HasColumnType("float");
 
@@ -455,26 +352,39 @@ namespace WoodMasters2.Core.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                        .HasPrecision(2)
+                        .HasColumnType("decimal(2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Rating")
-                        .HasPrecision(4, 2)
-                        .HasColumnType("decimal(4,2)");
+                        .HasPrecision(2)
+                        .HasColumnType("decimal(2)");
 
                     b.Property<double>("Width")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("MasterId");
 
                     b.ToTable("MasterPieces");
+                });
+
+            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPieceCategory", b =>
+                {
+                    b.Property<int>("MasterPieceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MasterPieceId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("MasterPieceCategory");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPieceWood", b =>
@@ -508,48 +418,6 @@ namespace WoodMasters2.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Stains");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Clear Coat"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Exotic Redwood"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Vintage Modern"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Golden Sunset"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Mocha"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Maroccan Red"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Silk Grey"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Whitish"
-                        });
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Supplier", b =>
@@ -568,58 +436,6 @@ namespace WoodMasters2.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Bari Trans LTD"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Ilza LTD"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "KoronaIm LTD"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Hardi LTD"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "JAF Bulgaria"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Centaur LTD"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Birch"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Cedar"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Ash"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Acer"
-                        });
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Wood", b =>
@@ -630,12 +446,6 @@ namespace WoodMasters2.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("StainId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -643,63 +453,37 @@ namespace WoodMasters2.Core.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Woods");
+                });
+
+            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.WoodStain", b =>
+                {
+                    b.Property<int>("WoodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StainId")
+                        .HasColumnType("int");
+
+                    b.HasKey("WoodId", "StainId");
+
                     b.HasIndex("StainId");
+
+                    b.ToTable("WoodStain");
+                });
+
+            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.WoodSupplier", b =>
+                {
+                    b.Property<int>("WoodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.HasKey("WoodId", "SupplierId");
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Woods");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Type = "Oak"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Type = "Walnut"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Type = "Pine"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Type = "Beech"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Type = "Linden"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Type = "Poplar"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Type = "Birch"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Type = "Cedar"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Type = "Ash"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Type = "Acer"
-                        });
+                    b.ToTable("WoodSupplier");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -785,21 +569,32 @@ namespace WoodMasters2.Core.Migrations
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPiece", b =>
                 {
-                    b.HasOne("WoodMasters2.Core.Data.Entities.Category", "Category")
-                        .WithMany("MasterPieces")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WoodMasters2.Core.Data.Entities.Master", "Master")
                         .WithMany()
                         .HasForeignKey("MasterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Master");
+                });
+
+            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPieceCategory", b =>
+                {
+                    b.HasOne("WoodMasters2.Core.Data.Entities.Category", "Category")
+                        .WithMany("MasterPiecesCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WoodMasters2.Core.Data.Entities.MasterPiece", "MasterPiece")
+                        .WithMany("MasterPiecesCategories")
+                        .HasForeignKey("MasterPieceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
 
-                    b.Navigation("Master");
+                    b.Navigation("MasterPiece");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPieceWood", b =>
@@ -821,15 +616,42 @@ namespace WoodMasters2.Core.Migrations
                     b.Navigation("Wood");
                 });
 
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Wood", b =>
+            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.WoodStain", b =>
                 {
-                    b.HasOne("WoodMasters2.Core.Data.Entities.Stain", null)
-                        .WithMany("Woods")
-                        .HasForeignKey("StainId");
+                    b.HasOne("WoodMasters2.Core.Data.Entities.Stain", "Stain")
+                        .WithMany("WoodsStains")
+                        .HasForeignKey("StainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("WoodMasters2.Core.Data.Entities.Supplier", null)
-                        .WithMany("Woods")
-                        .HasForeignKey("SupplierId");
+                    b.HasOne("WoodMasters2.Core.Data.Entities.Wood", "Wood")
+                        .WithMany("WoodsStains")
+                        .HasForeignKey("WoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stain");
+
+                    b.Navigation("Wood");
+                });
+
+            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.WoodSupplier", b =>
+                {
+                    b.HasOne("WoodMasters2.Core.Data.Entities.Supplier", "Supplier")
+                        .WithMany("WoodsSuppliers")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WoodMasters2.Core.Data.Entities.Wood", "Wood")
+                        .WithMany("WoodsSuppliers")
+                        .HasForeignKey("WoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supplier");
+
+                    b.Navigation("Wood");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Address", b =>
@@ -839,7 +661,7 @@ namespace WoodMasters2.Core.Migrations
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Category", b =>
                 {
-                    b.Navigation("MasterPieces");
+                    b.Navigation("MasterPiecesCategories");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Country", b =>
@@ -854,22 +676,28 @@ namespace WoodMasters2.Core.Migrations
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPiece", b =>
                 {
+                    b.Navigation("MasterPiecesCategories");
+
                     b.Navigation("MasterPiecesWoods");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Stain", b =>
                 {
-                    b.Navigation("Woods");
+                    b.Navigation("WoodsStains");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Supplier", b =>
                 {
-                    b.Navigation("Woods");
+                    b.Navigation("WoodsSuppliers");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Wood", b =>
                 {
                     b.Navigation("MasterPiecesWoods");
+
+                    b.Navigation("WoodsStains");
+
+                    b.Navigation("WoodsSuppliers");
                 });
 #pragma warning restore 612, 618
         }

@@ -15,6 +15,6 @@ namespace WoodMasters2.Core.Data.Entities
         [StringLength(50)]
         public string Name { get; set; } = null!;
         
-        public virtual List<WoodSupplier> WoodsSuppliers { get; set; } = new List<WoodSupplier>();
+        public virtual List<Wood> Woods { get; set; } = new List<Wood>();
     }
 }

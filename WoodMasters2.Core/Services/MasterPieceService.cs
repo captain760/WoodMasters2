@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WoodMasters2.Core.Contracts;
+using WoodMasters2.Core.Data;
 using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Models;
 
@@ -14,34 +17,83 @@ namespace WoodMasters2.Core.Services
     /// </summary>
     public class MasterPieceService : IMasterPieceService
     {
-        public Task AddMasterPieceAsync(AddMasterPieceViewModel model)
+        private readonly WMDbContext context;
+
+        public MasterPieceService(WMDbContext _context)
         {
-            throw new NotImplementedException();
+            context = _context;
+        }
+
+        /// <summary>
+        /// Add MasterPiece to the DB
+        /// </summary>
+        /// <returns>List of MasterPieces</returns>
+        public async Task AddMasterPieceAsync(AddMasterPieceViewModel model, string userId)
+        {
+
+
+            var entity = new MasterPiece()
+            {
+                Name = model.Name,
+                Width = model.Width,
+                Length = model.Length,
+                Depth = model.Depth,
+                Description = model.Description,
+                CategoryId = model.CategoryId,
+                MasterId = userId,
+                ImageURL = model.ImageURL,
+                Price = model.Price,
+                Quantity = model.Quantity
+            };
+
+            await context.MasterPieces.AddAsync(entity);
+            await context.SaveChangesAsync();
+
         }
 
         /// <summary>
         /// Gets all MasterPieces from the DB
         /// </summary>
-        /// <returns>List of MasterPieces</returns>
-
-        public Task<IEnumerable<MasterPieceViewModel>> GetAll()
+        /// <returns>List of MasterPieces</returns>   
+        public async Task<IEnumerable<MasterPieceViewModel>> GetAllMasterPiecesAsync()
         {
-            throw new NotImplementedException();
+            var entities = await context.MasterPieces
+                .Include(x => x.Master)
+                .Include(x => x.Category)                            
+                .ToListAsync();
+            
+            return entities.Select(m => new MasterPieceViewModel
+            {
+                Id = m.Id,
+                Master = m.Master.UserName,
+                Name = m.Name,
+                Description = m.Description,
+                ImageURL = m.ImageURL,
+                Rating = m.Rating,
+                Category = m.Category.Name,
+                Price = m.Price,    
+                Width = m.Width,
+                Length=m.Length,
+                Depth = m.Depth,
+                Quantity = m.Quantity
+            });
         }
 
-        public Task<IEnumerable<MasterPieceViewModel>> GetAllMasterPiecesAsync()
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
-            throw new NotImplementedException();
+            return await context.Categories.ToListAsync();
         }
 
-        public Task<IEnumerable<Category>> GetCategoriesAsync()
+        public async Task<IEnumerable<Supplier>> GetSuppliersAsync()
         {
-            throw new NotImplementedException();
+            return await context.Suppliers.ToListAsync();
         }
 
-        public Task<IEnumerable<Wood>> GetWoodsAsync()
+        public async Task<IEnumerable<Wood>> GetWoodsAsync()
         {
-            throw new NotImplementedException();
+            return await context.Woods.ToListAsync();
         }
+
+       
     }
 }

@@ -35,6 +35,12 @@ namespace WoodMasters2.Core.Models
         /// MasterPiece thickness
         /// </summary>
         public double Depth { get; set; }
+
+        /// <summary>
+        /// MasterPiece description
+        /// </summary>
+        public string Description { get; set; } = null!;
+
         /// <summary>
         /// MasterPiece image
         /// </summary>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WoodMasters2.Core.Data;
 
@@ -11,9 +12,10 @@ using WoodMasters2.Core.Data;
 namespace WoodMasters2.Core.Migrations
 {
     [DbContext(typeof(WMDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221102092629_DBChanges")]
+    partial class DBChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -455,15 +457,15 @@ namespace WoodMasters2.Core.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                        .HasPrecision(2)
+                        .HasColumnType("decimal(2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Rating")
-                        .HasPrecision(4, 2)
-                        .HasColumnType("decimal(4,2)");
+                        .HasPrecision(2)
+                        .HasColumnType("decimal(2)");
 
                     b.Property<double>("Width")
                         .HasColumnType("float");

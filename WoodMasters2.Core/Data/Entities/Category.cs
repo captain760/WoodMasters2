@@ -14,6 +14,6 @@ namespace WoodMasters2.Core.Data.Entities
         [Required]
         [StringLength(50)]
         public string Name { get; set; } = null!;
-        public virtual List<MasterPieceCategory> MasterPiecesCategories { get; set; } = new List<MasterPieceCategory>();
+        public virtual List<MasterPiece> MasterPieces { get; set; } = new List<MasterPiece>();
     }
 }

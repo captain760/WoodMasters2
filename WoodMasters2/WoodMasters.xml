@@ -4,11 +4,6 @@
         <name>WoodMasters2</name>
     </assembly>
     <members>
-        <member name="T:WoodMasters2.Controllers.AccountController">
-            <summary>
-            Controller for the Accounts of the users
-            </summary>
-        </member>
         <member name="T:WoodMasters2.Controllers.BaseController">
             <summary>
             Base controller inherited by all other controllers
@@ -21,25 +16,104 @@
         </member>
         <member name="M:WoodMasters2.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{WoodMasters2.Controllers.HomeController})">
             <summary>
-            
+            _logger controller
             </summary>
             <param name="logger"></param>
         </member>
         <member name="M:WoodMasters2.Controllers.HomeController.Index">
             <summary>
-            
+            Index controller
             </summary>
             <returns></returns>
         </member>
         <member name="M:WoodMasters2.Controllers.HomeController.Privacy">
             <summary>
-            
+            Privacy controller
             </summary>
             <returns></returns>
         </member>
         <member name="M:WoodMasters2.Controllers.HomeController.Error">
             <summary>
-            
+            Errors handling controller
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:WoodMasters2.Controllers.MasterPieceController">
+            <summary>
+            MasterPiece controller
+            </summary>
+        </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.#ctor(WoodMasters2.Core.Contracts.IMasterPieceService)">
+            <summary>
+            Injecting MasterPieceService
+            </summary>
+            <param name="_masterPieceService"></param>
+        </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.All">
+            <summary>
+            showing all MasterPieces
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.Add">
+            <summary>
+            Add MasterPiece control on GET
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.Add(WoodMasters2.Core.Models.AddMasterPieceViewModel)">
+            <summary>
+            Add MasterPiece on POST
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WoodMasters2.Controllers.RatingController">
+            <summary>
+            Rating controller
+            </summary>
+        </member>
+        <member name="T:WoodMasters2.Controllers.UserController">
+            <summary>
+            Controller for the Accounts of the users
+            </summary>
+        </member>
+        <member name="M:WoodMasters2.Controllers.UserController.#ctor(Microsoft.AspNetCore.Identity.UserManager{WoodMasters2.Core.Data.Entities.Master},Microsoft.AspNetCore.Identity.SignInManager{WoodMasters2.Core.Data.Entities.Master})">
+            <summary>
+            Master's accounts controller
+            </summary>
+            <param name="_userManager"></param>
+            <param name="_signInManager"></param>
+        </member>
+        <member name="M:WoodMasters2.Controllers.UserController.Register">
+            <summary>
+            Register Get
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.UserController.Register(WoodMasters2.Core.Models.RegisterViewModel)">
+            <summary>
+            Register Post
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.UserController.Login">
+            <summary>
+            Login Get
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.UserController.Login(WoodMasters2.Core.Models.LoginViewModel)">
+            <summary>
+            Login Post
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.UserController.Logout">
+            <summary>
+            LogOut control - redirect to Home/Index
             </summary>
             <returns></returns>
         </member>

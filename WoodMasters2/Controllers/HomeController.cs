@@ -11,7 +11,7 @@ namespace WoodMasters2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         /// <summary>
-        /// 
+        /// _logger controller
         /// </summary>
         /// <param name="logger"></param>
         public HomeController(ILogger<HomeController> logger)
@@ -19,15 +19,19 @@ namespace WoodMasters2.Controllers
             _logger = logger;
         }
         /// <summary>
-        /// 
+        /// Index controller
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-            return View();
+            if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("All", "MasterPiece");
+            }
+                return View();
         }
         /// <summary>
-        /// 
+        /// Privacy controller
         /// </summary>
         /// <returns></returns>
         public IActionResult Privacy()
@@ -35,7 +39,7 @@ namespace WoodMasters2.Controllers
             return View();
         }
         /// <summary>
-        /// 
+        /// Errors handling controller
         /// </summary>
         /// <returns></returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

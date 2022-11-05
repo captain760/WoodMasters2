@@ -11,9 +11,11 @@ namespace WoodMasters2.Core.Data.Entities
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         [StringLength(50)]
         public string Name { get; set; } = null!;
-        public virtual List<WoodStain> WoodsStains { get; set; } = new List<WoodStain>();
+
+        public virtual ICollection<Wood> Woods { get; set; } = new List<Wood>();
     }
 }

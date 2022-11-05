@@ -22,20 +22,27 @@ namespace WoodMasters2.Core.Models
         /// MasterPiece width
         /// </summary>
         [Required]
-        [Range(typeof(decimal), "0.1", "1000.0")]
+        [Range(0.1, 1000.0)]
         public double Width { get; set; }
         /// <summary>
         /// MasterPiece length
         /// </summary>
         [Required]
-        [Range(typeof(decimal), "0.1", "1000.0")]
+        [Range(0.1, 1000.0)]
         public double Length { get; set; }
         /// <summary>
         /// MasterPiece thickness
         /// </summary>
         [Required]
-        [Range(typeof(decimal), "0.1", "1000.0")]
+        [Range(0.1, 1000.0)]
         public double Depth { get; set; }
+        /// <summary>
+        /// MasterPiece description
+        /// </summary>
+        [Required]
+        [StringLength(5000, MinimumLength =2)]
+        public string Description { get; set; } = null!;
+
         /// <summary>
         /// MasterPiece image
         /// </summary>
@@ -43,28 +50,33 @@ namespace WoodMasters2.Core.Models
         [StringLength(256, MinimumLength = 5)]
         public string ImageURL { get; set; } = null!;
         /// <summary>
-        /// MasterPiece wood type
+        /// The number of woods used in the MasterPiece
         /// </summary>
         [Required]
-        [StringLength(50, MinimumLength = 2)]
-        public string WoodId { get; set; } = null!;
+        [Range(1,10)]
+        public int WoodsUsed { get; set; }
+
+        /// <summary>
+        /// MasterPiece wood type
+        /// </summary>
+        [Required]        
+        public int WoodId { get; set; } 
         /// <summary>
         /// MasterPiece wood supplier
         /// </summary>
         [Required]
-        [StringLength(50, MinimumLength = 2)]
-        public string SupplierId { get; set; } = null!;
+        
+        public int SupplierId { get; set; } 
         /// <summary>
         /// MasterPiece craft type
         /// </summary>
-        [Required]
-        [StringLength(50, MinimumLength = 2)]
-        public string CategoryId { get; set; } = null!;
+        [Required]        
+        public int CategoryId { get; set; } 
         /// <summary>
         /// MasterPiece price
         /// </summary>public string? Category { get; set; }
         [Required]
-        [Range(typeof(decimal), "0.01", "10000.00")]
+        [Range(typeof(decimal), "0.01", "10000.00",ConvertValueInInvariantCulture =true)]
         public decimal Price { get; set; }
         /// <summary>
         /// MasterPiece quantity available

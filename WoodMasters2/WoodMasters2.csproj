@@ -24,8 +24,4 @@
     <ProjectReference Include="..\WoodMasters2.Core\WoodMasters2.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Home\NewFolder\" />
-  </ItemGroup>
-
 </Project>
