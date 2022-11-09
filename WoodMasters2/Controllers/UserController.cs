@@ -72,8 +72,10 @@ namespace WoodMasters2.Controllers
                         }
                     }
                 },
-                Email = model.Email
+                Email = model.Email,
+                EmailConfirmed = true
             };
+            await userManager.AddClaimAsync(user, new System.Security.Claims.Claim("first_name", user.FirstName));
 
             var result = await userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
@@ -121,6 +123,7 @@ namespace WoodMasters2.Controllers
             var user = await userManager.FindByNameAsync(model.UserName);
             if (user != null)
             {
+                
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 if (result.Succeeded)
                 {
