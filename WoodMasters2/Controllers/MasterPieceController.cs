@@ -67,31 +67,31 @@ namespace WoodMasters2.Controllers
 
         }
 
-        //public async Task<IActionResult> AddToCollection(int movieId)
-        //{
+        public async Task<IActionResult> AddToFavorites(int masterPieceId)
+        {
 
-        //    var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-        //    await movieService.AddMovieToCollectionAsync(movieId, userId);
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await masterPieceService.AddMasterPieceToFavoritesAsync(masterPieceId, userId);
 
 
-        //    return RedirectToAction(nameof(All));
-        //}
+            return RedirectToAction(nameof(All));
+        }
 
-        //public async Task<IActionResult> Watched()
-        //{
-        //    var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-        //    var model = await movieService.GetWatchedAsync(userId);
+        public async Task<IActionResult> Favorites()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var model = await masterPieceService.GetFavoritesAsync(userId);
 
-        //    return View("Mine", model);
-        //}
+            return View("Favorite", model);
+        }
 
-        //public async Task<IActionResult> RemoveFromCollection(int movieId)
-        //{
-        //    var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-        //    await movieService.RemoveMovieFromCollectionAsync(movieId, userId);
+        public async Task<IActionResult> Remove(int masterPieceId)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await masterPieceService.RemoveMasterPieceFromFavoritesAsync(masterPieceId, userId);
 
-        //    return RedirectToAction(nameof(Watched));
-        //}
+            return RedirectToAction(nameof(Favorites));
+        }
 
     }
 }

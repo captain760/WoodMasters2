@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WoodMasters2.Models;
 
@@ -22,6 +23,7 @@ namespace WoodMasters2.Controllers
         /// Index controller
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         public IActionResult Index()
         {
             if (User?.Identity?.IsAuthenticated ?? false)
@@ -34,6 +36,8 @@ namespace WoodMasters2.Controllers
         /// Privacy controller
         /// </summary>
         /// <returns></returns>
+        
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();

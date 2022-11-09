@@ -51,6 +51,44 @@ namespace WoodMasters2.Core.Services
 
         }
 
+        public async Task AddMasterPieceToFavoritesAsync(int masterPieceId, string userId)
+        {
+            var user = await context.Users
+                        .Where(u => u.Id == userId)                        
+                        .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            var masterPiece = await context.MasterPieces.FirstOrDefaultAsync(u => u.Id == masterPieceId);
+
+            if (masterPiece == null)
+            {
+                throw new ArgumentException("Invalid MasterPiece ID");
+            }
+
+            if (!user.MasterPieces.Any(m => m.Id == masterPieceId))
+            {
+                user.MasterPieces.Add(new MasterPiece()
+                            {
+                    Id = masterPiece.Id,
+                    MasterId = user.Id,
+                    Name = masterPiece.Name
+
+                });
+
+                await context.SaveChangesAsync();
+            }
+
+        }
+
+        public Task DeleteAsync(int masterPieceId, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Gets all MasterPieces from the DB
         /// </summary>
@@ -84,6 +122,35 @@ namespace WoodMasters2.Core.Services
             return await context.Categories.ToListAsync();
         }
 
+        public async Task<IEnumerable<MasterPieceViewModel>> GetFavoritesAsync(string userId)
+        {
+            var user = await context.Users
+                    .Where(u => u.Id == userId)  
+                    .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+
+            return user.MasterPieces
+            .Select(m => new MasterPieceViewModel()
+            {
+                Master = m.Master.UserName,
+                Category = m.Category.Name,
+                Id = m.Id,
+                ImageURL = m.ImageURL,
+                Name = m.Name,
+                Rating = m.Rating
+            });
+
+        }
+
+        public Task<IEnumerable<MasterPieceViewModel>> GetMineAsync(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Supplier>> GetSuppliersAsync()
         {
             return await context.Suppliers.ToListAsync();
@@ -94,6 +161,11 @@ namespace WoodMasters2.Core.Services
             return await context.Woods.ToListAsync();
         }
 
-       
+        public Task RemoveMasterPieceFromFavoritesAsync(int masterPieceId, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

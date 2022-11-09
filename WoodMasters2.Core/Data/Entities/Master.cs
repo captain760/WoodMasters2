@@ -27,5 +27,6 @@ namespace WoodMasters2.Core.Data.Entities
         public Experience Experience { get; set; }
         
         public virtual List<MasterAddress> MastersAddresses { get; set; } = new List<MasterAddress>();
+        public virtual List<MasterPiece> MasterPieces { get; set; } = new List<MasterPiece>();
     }
 }
