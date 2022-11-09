@@ -9,6 +9,11 @@
             Base controller inherited by all other controllers
             </summary>
         </member>
+        <member name="P:WoodMasters2.Controllers.BaseController.UserFirstName">
+            <summary>
+            Creating Claim: UserFirstName
+            </summary>
+        </member>
         <member name="T:WoodMasters2.Controllers.HomeController">
             <summary>
             Home controller for Logged-Out users
@@ -67,11 +72,6 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
-        </member>
-        <member name="T:WoodMasters2.Controllers.RatingController">
-            <summary>
-            Rating controller
-            </summary>
         </member>
         <member name="T:WoodMasters2.Controllers.UserController">
             <summary>

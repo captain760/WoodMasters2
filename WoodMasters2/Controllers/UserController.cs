@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WoodMasters2.Core.Constants;
 using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Models;
 
@@ -74,12 +75,15 @@ namespace WoodMasters2.Controllers
                 },
                 Email = model.Email,
                 EmailConfirmed = true
-            };
-            await userManager.AddClaimAsync(user, new System.Security.Claims.Claim("first_name", user.FirstName));
+            };           
 
             var result = await userManager.CreateAsync(user, model.Password);
+
+            await userManager.AddClaimAsync(user, new System.Security.Claims.Claim(ClaimTypeConstants.FirstName, user.FirstName));
+
             if (result.Succeeded)
             {
+                await signInManager.SignInAsync(user, isPersistent: false); 
                 return RedirectToAction("Login", "User");
             }
 
@@ -102,7 +106,7 @@ namespace WoodMasters2.Controllers
             {
                 return RedirectToAction("All", "MasterPiece");
             }
-            var model = new LoginViewModel();
+            var model = new LoginViewModel();            
 
             return View(model);
         }
@@ -127,6 +131,7 @@ namespace WoodMasters2.Controllers
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 if (result.Succeeded)
                 {
+                    
                     return RedirectToAction("All", "MasterPiece");
                 }
             }
