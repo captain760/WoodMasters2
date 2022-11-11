@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WoodMasters2.Core.Data;
 
@@ -11,9 +12,10 @@ using WoodMasters2.Core.Data;
 namespace WoodMasters2.Core.Migrations
 {
     [DbContext(typeof(WMDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221111142836_AddingFavorites2")]
+    partial class AddingFavorites2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,27 +319,6 @@ namespace WoodMasters2.Core.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Favorite", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("MasterId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MasterId");
-
-                    b.ToTable("Favorite");
-                });
-
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Master", b =>
                 {
                     b.Property<string>("Id")
@@ -363,6 +344,10 @@ namespace WoodMasters2.Core.Migrations
 
                     b.Property<int>("Experience")
                         .HasColumnType("int");
+
+                    b.Property<string>("Favorites")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -785,13 +770,6 @@ namespace WoodMasters2.Core.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Favorite", b =>
-                {
-                    b.HasOne("WoodMasters2.Core.Data.Entities.Master", null)
-                        .WithMany("Favorites")
-                        .HasForeignKey("MasterId");
-                });
-
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterAddress", b =>
                 {
                     b.HasOne("WoodMasters2.Core.Data.Entities.Address", "Address")
@@ -877,8 +855,6 @@ namespace WoodMasters2.Core.Migrations
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Master", b =>
                 {
-                    b.Navigation("Favorites");
-
                     b.Navigation("MasterPieces");
 
                     b.Navigation("MastersAddresses");

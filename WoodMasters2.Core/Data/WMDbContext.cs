@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WoodMasters2.Core.Data.Entities;
 
 namespace WoodMasters2.Core.Data
@@ -27,7 +28,7 @@ namespace WoodMasters2.Core.Data
                     .UseLazyLoadingProxies();
             }
         }
-
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             
@@ -36,7 +37,10 @@ namespace WoodMasters2.Core.Data
             
             builder.Entity<MasterPieceWood>()
                 .HasKey(x => new { x.MasterPieceId, x.WoodId });
-                        
+
+            
+
+
 
             builder.Entity<Master>()
                 .Property(m => m.UserName)

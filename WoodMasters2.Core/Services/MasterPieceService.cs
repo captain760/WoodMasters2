@@ -69,18 +69,15 @@ namespace WoodMasters2.Core.Services
                 throw new ArgumentException("Invalid MasterPiece ID");
             }
 
-            if (!user.MasterPieces.Any(m => m.Id == masterPieceId))
+            if (!user.Favorites.Any(m => m.Value == masterPieceId))
             {
-                user.MasterPieces.Add(new MasterPiece()
-                            {
-                    Id = masterPiece.Id,
-                    MasterId = user.Id,
-                    Name = masterPiece.Name
-
-                });
+                user.Favorites.Add(new Favorite()
+                {
+                    Value = masterPieceId
+                });   
 
                 await context.SaveChangesAsync();
-            }
+             }
 
         }
 
@@ -125,23 +122,47 @@ namespace WoodMasters2.Core.Services
         public async Task<IEnumerable<MasterPieceViewModel>> GetFavoritesAsync(string userId)
         {
             var user = await context.Users
+                    .Include(mp=>mp.MasterPieces)
+                    .Include(f=>f.Favorites)
                     .Where(u => u.Id == userId)  
                     .FirstOrDefaultAsync();
+
+
+
+
+
 
             if (user == null)
             {
                 throw new ArgumentException("Invalid user ID");
             }
+            
+            var favoriteMasterPieces = new List<MasterPiece>();
+            foreach (var mpId in user.Favorites)
+            {
+                var favoriteMasterPiece = user.MasterPieces.FirstOrDefault(mp => mp.Id == mpId.Value);
+                if (favoriteMasterPiece != null)
+                {
+                    favoriteMasterPieces.Add(favoriteMasterPiece);
+                }
+            }
 
-            return user.MasterPieces
+            return favoriteMasterPieces
             .Select(m => new MasterPieceViewModel()
             {
-                Master = m.Master.UserName,
-                Category = m.Category.Name,
                 Id = m.Id,
-                ImageURL = m.ImageURL,
+                Master = m.Master.UserName,
                 Name = m.Name,
-                Rating = m.Rating
+                Description = m.Description,
+                ImageURL = m.ImageURL,
+                Rating = m.Rating,
+                Category = m.Category.Name,
+                Price = m.Price,
+                Width = m.Width,
+                Length = m.Length,
+                Depth = m.Depth,
+                Quantity = m.Quantity
+
             });
 
         }

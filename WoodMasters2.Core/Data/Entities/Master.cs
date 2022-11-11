@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -28,5 +29,11 @@ namespace WoodMasters2.Core.Data.Entities
         
         public virtual List<MasterAddress> MastersAddresses { get; set; } = new List<MasterAddress>();
         public virtual List<MasterPiece> MasterPieces { get; set; } = new List<MasterPiece>();
+        /// <summary>
+        /// List of favorite MasterPiece's Ids
+        /// </summary>
+        
+        public  List<Favorite> Favorites { get; set; } = new List<Favorite>();
+        
     }
 }
