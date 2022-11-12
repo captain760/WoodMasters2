@@ -30,13 +30,13 @@ namespace WoodMasters2.Controllers
             {
                 return RedirectToAction("All", "MasterPiece");
             }
-                return View();
+            return View();
         }
         /// <summary>
         /// Privacy controller
         /// </summary>
         /// <returns></returns>
-        
+
         [AllowAnonymous]
         public IActionResult Privacy()
         {

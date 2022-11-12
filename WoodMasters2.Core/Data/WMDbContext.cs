@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WoodMasters2.Core.Data.Entities;
 
 namespace WoodMasters2.Core.Data
@@ -28,17 +27,17 @@ namespace WoodMasters2.Core.Data
                     .UseLazyLoadingProxies();
             }
         }
-        
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
+
             builder.Entity<MasterAddress>()
                 .HasKey(x => new { x.MasterId, x.AddressId });
-            
+
             builder.Entity<MasterPieceWood>()
                 .HasKey(x => new { x.MasterPieceId, x.WoodId });
 
-            
+
 
 
 
@@ -53,14 +52,14 @@ namespace WoodMasters2.Core.Data
                 .IsRequired();
 
             builder.Entity<MasterPiece>()
-                .Property(mp=>mp.Price)
+                .Property(mp => mp.Price)
                 .HasColumnType("decimal")
-                .HasPrecision(7,2);
+                .HasPrecision(7, 2);
 
             builder.Entity<MasterPiece>()
                .Property(mp => mp.Rating)
                .HasColumnType("decimal")
-               .HasPrecision(4,2);
+               .HasPrecision(4, 2);
 
             //Seeding Categories, Woods, Suppliers and a MasterPiece example
             builder
@@ -313,7 +312,7 @@ namespace WoodMasters2.Core.Data
               Name = "Whitish"
           });
 
-            
+
 
             //builder
             //   .Entity<MasterPiece>()

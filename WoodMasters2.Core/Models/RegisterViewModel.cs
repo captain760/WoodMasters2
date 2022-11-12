@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WoodMasters2.Core.Models
 {
@@ -30,7 +25,7 @@ namespace WoodMasters2.Core.Models
         [StringLength(85)]
         public string PlaceName { get; set; } = null!;
         [Required]
-        [StringLength(56)]        
+        [StringLength(56)]
         public string Country { get; set; } = null!;
 
         [Required]

@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
 using WoodMasters2.Core.Data.Entities;
@@ -54,7 +48,7 @@ namespace WoodMasters2.Core.Services
         public async Task AddMasterPieceToFavoritesAsync(int masterPieceId, string userId)
         {
             var user = await context.Users
-                        .Where(u => u.Id == userId)                        
+                        .Where(u => u.Id == userId)
                         .FirstOrDefaultAsync();
 
             if (user == null)
@@ -68,16 +62,17 @@ namespace WoodMasters2.Core.Services
             {
                 throw new ArgumentException("Invalid MasterPiece ID");
             }
-
-            if (!user.Favorites.Any(m => m.Value == masterPieceId))
+            var favoriteIds = user.Favorites.Select(u => u.Value);
+            var favoriteMasterPieces = context.MasterPieces.Where(f => favoriteIds.Contains(f.Id));
+            if (favoriteMasterPieces==null)
             {
                 user.Favorites.Add(new Favorite()
                 {
                     Value = masterPieceId
-                });   
+                });
 
                 await context.SaveChangesAsync();
-             }
+            }
 
         }
 
@@ -94,9 +89,9 @@ namespace WoodMasters2.Core.Services
         {
             var entities = await context.MasterPieces
                 .Include(x => x.Master)
-                .Include(x => x.Category)                            
+                .Include(x => x.Category)
                 .ToListAsync();
-            
+
             return entities.Select(m => new MasterPieceViewModel
             {
                 Id = m.Id,
@@ -106,9 +101,9 @@ namespace WoodMasters2.Core.Services
                 ImageURL = m.ImageURL,
                 Rating = m.Rating,
                 Category = m.Category.Name,
-                Price = m.Price,    
+                Price = m.Price,
                 Width = m.Width,
-                Length=m.Length,
+                Length = m.Length,
                 Depth = m.Depth,
                 Quantity = m.Quantity
             });
@@ -122,31 +117,19 @@ namespace WoodMasters2.Core.Services
         public async Task<IEnumerable<MasterPieceViewModel>> GetFavoritesAsync(string userId)
         {
             var user = await context.Users
-                    .Include(mp=>mp.MasterPieces)
-                    .Include(f=>f.Favorites)
-                    .Where(u => u.Id == userId)  
+                    .Include(mp => mp.MasterPieces)
+                    .Include(f => f.Favorites)
+                    .Where(u => u.Id == userId)
                     .FirstOrDefaultAsync();
-
-
-
-
-
 
             if (user == null)
             {
                 throw new ArgumentException("Invalid user ID");
             }
+            var favoriteIds = user.Favorites.Select(u=>u.Value);
+            var favoriteMasterPieces = context.MasterPieces.Where(f => favoriteIds.Contains(f.Id));
+                
             
-            var favoriteMasterPieces = new List<MasterPiece>();
-            foreach (var mpId in user.Favorites)
-            {
-                var favoriteMasterPiece = user.MasterPieces.FirstOrDefault(mp => mp.Id == mpId.Value);
-                if (favoriteMasterPiece != null)
-                {
-                    favoriteMasterPieces.Add(favoriteMasterPiece);
-                }
-            }
-
             return favoriteMasterPieces
             .Select(m => new MasterPieceViewModel()
             {
@@ -182,11 +165,11 @@ namespace WoodMasters2.Core.Services
             return await context.Woods.ToListAsync();
         }
 
-        public Task RemoveMasterPieceFromFavoritesAsync(int masterPieceId, string userId)
+        public async Task RemoveMasterPieceFromFavoritesAsync(int masterPieceId, string userId)
         {
-            throw new NotImplementedException();
+             
         }
 
-        
+
     }
 }

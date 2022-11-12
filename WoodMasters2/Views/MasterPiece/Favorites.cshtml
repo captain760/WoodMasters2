@@ -1,0 +1,32 @@
+﻿
+@model IEnumerable<MasterPieceViewModel>
+
+@{
+ViewBag.Title = "Favorite MasterPieces";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr/>
+
+
+<div class="text-center row">
+    @foreach (var mp in Model)
+    {
+        <div class="card col-4"style="width: 20rem; ">
+        <img class="card-img-top"style="width: 18rem;"
+        src="@mp.ImageURL"alt="MasterPiece Image">
+        <div class="card-body">
+
+        <h5 class="card-title mt-1">@mp.Name</h5>
+        <p class="mb-0">Master: @mp.Master</p>
+        <p class="mb-0">Rating: @mp.Rating</p>
+        <p>Genre: @mp.Category</p>
+        <p>Price: @mp.Price</p>
+        </div>
+
+        <form class="input-group-sm"asp-route-masterPieceId="@mp.Id"asp-controller="MasterPiece"asp-action="Remove"method="post">
+        <input class="fs-6 btnbtn-success mb-3 p-2"type="submit"value="Remove from Favorites"/>
+        </form>
+        </div>
+    }
+</div>

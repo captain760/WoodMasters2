@@ -1,17 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WoodMasters2.Core.Data.Enums;
 
 namespace WoodMasters2.Core.Data.Entities
 {
-    public class Master: IdentityUser
+    public class Master : IdentityUser
     {
         [Required]
         [StringLength(20)]
@@ -26,14 +19,14 @@ namespace WoodMasters2.Core.Data.Entities
 
 
         public Experience Experience { get; set; }
-        
+
         public virtual List<MasterAddress> MastersAddresses { get; set; } = new List<MasterAddress>();
         public virtual List<MasterPiece> MasterPieces { get; set; } = new List<MasterPiece>();
         /// <summary>
         /// List of favorite MasterPiece's Ids
         /// </summary>
-        
-        public  List<Favorite> Favorites { get; set; } = new List<Favorite>();
-        
+
+        public List<Favorite> Favorites { get; set; } = new List<Favorite>();
+
     }
 }

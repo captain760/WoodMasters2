@@ -75,7 +75,7 @@ namespace WoodMasters2.Controllers
                 },
                 Email = model.Email,
                 EmailConfirmed = true
-            };           
+            };
 
             var result = await userManager.CreateAsync(user, model.Password);
 
@@ -83,7 +83,7 @@ namespace WoodMasters2.Controllers
 
             if (result.Succeeded)
             {
-                await signInManager.SignInAsync(user, isPersistent: false); 
+                await signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Login", "User");
             }
 
@@ -106,7 +106,7 @@ namespace WoodMasters2.Controllers
             {
                 return RedirectToAction("All", "MasterPiece");
             }
-            var model = new LoginViewModel();            
+            var model = new LoginViewModel();
 
             return View(model);
         }
@@ -127,11 +127,11 @@ namespace WoodMasters2.Controllers
             var user = await userManager.FindByNameAsync(model.UserName);
             if (user != null)
             {
-                
+
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 if (result.Succeeded)
                 {
-                    
+
                     return RedirectToAction("All", "MasterPiece");
                 }
             }

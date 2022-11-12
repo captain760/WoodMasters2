@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WoodMasters2.Core.Data
+﻿namespace WoodMasters2.Core.Data
 {
     public class Configuration
     {

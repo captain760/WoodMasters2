@@ -44,7 +44,7 @@ namespace WoodMasters2.Controllers
                 Woods = await masterPieceService.GetWoodsAsync(),
                 Suppliers = await masterPieceService.GetSuppliersAsync()
             };
-            
+
 
             return View(model);
         }
@@ -82,7 +82,7 @@ namespace WoodMasters2.Controllers
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var model = await masterPieceService.GetFavoritesAsync(userId);
 
-            return View("Favorite", model);
+            return View(model);
         }
 
         public async Task<IActionResult> Remove(int masterPieceId)

@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
 using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Services;
-using WoodMasters2.Core.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 

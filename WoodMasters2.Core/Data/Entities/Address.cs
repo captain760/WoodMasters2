@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WoodMasters2.Core.Data.Entities
 {
@@ -16,7 +11,7 @@ namespace WoodMasters2.Core.Data.Entities
         [Required]
         [StringLength(85)]
         public string PlaceName { get; set; } = null!;
-        [Required]        
+        [Required]
         [ForeignKey(nameof(Country))]
         public int CountryId { get; set; }
         [Required]

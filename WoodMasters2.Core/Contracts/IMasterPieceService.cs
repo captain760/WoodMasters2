@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WoodMasters2.Core.Data.Entities;
+﻿using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Models;
 
 namespace WoodMasters2.Core.Contracts
@@ -13,7 +8,7 @@ namespace WoodMasters2.Core.Contracts
     /// </summary>
     public interface IMasterPieceService
     {
-        
+
         /// <summary>
         /// Gets all MasterPieces
         /// </summary>
