@@ -63,8 +63,8 @@ namespace WoodMasters2.Core.Services
                 throw new ArgumentException("Invalid MasterPiece ID");
             }
             var favoriteIds = user.Favorites.Select(u => u.Value);
-            var favoriteMasterPieces = context.MasterPieces.Where(f => favoriteIds.Contains(f.Id));
-            if (favoriteMasterPieces==null)
+            var favoriteMasterPieces = context.MasterPieces.Where(f => favoriteIds.Contains(f.Id)).ToList();
+            if (favoriteMasterPieces == null || favoriteMasterPieces.Count == 0)
             {
                 user.Favorites.Add(new Favorite()
                 {
@@ -167,7 +167,28 @@ namespace WoodMasters2.Core.Services
 
         public async Task RemoveMasterPieceFromFavoritesAsync(int masterPieceId, string userId)
         {
-             
+            var user = await context.Users
+                   .Include(mp => mp.MasterPieces)
+                   .Include(f => f.Favorites)
+                   .Where(u => u.Id == userId)
+                   .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+            var favoriteToRemove = user.Favorites.FirstOrDefault(f=>f.Value==masterPieceId);
+
+            if (favoriteToRemove!= null)
+            {
+                user.Favorites.Remove(favoriteToRemove);
+
+                await context.SaveChangesAsync();
+                //context.Entry(favoriteToRemove).State = EntityState.Deleted;
+                //context.SaveChanges();
+                //context.Entry(favoriteToRemove).State = EntityState.Detached;
+            }
+
         }
 
 
