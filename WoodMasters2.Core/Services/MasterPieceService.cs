@@ -44,7 +44,13 @@ namespace WoodMasters2.Core.Services
             await context.SaveChangesAsync();
 
         }
-
+        /// <summary>
+        /// Add MasterPiece to the Favorites List
+        /// </summary>
+        /// <param name="masterPieceId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task AddMasterPieceToFavoritesAsync(int masterPieceId, string userId)
         {
             var user = await context.Users
@@ -75,7 +81,13 @@ namespace WoodMasters2.Core.Services
             }
 
         }
-
+        /// <summary>
+        /// Deleting MasterPiece By the master
+        /// </summary>
+        /// <param name="masterPieceId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public Task DeleteAsync(int masterPieceId, string userId)
         {
             throw new NotImplementedException();
@@ -108,17 +120,68 @@ namespace WoodMasters2.Core.Services
                 Quantity = m.Quantity
             });
         }
-
+        /// <summary>
+        /// Get the Category of the MasterPiece
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return await context.Categories.ToListAsync();
         }
-
+        /// <summary>
+        /// Get Favorite MasterPieces List
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task<IEnumerable<MasterPieceViewModel>> GetFavoritesAsync(string userId)
         {
             var user = await context.Users
-                    .Include(mp => mp.MasterPieces)
-                    .Include(f => f.Favorites)
+                    .Where(u => u.Id == userId)
+                    .Include(mp => mp.MasterPieces)                    
+                    .ThenInclude(mp => mp.Category)
+                    .Include(f => f.Favorites)                             
+                    .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user ID");
+            }
+            var favoriteIds = user.Favorites.Select(u=>u.Value).ToList();
+            var favoriteMasterPieces =  await context.MasterPieces
+                .Where(f => favoriteIds.Contains(f.Id))
+                .ToListAsync();
+                
+            
+            return favoriteMasterPieces
+                .Select(m => new MasterPieceViewModel()
+            {
+                Id = m.Id,
+                Master = m.Master.UserName,
+                Name = m.Name,
+                Description = m.Description,
+                ImageURL = m.ImageURL,
+                Rating = m.Rating,
+                Category = m.Category?.Name,
+                Price = m.Price,
+                Width = m.Width,
+                Length = m.Length,
+                Depth = m.Depth,
+                Quantity = m.Quantity
+
+            });
+
+        }
+        /// <summary>
+        /// Get owned MasterPieces
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public async Task<IEnumerable<MasterPieceViewModel>> GetMineAsync(string userId)
+        {
+            var user = await context.Users
+                    .Include(mp => mp.MasterPieces)                    
                     .Where(u => u.Id == userId)
                     .FirstOrDefaultAsync();
 
@@ -126,12 +189,8 @@ namespace WoodMasters2.Core.Services
             {
                 throw new ArgumentException("Invalid user ID");
             }
-            var favoriteIds = user.Favorites.Select(u=>u.Value);
-            var favoriteMasterPieces = context.MasterPieces.Where(f => favoriteIds.Contains(f.Id));
-                
-            
-            return favoriteMasterPieces
-            .Select(m => new MasterPieceViewModel()
+            var mineMasterPieces = user.MasterPieces                
+                .Select(m => new MasterPieceViewModel()
             {
                 Id = m.Id,
                 Master = m.Master.UserName,
@@ -147,24 +206,31 @@ namespace WoodMasters2.Core.Services
                 Quantity = m.Quantity
 
             });
-
+            return mineMasterPieces;
         }
-
-        public Task<IEnumerable<MasterPieceViewModel>> GetMineAsync(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Get the Supplier of the wood for the MasterPiece
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Supplier>> GetSuppliersAsync()
         {
             return await context.Suppliers.ToListAsync();
         }
-
+        /// <summary>
+        /// Get the wood of the MasterPiece
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Wood>> GetWoodsAsync()
         {
             return await context.Woods.ToListAsync();
         }
-
+        /// <summary>
+        /// Remove the MasterPiece from the Favorites list
+        /// </summary>
+        /// <param name="masterPieceId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task RemoveMasterPieceFromFavoritesAsync(int masterPieceId, string userId)
         {
             var user = await context.Users
@@ -184,9 +250,7 @@ namespace WoodMasters2.Core.Services
                 user.Favorites.Remove(favoriteToRemove);
 
                 await context.SaveChangesAsync();
-                //context.Entry(favoriteToRemove).State = EntityState.Deleted;
-                //context.SaveChanges();
-                //context.Entry(favoriteToRemove).State = EntityState.Detached;
+                
             }
 
         }

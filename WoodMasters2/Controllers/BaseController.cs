@@ -27,6 +27,10 @@ namespace WoodMasters2.Controllers
                 return firstName;
             }
         }
+        /// <summary>
+        /// Attaching UserFirstName always to the ViewBag
+        /// </summary>
+        /// <param name="context"></param>
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             if (User?.Identity?.IsAuthenticated ?? false)

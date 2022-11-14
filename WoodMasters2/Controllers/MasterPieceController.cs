@@ -61,34 +61,61 @@ namespace WoodMasters2.Controllers
                 return View(model);
             }
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            await masterPieceService.AddMasterPieceAsync(model, userId);
+            await masterPieceService.AddMasterPieceAsync(model, userId!);
 
             return RedirectToAction(nameof(All));
 
         }
-
+        /// <summary>
+        /// Add to Favorites List
+        /// </summary>
+        /// <param name="masterPieceId"></param>
+        /// <returns></returns>
+        [HttpPost]
         public async Task<IActionResult> AddToFavorites(int masterPieceId)
         {
 
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            await masterPieceService.AddMasterPieceToFavoritesAsync(masterPieceId, userId);
+            await masterPieceService.AddMasterPieceToFavoritesAsync(masterPieceId, userId!);
 
 
             return RedirectToAction(nameof(All));
         }
-
+        /// <summary>
+        /// Get the list of Favorites
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public async Task<IActionResult> Favorites()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            var model = await masterPieceService.GetFavoritesAsync(userId);
+            var model = await masterPieceService.GetFavoritesAsync(userId!);
 
             return View(model);
         }
+        /// <summary>
+        /// Get the list of Owned MasterPieces
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var model = await masterPieceService.GetMineAsync(userId!);
 
+            return View("Mine",model);
+        }
+
+        /// <summary>
+        /// Remove a MasterPiece from Favorites list
+        /// </summary>
+        /// <param name="masterPieceId"></param>
+        /// <returns></returns>
+        [HttpPost]
         public async Task<IActionResult> Remove(int masterPieceId)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            await masterPieceService.RemoveMasterPieceFromFavoritesAsync(masterPieceId, userId);
+            await masterPieceService.RemoveMasterPieceFromFavoritesAsync(masterPieceId, userId!);
 
             return RedirectToAction(nameof(Favorites));
         }
