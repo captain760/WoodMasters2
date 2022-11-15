@@ -55,6 +55,7 @@ namespace WoodMasters2.Core.Services
         {
             var user = await context.Users
                         .Where(u => u.Id == userId)
+                        .Include(f=>f.Favorites)
                         .FirstOrDefaultAsync();
 
             if (user == null)
@@ -69,8 +70,8 @@ namespace WoodMasters2.Core.Services
                 throw new ArgumentException("Invalid MasterPiece ID");
             }
             var favoriteIds = user.Favorites.Select(u => u.Value);
-            var favoriteMasterPieces = context.MasterPieces.Where(f => favoriteIds.Contains(f.Id)).ToList();
-            if (favoriteMasterPieces == null || favoriteMasterPieces.Count == 0)
+            var favoriteMasterPieces = await context.MasterPieces.Where(f => favoriteIds.Contains(f.Id)).ToListAsync();
+            if (favoriteMasterPieces == null || favoriteMasterPieces.Count == 0 || !favoriteMasterPieces.Contains(masterPiece))
             {
                 user.Favorites.Add(new Favorite()
                 {
@@ -88,9 +89,26 @@ namespace WoodMasters2.Core.Services
         /// <param name="userId"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Task DeleteAsync(int masterPieceId, string userId)
+        public async Task DeleteAsync(int masterPieceId)
         {
-            throw new NotImplementedException();
+            //var user = await context.Users
+            //       .Include(mp => mp.MasterPieces)                   
+            //       .Where(u => u.Id == userId)
+            //       .FirstOrDefaultAsync();
+
+            //if (user == null)
+            //{
+            //    throw new ArgumentException("Invalid user ID");
+            //}
+            var masterPieceToDelete = await context.MasterPieces.FirstOrDefaultAsync(f => f.Id == masterPieceId);
+
+            if (masterPieceToDelete != null)
+            {
+                masterPieceToDelete.IsDeleted = true;
+
+                await context.SaveChangesAsync();
+
+            }
         }
 
         /// <summary>
@@ -100,6 +118,7 @@ namespace WoodMasters2.Core.Services
         public async Task<IEnumerable<MasterPieceViewModel>> GetAllMasterPiecesAsync()
         {
             var entities = await context.MasterPieces
+                .Where(mp=>mp.IsDeleted==false)
                 .Include(x => x.Master)
                 .Include(x => x.Category)
                 .ToListAsync();
@@ -138,9 +157,9 @@ namespace WoodMasters2.Core.Services
         {
             var user = await context.Users
                     .Where(u => u.Id == userId)
-                    .Include(mp => mp.MasterPieces)                    
+                    .Include(mp => mp.MasterPieces)
                     .ThenInclude(mp => mp.Category)
-                    .Include(f => f.Favorites)                             
+                    .Include(f => f.Favorites)
                     .FirstOrDefaultAsync();
 
             if (user == null)
@@ -154,20 +173,21 @@ namespace WoodMasters2.Core.Services
                 
             
             return favoriteMasterPieces
+                .Where(mp => mp.IsDeleted == false)
                 .Select(m => new MasterPieceViewModel()
             {
-                Id = m.Id,
-                Master = m.Master.UserName,
-                Name = m.Name,
-                Description = m.Description,
-                ImageURL = m.ImageURL,
-                Rating = m.Rating,
-                Category = m.Category?.Name,
-                Price = m.Price,
-                Width = m.Width,
-                Length = m.Length,
-                Depth = m.Depth,
-                Quantity = m.Quantity
+                    Id = m.Id,
+                    Master = user.UserName,
+                    Name = m.Name,
+                    Description = m.Description,
+                    ImageURL = m.ImageURL,
+                    Rating = m.Rating,
+                    Category = m.Category?.Name,
+                    Price = m.Price,
+                    Width = m.Width,
+                    Length = m.Length,
+                    Depth = m.Depth,
+                    Quantity = m.Quantity
 
             });
 
@@ -181,7 +201,8 @@ namespace WoodMasters2.Core.Services
         public async Task<IEnumerable<MasterPieceViewModel>> GetMineAsync(string userId)
         {
             var user = await context.Users
-                    .Include(mp => mp.MasterPieces)                    
+                    .Include(mp => mp.MasterPieces)   
+                    .ThenInclude(mp=>mp.Category)
                     .Where(u => u.Id == userId)
                     .FirstOrDefaultAsync();
 
@@ -189,11 +210,12 @@ namespace WoodMasters2.Core.Services
             {
                 throw new ArgumentException("Invalid user ID");
             }
-            var mineMasterPieces = user.MasterPieces                
+            var mineMasterPieces = user.MasterPieces
+                .Where(mp => mp.IsDeleted == false)
                 .Select(m => new MasterPieceViewModel()
             {
                 Id = m.Id,
-                Master = m.Master.UserName,
+                Master = user.UserName,
                 Name = m.Name,
                 Description = m.Description,
                 ImageURL = m.ImageURL,

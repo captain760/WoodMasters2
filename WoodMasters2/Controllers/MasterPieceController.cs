@@ -53,7 +53,7 @@ namespace WoodMasters2.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> Add(AddMasterPieceViewModel model)
         {
             if (!ModelState.IsValid)
@@ -120,5 +120,18 @@ namespace WoodMasters2.Controllers
             return RedirectToAction(nameof(Favorites));
         }
 
+        /// <summary>
+        /// Deleteing MasterPiece from Master's collection
+        /// </summary>
+        /// <param name="masterPieceId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Delete(int masterPieceId)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await masterPieceService.DeleteAsync(masterPieceId);
+
+            return RedirectToAction(nameof(Mine));
+        }
     }
 }

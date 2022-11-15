@@ -11,21 +11,21 @@ ViewBag.Title = "Mine MasterPieces";
 <div class="text-center row">
     @foreach (var mp in Model)
     {
-<div class="card col-4"style="width: 20rem; ">
-<img class="card-img-top"style="width: 18rem;"
-src="@mp.ImageURL"alt="MasterPiece Image">
-<div class="card-body">
+        <div class="card col-4"style="width: 20rem; ">
+            <img class="card-img-top"style="width: 18rem;"
+            src="@mp.ImageURL"alt="MasterPiece Image">
+            <div class="card-body">
 
-<h5 class="card-title mt-1">@mp.Name</h5>
-<p class="mb-0">Master: @mp.Master</p>
-<p class="mb-0">Rating: @mp.Rating</p>
-<p>Genre: @mp.Category</p>
-</div>
+                <h5 class="card-title mt-1">@mp.Name</h5>
+                <p class="mb-0">Master: @mp.Master</p>
+                <p class="mb-0">Rating: @mp.Rating</p>
+                <p>Category: @mp.Category</p>
+            </div>
 
-<form class="input-group-sm"asp-route-movieId="@mp.Id"asp-controller="Movies"asp-action="Delete"method="post">
-<input class="fs-6 btnbtn-danger mb-3 p-2"type="submit"value="Delete"/>
-</form>
-</div>
+            <form class="input-group-sm"asp-route-masterPieceId="@mp.Id"asp-controller="MasterPiece"asp-action="Delete"method="post">
+            <input class="fs-6 btn btn-danger mb-3 p-2"type="submit"value="Delete"/>
+            </form>
+        </div>
     }
 </div>
 

@@ -25,7 +25,7 @@ namespace WoodMasters2.Core.Contracts
         Task<IEnumerable<MasterPieceViewModel>> GetMineAsync(string userId);
 
         Task RemoveMasterPieceFromFavoritesAsync(int masterPieceId, string userId);
-        Task DeleteAsync(int masterPieceId, string userId);
+        Task DeleteAsync(int masterPieceId);
 
     }
 }
