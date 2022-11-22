@@ -1,0 +1,38 @@
+﻿@model CommentViewModel
+
+
+@{
+    ViewBag.Title = "Comments for Masterpiece";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@Model.MasterPiece.ImageURL" alt="Masterpiece Image">
+    <div class="text-center row">
+        @foreach (var mp in Model.Comments)
+        {        
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@mp.MasterPiece?.Master.UserName</h5>
+                <p class="mb-0">Comment: @mp.Body</p>
+                <p class="mb-0">Posted on: @mp.PostingTime</p>
+                
+            </div>                    
+        }
+        <div class="form-group">
+                        <div class="col-md-12">
+                            <textarea name="Comment" id="Comment" required rows="5" style="width:100%;" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="hidden" name="masterPieceId" value="@ViewBag.MasterPieceId" />
+                            
+                            <input type="submit" id="btnRegister" name="btnRegister" value="Submit Comment" class="btn btn-warning" />
+                        </div>
+                    </div>
+    </div>
+</div>

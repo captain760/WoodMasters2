@@ -17,6 +17,7 @@ namespace WoodMasters2.Core.Data
         public DbSet<Stain> Stains { get; set; } = null!;
         public DbSet<Supplier> Suppliers { get; set; } = null!;
         public DbSet<Wood> Woods { get; set; } = null!;
+        public DbSet<Comment> Comments { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

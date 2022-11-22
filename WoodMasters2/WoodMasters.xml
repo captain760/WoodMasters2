@@ -112,6 +112,20 @@
             <param name="masterPieceId"></param>
             <returns></returns>
         </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.Edit(System.Int32)">
+            <summary>
+            Get for Editing a MasterPiece
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.Edit(WoodMasters2.Core.Models.EditMasterPieceViewModel)">
+            <summary>
+            Post for Editing a MasterPiece
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:WoodMasters2.Controllers.UserController">
             <summary>
             Controller for the Accounts of the users

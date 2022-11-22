@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Net;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
 using WoodMasters2.Core.Data.Entities;
@@ -111,6 +112,23 @@ namespace WoodMasters2.Core.Services
             }
         }
 
+        public async Task EditMasterPieceAsync(EditMasterPieceViewModel model)
+        {
+            var entity = await context.MasterPieces.FindAsync(model.Id);
+            entity.Name = model.Name;
+            entity.Width = model.Width;
+            entity.Length = model.Length;
+            entity.Depth = model.Depth;
+            entity.Description = model.Description;
+            entity.CategoryId = model.CategoryId;
+            
+            entity.ImageURL = model.ImageURL;
+            entity.Price = model.Price;
+            entity.Quantity = model.Quantity;
+
+            await context.SaveChangesAsync();
+        }
+
         /// <summary>
         /// Gets all MasterPieces from the DB
         /// </summary>
@@ -147,6 +165,32 @@ namespace WoodMasters2.Core.Services
         {
             return await context.Categories.ToListAsync();
         }
+
+        
+        public async Task<EditMasterPieceViewModel> GetEditMasterPieceAsync(int id)
+        {
+            var masterPiece = await context.MasterPieces.FindAsync(id);
+            var model = new EditMasterPieceViewModel()
+            {
+                Id = id,
+                Depth = masterPiece.Depth,
+                Width = masterPiece.Width,
+                Description = masterPiece.Description,
+                CategoryId = masterPiece.CategoryId,
+                Length = masterPiece.Length,
+                ImageURL = masterPiece.ImageURL,
+                Name = masterPiece.Name,
+                Price = masterPiece.Price,
+                Quantity = masterPiece.Quantity
+            };
+            model.Categories = await GetCategoriesAsync();
+            model.Suppliers = await GetSuppliersAsync();
+            model.Woods = await GetWoodsAsync();
+
+            return model;
+        }
+
+
         /// <summary>
         /// Get Favorite MasterPieces List
         /// </summary>

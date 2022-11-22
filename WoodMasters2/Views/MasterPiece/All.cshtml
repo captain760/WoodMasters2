@@ -7,7 +7,7 @@
 
 
 <h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+<hr class="border border-success border-3 opacity-75">
 
 <div class="text-center row">
     @foreach (var mp in Model)
@@ -18,18 +18,24 @@
             <div class="card-body">
 
                 <h5 class="card-title mt-1">@mp.Name</h5>
-                <p class="mb-0">Master: @mp.Master</p>
+                <p class="mb-1">Category: @mp.Category</p>
+                <p class="mb-1">Master: @mp.Master</p>
+                <p class="mb-1">Width/Length/Depth[cm]: @mp.Width/@mp.Length/@mp.Depth</p>                
+                <p class="mb-1">Description: @mp.Description</p>
+                <p class="mb-0">Price: @mp.Price $</p>
+                <p class="mb-1">Quantity: @mp.Quantity pcs.</p>
                 <p class="mb-0">Rating: @mp.Rating</p>
-                <p>Category: @mp.Category</p>
+                
             </div>
             @if (User?.Identity?.Name!= mp.Master)
             {
+                
                 <form class="input-group-sm" asp-controller="MasterPiece" asp-action="AddToFavorites" asp-route-masterPieceId="@mp.Id">
-                    <input type="submit" value="Add to Favorites" class="fs-6 btn btn-success mb-3 p-2" />
+                    <input type="submit" value="Add to Favorites" class="fs-6 btn btn-warning mb-3 p-2" />
                 </form>
 
-                <form class="input-group-sm" asp-controller="MasterPiece" asp-action="Rate" asp-route-masterPieceId="@mp.Id">
-                    <input type="button" value="Rate Me!" class="fs-6 btn btn-success mb-3 p-2" />
+                <form class="input-group-sm" asp-controller="Comment" asp-action="All" asp-route-masterPieceId="@mp.Id">
+                    <input type="button" value="Comments" class="fs-6 btn btn-secondary mb-3 p-2" />
                 </form>               
             }
             

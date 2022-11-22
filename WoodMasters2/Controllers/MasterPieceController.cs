@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 using System.Security.Claims;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Models;
@@ -130,6 +131,32 @@ namespace WoodMasters2.Controllers
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await masterPieceService.DeleteAsync(masterPieceId);
+
+            return RedirectToAction(nameof(Mine));
+        }/// <summary>
+        /// Get for Editing a MasterPiece
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await masterPieceService.GetEditMasterPieceAsync(id);
+            return View(model);
+        }
+        /// <summary>
+        /// Post for Editing a MasterPiece
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditMasterPieceViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            await masterPieceService.EditMasterPieceAsync(model);
 
             return RedirectToAction(nameof(Mine));
         }

@@ -5,7 +5,7 @@ ViewBag.Title = "Mine MasterPieces";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
-<hr/>
+<hr class="border border-primary border-3 opacity-75">
 
 
 <div class="text-center row">
@@ -17,10 +17,17 @@ ViewBag.Title = "Mine MasterPieces";
             <div class="card-body">
 
                 <h5 class="card-title mt-1">@mp.Name</h5>
-                <p class="mb-0">Master: @mp.Master</p>
+                <p class="mb-1">Category: @mp.Category</p>                
+                <p class="mb-1">Width/Length/Depth[cm]: @mp.Width/@mp.Length/@mp.Depth</p>                
+                <p class="mb-1">Description: @mp.Description</p>
+                <p class="mb-0">Price: @mp.Price $</p>
+                <p class="mb-1">Quantity: @mp.Quantity pcs.</p>
                 <p class="mb-0">Rating: @mp.Rating</p>
-                <p>Category: @mp.Category</p>
             </div>
+
+            <form class="input-group-sm"asp-route-Id="@mp.Id"asp-controller="MasterPiece"asp-action="Edit" method="get">
+            <input class="fs-6 btn btn-warning mb-3 p-2"type="submit"value="Edit"/>
+            </form>
 
             <form class="input-group-sm"asp-route-masterPieceId="@mp.Id"asp-controller="MasterPiece"asp-action="Delete"method="post">
             <input class="fs-6 btn btn-danger mb-3 p-2"type="submit"value="Delete"/>

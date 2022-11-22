@@ -6,7 +6,7 @@ ViewBag.Title = "Favorite MasterPieces";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
-<hr/>
+<hr class="border border-warning border-3 opacity-75">
 
 
 <div class="text-center row">
@@ -25,7 +25,7 @@ ViewBag.Title = "Favorite MasterPieces";
         </div>
 
         <form class="input-group-sm"asp-route-masterPieceId="@mp.Id"asp-controller="MasterPiece"asp-action="Remove"method="post">
-        <input class="fs-6 btn btn-warning mb-3 p-2"type="submit"value="Remove from Favorites"/>
+        <input class="fs-6 btn btn-danger mb-3 p-2"type="submit"value="Remove from Favorites"/>
         </form>
         </div>
     }

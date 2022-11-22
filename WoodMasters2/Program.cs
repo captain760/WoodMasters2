@@ -16,6 +16,11 @@ builder.Services.AddDefaultIdentity<Master>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequiredLength = 5;
+    options.Password.RequireDigit = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    
 })
     .AddEntityFrameworkStores<WMDbContext>();
 builder.Services.ConfigureApplicationCookie(options =>
@@ -30,6 +35,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
 }
 else
