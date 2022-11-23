@@ -4,9 +4,17 @@
 @{
 ViewBag.Title = "Favorite MasterPieces";
 }
-
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr class="border border-warning border-3 opacity-75">
+<head>
+<style>
+body  {
+  background-image: url("/Images/fav-background.jpg");
+  background-color: #cccccc;
+}
+</style>
+</head>
+<hr class="border border-primary border-2 opacity-100">
+<h2 class="text-center text-primary">@ViewBag.Title</h2>
+<hr class="border border-primary border-3 opacity-100">
 
 
 <div class="text-center row">
@@ -17,11 +25,13 @@ ViewBag.Title = "Favorite MasterPieces";
         src="@mp.ImageURL"alt="MasterPiece Image">
         <div class="card-body">
 
-        <h5 class="card-title mt-1">@mp.Name</h5>
-        <p class="mb-0">Master: @mp.Master</p>
-        <p class="mb-0">Rating: @mp.Rating</p>
-        <p>Category: @mp.Category</p>
-        <p>Price: @mp.Price</p>
+         <h5 class="card-title mt-1">@mp.Name</h5>
+                <p class="mb-1">Category: @mp.Category</p>                
+                <p class="mb-1">Width/Length/Depth[cm]: @mp.Width/@mp.Length/@mp.Depth</p>                
+                <p class="mb-1">Description: @mp.Description</p>
+                <p class="mb-0">Price: @mp.Price $</p>
+                <p class="mb-1">Quantity: @mp.Quantity pcs.</p>
+                <p class="mb-0">Rating: @mp.Rating</p>
         </div>
 
         <form class="input-group-sm"asp-route-masterPieceId="@mp.Id"asp-controller="MasterPiece"asp-action="Remove"method="post">

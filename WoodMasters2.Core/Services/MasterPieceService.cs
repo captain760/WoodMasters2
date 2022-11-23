@@ -236,6 +236,17 @@ namespace WoodMasters2.Core.Services
             });
 
         }
+
+        public async Task<MasterPiece> GetMasterPieceByIdAsync(int id)
+        {
+            var entity = await context.MasterPieces.FindAsync(id);
+            if (entity==null)
+            {
+                throw new ArgumentException("Invalid MasterPiece ID");
+            }
+            return entity;
+        }
+
         /// <summary>
         /// Get owned MasterPieces
         /// </summary>

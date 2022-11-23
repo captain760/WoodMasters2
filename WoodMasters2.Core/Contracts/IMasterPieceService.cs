@@ -30,6 +30,8 @@ namespace WoodMasters2.Core.Contracts
 
         Task<EditMasterPieceViewModel> GetEditMasterPieceAsync(int id);
         Task EditMasterPieceAsync(EditMasterPieceViewModel model);
+
+        Task <MasterPiece> GetMasterPieceByIdAsync(int id);
     }
 }
 
