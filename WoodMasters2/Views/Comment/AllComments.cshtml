@@ -12,6 +12,15 @@
             <img class="card-img-top" style="width: 18rem;"
              src="@Model.MasterPiece.ImageURL" alt="Masterpiece Image">
     <div class="text-center row">
+        <h5 class="card-title mt-1">@Model.MasterPiece.Name</h5>
+        
+                <p class="mb-1">Category: @Model.MasterPiece.Category</p>
+                <p class="mb-1">Master: @Model.MasterPiece.Master</p>
+                <p class="mb-1">Width/Length/Depth[cm]: @Model.MasterPiece.Width/@Model.MasterPiece.Length/@Model.MasterPiece.Depth</p>                
+                <p class="mb-1">Description: @Model.MasterPiece.Description</p>
+                <p class="mb-0">Price: @Model.MasterPiece.Price $</p>
+                <p class="mb-1">Quantity: @Model.MasterPiece.Quantity pcs.</p>
+                <p class="mb-0">Rating: @Model.MasterPiece.Rating</p>
         @foreach (var mp in Model.Comments)
         {        
             <div class="card-body">

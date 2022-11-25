@@ -10,15 +10,7 @@ namespace WoodMasters2.Controllers
     /// </summary>
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-        /// <summary>
-        /// _logger controller
-        /// </summary>
-        /// <param name="logger"></param>
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        
         /// <summary>
         /// Index controller
         /// </summary>

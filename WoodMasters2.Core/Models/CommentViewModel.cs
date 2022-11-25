@@ -12,6 +12,11 @@ namespace WoodMasters2.Core.Models
     {
         public MasterPiece MasterPiece { get; set; } = null!;
         public IEnumerable<Comment> Comments { get; set; } = null!;
-        
+
+
+        //public int Id { get; set; }
+        //public string Title { get; set; }
+        //public string Content { get; set; }
+
     }
 }

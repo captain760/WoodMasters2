@@ -24,7 +24,7 @@ namespace WoodMasters2.Core.Services
             MasterPiece masterPiece = await context.MasterPieces.FindAsync(masterPieceId);
             if (masterPiece==null)
             {
-                throw new ArgumentException("MasterPiece Id nit Found!");
+                throw new ArgumentException("MasterPiece Id not Found!");
             }
             var comments = context.Comments.Where(m => m.MasterPieceId == masterPieceId).ToList();
             var model = new CommentViewModel
