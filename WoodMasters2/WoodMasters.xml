@@ -50,12 +50,6 @@
             Home controller for Logged-Out users
             </summary>
         </member>
-        <member name="M:WoodMasters2.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{WoodMasters2.Controllers.HomeController})">
-            <summary>
-            _logger controller
-            </summary>
-            <param name="logger"></param>
-        </member>
         <member name="M:WoodMasters2.Controllers.HomeController.Index">
             <summary>
             Index controller

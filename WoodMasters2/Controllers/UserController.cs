@@ -125,6 +125,7 @@ namespace WoodMasters2.Controllers
             }
 
             var user = await userManager.FindByNameAsync(model.UserName);
+            
             if (user != null)
             {
 

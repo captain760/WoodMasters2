@@ -27,6 +27,7 @@ namespace WoodMasters2.Core.Data.Entities
         /// </summary>
 
         public List<Favorite> Favorites { get; set; } = new List<Favorite>();
+        public List<Comment> Comments { get; set; } = new List<Comment>();
 
     }
 }

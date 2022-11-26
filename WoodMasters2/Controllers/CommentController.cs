@@ -72,69 +72,69 @@ namespace WoodMasters2.Controllers
             return RedirectToAction(nameof(AllComments));
 
         }
-        public IActionResult Index(int masterPieceId)
-        {
-            var masterPiece = masterPieceService.GetMasterPieceByIdAsync(masterPieceId);
-            var comments = commentService.GetAllCommentsAsync(masterPieceId)
-                .Where(p => p.Comments.IsDeleted == false)
-                .Select(p => new CommentViewModel
-                {
-                    MasterPiece = masterPiece,
-                    Comments = comments
+        //public IActionResult Index(int masterPieceId)
+        //{
+        //    var masterPiece = masterPieceService.GetMasterPieceByIdAsync(masterPieceId);
+        //    var comments = commentService.GetAllCommentsAsync(masterPieceId)
+        //        .Where(p => p.Comments.IsDeleted == false)
+        //        .Select(p => new CommentViewModel
+        //        {
+        //            MasterPiece = masterPiece,
+        //            Comments = comments
                     
-                })
-            .ToList();
-            return View(posts);
-        }
+        //        })
+        //    .ToList();
+        //    return View(posts);
+        //}
 
-        public IActionResult Add()
-        {
+        //public IActionResult Add()
+        //{
 
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Add(PostFormModel model)
-        {
-            var post = new Post()
-            {
-                Title = model.Title,
-                Content = model.Content
-            };
-            this.data.Posts.Add(post);
-            this.data.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //    return View();
+        //}
+        //[HttpPost]
+        //public IActionResult Add(PostFormModel model)
+        //{
+        //    var post = new Post()
+        //    {
+        //        Title = model.Title,
+        //        Content = model.Content
+        //    };
+        //    this.data.Posts.Add(post);
+        //    this.data.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
-        public IActionResult Edit(int Id)
-        {
-            var post = this.data.Posts.Find(Id);
+        //public IActionResult Edit(int Id)
+        //{
+        //    var post = this.data.Posts.Find(Id);
 
-            return View(new PostFormModel()
-            {
-                Title = post.Title,
-                Content = post.Content
-            });
-        }
-        [HttpPost]
-        public IActionResult Edit(int Id, PostFormModel model)
-        {
-            var post = this.data.Posts.Find(Id);
-            post.Title = model.Title;
-            post.Content = model.Content;
+        //    return View(new PostFormModel()
+        //    {
+        //        Title = post.Title,
+        //        Content = post.Content
+        //    });
+        //}
+        //[HttpPost]
+        //public IActionResult Edit(int Id, PostFormModel model)
+        //{
+        //    var post = this.data.Posts.Find(Id);
+        //    post.Title = model.Title;
+        //    post.Content = model.Content;
 
-            this.data.SaveChanges();
+        //    this.data.SaveChanges();
 
-            return RedirectToAction("Index");
-        }
-        [HttpPost]
-        public IActionResult Delete(int Id)
-        {
-            var post = this.data.Posts.Find(Id);
-            post.IsDeleted = true;
+        //    return RedirectToAction("Index");
+        //}
+        //[HttpPost]
+        //public IActionResult Delete(int Id)
+        //{
+        //    var post = this.data.Posts.Find(Id);
+        //    post.IsDeleted = true;
 
-            this.data.SaveChanges();
+        //    this.data.SaveChanges();
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
     }
 }
