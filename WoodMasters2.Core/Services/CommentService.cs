@@ -20,9 +20,7 @@ namespace WoodMasters2.Core.Services
             context = _context;
         }
 
-       
-
-        public async Task AddCommentAsync(CommentFormModel model, string authorId)
+        public async Task AddCommentAsync(CommentFormModel model, string authorId, int masterPieceId)
         {
             MasterPiece masterPiece = await context.MasterPieces.FindAsync(model.MasterPieceId);
             if (masterPiece == null)

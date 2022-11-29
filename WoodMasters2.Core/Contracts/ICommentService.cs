@@ -11,6 +11,6 @@ namespace WoodMasters2.Core.Contracts
     public interface ICommentService
     {
         Task<CommentViewModel> GetAllCommentsAsync(int masterPieceId);
-        Task AddCommentAsync(CommentFormModel model,string authorId);
+        Task AddCommentAsync(CommentFormModel model,string authorId, int masterPieceId);
     }
 }

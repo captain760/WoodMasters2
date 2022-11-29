@@ -1,7 +1,7 @@
 ﻿@model CommentFormModel
 
 @{
-    ViewBag.Title = "Add Post";
+    ViewBag.Title = "Add Comment";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -10,18 +10,14 @@
 <div class="row">
     <form method="post">
         <div class="form-group">
-            <div class="mb-3">
-@*                <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" placeholder="Write your title here...">
-                <span asp-validation-for="@Model.Title" class="small text-danger"></span>
-*@            </div>
+            
             <div class="mb-3">
                 <label asp-for="Content"></label>
-                <input asp-for="Content" class="form-control" placeholder="Write your post here...">
+                <input asp-for="Content" class="form-control" placeholder="Write your comment here...">
                 <span asp-validation-for="@Model.Content" class="small text-danger"></span>
             </div>
         </div>
-        <input class="btn btn-primary mt-3" type="submit" value="Create" />
+        <input class="btn btn-primary mt-3" type="submit" value="Add" />
     </form>
 </div>
 

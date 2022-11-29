@@ -76,8 +76,7 @@ namespace WoodMasters2.Controllers
 
 
 
-        [HttpGet]
-        [Route("Comment/Index/{masterPieceId:int}")]
+       [HttpPost]        
         public async Task<IActionResult> AllComments(int masterPieceId)
         {
             var model = await commentService.GetAllCommentsAsync(masterPieceId);
@@ -97,19 +96,20 @@ namespace WoodMasters2.Controllers
         /// Post method for Add
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="masterPieceId"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Add(CommentFormModel model)
+        public async Task<IActionResult> Add(CommentFormModel model, int masterPieceId)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+           //if (!ModelState.IsValid)
+           // {
+           //     return View(model);
+           // }
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             
-            await commentService.AddCommentAsync(model, userId!);
+            await commentService.AddCommentAsync(model, userId!,masterPieceId);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AllComments));
         }
 
         //public IActionResult Edit(int Id)

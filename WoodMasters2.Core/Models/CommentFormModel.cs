@@ -9,13 +9,13 @@ namespace WoodMasters2.Core.Models
 {
     public class CommentFormModel
     {
-        [Required]
-        [StringLength(50, MinimumLength = 10)]
-        public string Author { get; set; }
+        //[Required]
+        //[StringLength(20, MinimumLength = 2)]
+        //public string Author { get; set; } = null!;
         [Required]
         public int MasterPieceId { get; set; }
         [Required]
-        [StringLength(1500, MinimumLength = 30)]
-        public string Content { get; set; }
+        [StringLength(1500, MinimumLength = 5)]
+        public string Content { get; set; } = null!;
     }
 }

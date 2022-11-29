@@ -56,8 +56,8 @@
                         <p class="text-center text-primary"> Be the first one!</p>
                         
                     }
-                    <div class="d-grid gap-2 mb-2">
-                            <a asp-controller="Comment" asp-action="Add" class="btn btn-primary">Add Comment</a>
+                    <div class="d-grid gap-2 mb-2" >
+                            <a asp-controller="Comment" asp-action="Add" asp-route-masterPieceId="@Model.MasterPiece.Id class="btn btn-primary">Add Comment</a>
                     </div>
               </div>
            </div>
