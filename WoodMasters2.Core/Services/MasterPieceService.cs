@@ -141,7 +141,7 @@ namespace WoodMasters2.Core.Services
                 .Include(x => x.Category)
                 .ToListAsync();
 
-            return entities.Select(m => new MasterPieceViewModel
+            var result = entities.Select(m => new MasterPieceViewModel
             {
                 Id = m.Id,
                 Master = m.Master.UserName,
@@ -156,6 +156,7 @@ namespace WoodMasters2.Core.Services
                 Depth = m.Depth,
                 Quantity = m.Quantity
             });
+            return result;
         }
         /// <summary>
         /// Get the Category of the MasterPiece

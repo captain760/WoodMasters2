@@ -42,7 +42,8 @@ else
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-
+app.UseHttpsRedirection();
+//app.UseHsts();
 app.UseStaticFiles();
 
 app.UseRouting();

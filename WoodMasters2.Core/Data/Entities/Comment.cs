@@ -16,7 +16,7 @@ namespace WoodMasters2.Core.Data.Entities
         [Required]
         [ForeignKey(nameof(Master))]
         public string Author { get; set; } = null!;
-        public Master Master { get; set; }
+        public Master Master { get; set; } = null!;
 
         [Required]
         [StringLength(5000)]

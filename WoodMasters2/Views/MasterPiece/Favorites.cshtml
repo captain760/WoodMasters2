@@ -35,7 +35,7 @@ body  {
         </div>
 
         <form class="input-group-sm" asp-controller="Comment" asp-action="AllComments" asp-route-masterPieceId="@mp.Id">
-                    <input type="button" value="Comments" class="fs-6 btn btn-secondary mb-3 p-2" />
+                    <input type="submit" value="Comments" class="fs-6 btn btn-secondary mb-3 p-2" />
                 </form>    
 
         <form class="input-group-sm"asp-route-masterPieceId="@mp.Id"asp-controller="MasterPiece"asp-action="Remove"method="post">

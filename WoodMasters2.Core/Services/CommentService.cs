@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,35 @@ namespace WoodMasters2.Core.Services
             context = _context;
         }
 
+       
+
+        public async Task AddCommentAsync(CommentFormModel model, string authorId)
+        {
+            MasterPiece masterPiece = await context.MasterPieces.FindAsync(model.MasterPieceId);
+            if (masterPiece == null)
+            {
+                throw new ArgumentException("MasterPiece Id not Found!");
+            }
+            var entity = new Comment()
+            {
+                Author = authorId,
+                MasterPieceId = model.MasterPieceId,
+                Body = model.Content,
+                PostingTime = DateTime.Now,
+                IsDeleted = false
+            };
+            await context.Comments.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+
         public async Task<CommentViewModel> GetAllCommentsAsync(int masterPieceId)
         {
-            MasterPiece masterPiece = await context.MasterPieces.FindAsync(masterPieceId);
+            var masterPiece = await context.MasterPieces
+                .Where(mp => mp.IsDeleted == false && mp.Id == masterPieceId)
+                .Include(x => x.Master)
+                .Include(x => x.Category)
+                .FirstOrDefaultAsync();
+                
             if (masterPiece==null)
             {
                 throw new ArgumentException("MasterPiece Id not Found!");

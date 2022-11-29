@@ -38,9 +38,15 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WoodMasters2.Controllers.CommentController.AddComment(WoodMasters2.Core.Models.CommentViewModel)">
+        <member name="M:WoodMasters2.Controllers.CommentController.Add">
             <summary>
-            Add MasterPiece on POST
+            Get method for Add
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.CommentController.Add(WoodMasters2.Core.Models.CommentFormModel)">
+            <summary>
+            Post method for Add
             </summary>
             <param name="model"></param>
             <returns></returns>
