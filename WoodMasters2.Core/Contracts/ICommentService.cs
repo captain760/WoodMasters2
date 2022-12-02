@@ -12,5 +12,9 @@ namespace WoodMasters2.Core.Contracts
     {
         Task<CommentViewModel> GetAllCommentsAsync(int masterPieceId);
         Task AddCommentAsync(CommentFormModel model,string authorId, int masterPieceId);
+        Task<EditCommentViewModel> GetEditCommentAsync(int id);
+        Task EditCommentAsync(EditCommentViewModel model);
+        Task DeleteAsync(int commentId, int masterPieceId);
+
     }
 }

@@ -1,11 +1,13 @@
 ﻿@model CommentViewModel
+@using Microsoft.AspNetCore.Identity
+
 
 @{
-    ViewBag.Title = "All Comments";
+    ViewBag.Title = "Comments:";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+<hr class="border border-primary border-2 opacity-75">
 
     <div class="row">        
       <div class="col-sm-6">
@@ -21,30 +23,31 @@
                    <p class="mb-0">Price: @Model.MasterPiece.Price $</p>
                    <p class="mb-1">Quantity: @Model.MasterPiece.Quantity pcs.</p>
                    <p class="mb-0">Rating: @Model.MasterPiece.Rating</p>
+                   <hr class="border border-primary border-2 opacity-75">
                     @if (Model.Comments.Count() > 0)
                     {
                                               @foreach (var cmp in Model.Comments)
                                               {        
                                                   <div class="card-body">
                                               
-                                                      <h5 class="card-title mt-1">@cmp.MasterPiece?.Master.UserName</h5>
-                                                      <p class="mb-0">Comment: @cmp.Body</p>
-                                                      <p class="mb-0">Posted on: @cmp.PostingTime</p>
+                                                      <h5 class="card-title mt-1">@cmp.Master.UserName</h5>
+                                                      <p  class="mb-1">-->@cmp.Body</p>
+                                                      <p class="mb-0" style="font-style:italic ; font-size: 10px">Posted on: @cmp.PostingTime</p>
                                                       
                                                   </div>                    
                                               
-                                              @if (User?.Identity?.IsAuthenticated ?? false)
+                                              @if (User?.Identity?.Name == cmp.Master.UserName)
                                                               {
-                                                                  <div class="d-grid gap-2">
-                                                                      
-                                                                      <form class="mt-2" asp-controller="Comment" asp-action="Delete" asp-route-id="@cmp.Id">
-                                                                          <div class="d-grid gap-2">
-                                                                              <input type="submit" value="Delete" class="btn btn-danger mb-2"
-                                                                              onclick="return confirm('Are you sure you want to delete the post: @cmp.Body')"/>
-                                                                          </div>
-                                                                      </form>
-                                                                  </div>
+                                                                  <form form-inline class="input-group-sm"asp-controller="Comment"asp-action="Edit" asp-route-commentId="@cmp.Id" asp-route-masterPieceId="@Model.MasterPiece.Id" >
+                                                                  <input class="fs-6 btn btn-primary mb-3 p-2"type="submit"value="Edit"/>
+                                                                  </form>
+                                                                  <form form-inline class="input-group-sm"asp-route-commentId="@cmp.Id" asp-route-masterPieceId="@Model.MasterPiece.Id" asp-controller="Comment"asp-action="Delete"method="post">
+                                                                  <input class="fs-6 btn btn-danger mb-3 p-2"type="submit"value="Delete"
+                                                                        onclick="return confirm('Are you sure you want to delete the post: @cmp.Body')"/>
+                                                                  </form>
+
                                                               }
+                                                              <hr class="border border-secondary border-2 opacity-75">
                                               }
                                        
                             
@@ -56,8 +59,8 @@
                         <p class="text-center text-primary"> Be the first one!</p>
                         
                     }
-                    <div class="d-grid gap-2 mb-2" >
-                            <a asp-controller="Comment" asp-action="Add" asp-route-masterPieceId="@Model.MasterPiece.Id class="btn btn-primary">Add Comment</a>
+                    <div class="d-grid gap-2 mb-2">
+                            <a class="btn btn-primary btn-lg" asp-controller="Comment" asp-action="Add" asp-route-masterPieceId="@Model.MasterPiece.Id">Add Comment</a>
                     </div>
               </div>
            </div>

@@ -11,7 +11,9 @@ namespace WoodMasters2.Core.Models
     public class CommentViewModel
     {
         public MasterPiece MasterPiece { get; set; } = null!;
-        public IEnumerable<Comment> Comments { get; set; } = null!;
+
+        
+        public IEnumerable<Comment> Comments { get; set; } = new List<Comment>();
         
     }
 }

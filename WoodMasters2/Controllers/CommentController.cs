@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WoodMasters2.Core.Contracts;
-using WoodMasters2.Core.Data.Entities;
+
 using WoodMasters2.Core.Models;
 
 namespace WoodMasters2.Controllers
@@ -24,59 +24,12 @@ namespace WoodMasters2.Controllers
             commentService = _commentService;            
         }
 
-        //public ActionResult Index()
-        //{
-        //    return View(commentService.GetAllCommentsAsync(masterPieceId) .Comments.ToList());
-        //}
-
         /// <summary>
-        /// Getting AllComments for the MasterPiece
+        /// Post method for showing all comments for a MasterPiece
         /// </summary>
+        /// <param name="masterPieceId"></param>
         /// <returns></returns>
-        //[HttpGet]
-        //public async Task<IActionResult> AllComments(int masterPieceId)
-        //{
-
-        //    var model = await commentService.GetAllCommentsAsync(masterPieceId);
-
-        //    return View(model);
-        //}
-        //[HttpGet]
-        //public async Task<IActionResult> AddComment(int masterPieceId)
-        //{
-        //    var masterPiece = masterPieceService.GetMasterPieceByIdAsync(masterPieceId);
-        //    var model = new CommentViewModel()
-        //    {
-        //        //MasterPiece = await masterPieceService.GetAllMasterPiecesAsync().Fir,
-        //        //Woods = await masterPieceService.GetWoodsAsync(),
-        //        //Suppliers = await masterPieceService.GetSuppliersAsync()
-        //    };
-
-
-        //    return View(model);
-        //}
-        ///// <summary>
-        ///// Add MasterPiece on POST
-        ///// </summary>
-        ///// <param name="model"></param>
-        ///// <returns></returns>
-        ////[HttpPost]
-        //public async Task<IActionResult> AddComment(CommentViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-        //    //var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-        //    //await masterPieceService.AddCommentAsync(model, userId!);
-
-        //    return RedirectToAction(nameof(AllComments));
-
-        //}
-
-
-
-       [HttpPost]        
+       //[HttpPost]        
         public async Task<IActionResult> AllComments(int masterPieceId)
         {
             var model = await commentService.GetAllCommentsAsync(masterPieceId);
@@ -101,47 +54,62 @@ namespace WoodMasters2.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CommentFormModel model, int masterPieceId)
         {
-           //if (!ModelState.IsValid)
-           // {
-           //     return View(model);
-           // }
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             
             await commentService.AddCommentAsync(model, userId!,masterPieceId);
 
-            return RedirectToAction(nameof(AllComments));
+            return RedirectToAction(nameof(AllComments), new { masterPieceId });
+        }
+        /// <summary>
+        /// Get method for editing a comment
+        /// </summary>
+        /// <param name="CommentId"></param>       
+        /// <returns></returns>
+        [HttpGet]
+        //[Route("{CommentId:int}")]
+        public async Task<IActionResult> Edit(int CommentId)
+        {
+            var model = await commentService.GetEditCommentAsync(CommentId);
+            return View(model);
         }
 
-        //public IActionResult Edit(int Id)
-        //{
-        //    var post = this.data.Posts.Find(Id);
 
-        //    return View(new PostFormModel()
-        //    {
-        //        Title = post.Title,
-        //        Content = post.Content
-        //    });
-        //}
-        //[HttpPost]
-        //public IActionResult Edit(int Id, PostFormModel model)
-        //{
-        //    var post = this.data.Posts.Find(Id);
-        //    post.Title = model.Title;
-        //    post.Content = model.Content;
+        /// <summary>
+        /// Post method for editing comment
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        //[Route("{model:EditCommentViewModel}")]
+        public async Task<IActionResult> Edit(EditCommentViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            await commentService.EditCommentAsync(model);
+            int masterPieceId = model.MasterPieceId;
 
-        //    this.data.SaveChanges();
+            return RedirectToAction(nameof(AllComments), new {masterPieceId });
+                        
+        }
+        
+        /// <summary>
+        /// Deleting a comment method
+        /// </summary>
+        /// <param name="commentId"></param>        
+        /// <param name="masterPieceId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Delete(int commentId, int masterPieceId)
+        {
+            await commentService.DeleteAsync(commentId, masterPieceId);
 
-        //    return RedirectToAction("Index");
-        //}
-        //[HttpPost]
-        //public IActionResult Delete(int Id)
-        //{
-        //    var post = this.data.Posts.Find(Id);
-        //    post.IsDeleted = true;
-
-        //    this.data.SaveChanges();
-
-        //    return RedirectToAction("Index");
-        //}
+            return RedirectToAction(nameof(AllComments), new { masterPieceId });
+        }
     }
 }

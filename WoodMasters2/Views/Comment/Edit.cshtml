@@ -1,7 +1,7 @@
-﻿@model CommentFormModel
+﻿@model EditCommentViewModel
 
 @{
-    ViewBag.Title = "Edit Post";
+    ViewBag.Title = "Edit Comment";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -9,19 +9,20 @@
 
 <div class="row">
     <form method="post">
+        @Html.HiddenFor(m=>m.CommentId)      
+        @Html.HiddenFor(m=>m.MasterPieceId)      
         <div class="form-group">
-            <div class="mb-3">
-@*                <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" placeholder="Write your title here...">
-                <span asp-validation-for="@Model.Title" class="small text-danger"></span>
-*@            </div>
+            
             <div class="mb-3">
                 <label asp-for="Content"></label>
-                <input asp-for="Content" class="form-control" placeholder="Write your post here...">
+                <input asp-for="Content" class="form-control" aria-required="true" placeholder="@Model.Content">
                 <span asp-validation-for="@Model.Content" class="small text-danger"></span>
             </div>
         </div>
-        <input class="btn btn-primary mt-3" type="submit" value="Edit" />
+        <form class="input-group-sm" asp-controller="Comment" asp-action="Edit" asp-route-model="@Model" asp-route-masterPieceId="@Model.MasterPieceId">
+        <input class="fs-6 btn btn-primary mb-3 p-2"type="submit"value="Edit Comment"/>
+        </form>
+        
     </form>
 </div>
 

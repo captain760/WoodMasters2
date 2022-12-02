@@ -125,7 +125,9 @@ namespace WoodMasters2.Controllers
             }
 
             var user = await userManager.FindByNameAsync(model.UserName);
-            
+
+            //To create Claims on Login(for the pre-configured users only)
+            //await userManager.AddClaimAsync(user, new System.Security.Claims.Claim(ClaimTypeConstants.FirstName, user.FirstName));
             if (user != null)
             {
 

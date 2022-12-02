@@ -27,9 +27,10 @@ namespace WoodMasters2.Core.Services
             {
                 throw new ArgumentException("MasterPiece Id not Found!");
             }
+            
             var entity = new Comment()
             {
-                Author = authorId,
+                MasterId = authorId,
                 MasterPieceId = model.MasterPieceId,
                 Body = model.Content,
                 PostingTime = DateTime.Now,
@@ -39,11 +40,37 @@ namespace WoodMasters2.Core.Services
             await context.SaveChangesAsync();
         }
 
+        
+
+        public async Task DeleteAsync(int commentId, int masterPieceId)
+        {
+            var commentToDelete = await context.Comments.FirstOrDefaultAsync(f => f.Id == commentId);
+
+            if (commentToDelete != null)
+            {
+                commentToDelete.IsDeleted = true;
+
+                await context.SaveChangesAsync();
+
+            }
+        }
+
+       
+
+        public async Task EditCommentAsync(EditCommentViewModel model)
+        {
+            var comment = await context.Comments.FindAsync(model.CommentId);
+            comment.Body = model.Content;
+            comment.PostingTime = DateTime.Now;           
+            await context.SaveChangesAsync();
+        }
+
+
         public async Task<CommentViewModel> GetAllCommentsAsync(int masterPieceId)
         {
             var masterPiece = await context.MasterPieces
                 .Where(mp => mp.IsDeleted == false && mp.Id == masterPieceId)
-                .Include(x => x.Master)
+                .Include(x => x.Master)                
                 .Include(x => x.Category)
                 .FirstOrDefaultAsync();
                 
@@ -51,7 +78,10 @@ namespace WoodMasters2.Core.Services
             {
                 throw new ArgumentException("MasterPiece Id not Found!");
             }
-            var comments = context.Comments.Where(m => m.MasterPieceId == masterPieceId).ToList();
+            var comments = context.Comments
+                .Where(m => m.MasterPieceId == masterPieceId && m.IsDeleted ==false)
+                .Include(m=>m.Master)
+                .ToList();
             var model = new CommentViewModel
             {
                 MasterPiece = masterPiece,
@@ -60,5 +90,16 @@ namespace WoodMasters2.Core.Services
 
             return model;
         }
+
+        public async Task<EditCommentViewModel> GetEditCommentAsync(int id)
+        {
+            var comment = await context.Comments.FindAsync(id);
+            var model = new EditCommentViewModel()
+            {
+                Content = comment.Body
+            };
+            return model;
+        }
+
     }
 }

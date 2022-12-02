@@ -129,7 +129,7 @@ namespace WoodMasters2.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int masterPieceId)
         {
-            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            //var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await masterPieceService.DeleteAsync(masterPieceId);
 
             return RedirectToAction(nameof(Mine));

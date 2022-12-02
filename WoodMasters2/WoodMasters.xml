@@ -34,8 +34,9 @@
         </member>
         <member name="M:WoodMasters2.Controllers.CommentController.AllComments(System.Int32)">
             <summary>
-            Getting AllComments for the MasterPiece
+            Post method for showing all comments for a MasterPiece
             </summary>
+            <param name="masterPieceId"></param>
             <returns></returns>
         </member>
         <member name="M:WoodMasters2.Controllers.CommentController.Add">
@@ -49,6 +50,28 @@
             Post method for Add
             </summary>
             <param name="model"></param>
+            <param name="masterPieceId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.CommentController.Edit(System.Int32)">
+            <summary>
+            Get method for editing a comment
+            </summary>
+            <param name="CommentId"></param>       
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.CommentController.Edit(WoodMasters2.Core.Models.EditCommentViewModel)">
+            <summary>
+            Post method for editing comment
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.CommentController.Delete(System.Int32,System.Int32)">
+            <summary>
+            Deleting a comment method
+            </summary>
+            <param name="commentId"></param>        
             <param name="masterPieceId"></param>
             <returns></returns>
         </member>

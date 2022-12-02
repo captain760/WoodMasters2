@@ -15,8 +15,8 @@ namespace WoodMasters2.Core.Data.Entities
 
         [Required]
         [ForeignKey(nameof(Master))]
-        public string Author { get; set; } = null!;
-        public Master Master { get; set; } = null!;
+        public string MasterId { get; set; } = null!;
+        public virtual Master Master { get; set; } = null!;
 
         [Required]
         [StringLength(5000)]
@@ -27,7 +27,7 @@ namespace WoodMasters2.Core.Data.Entities
         [Required]
         [ForeignKey(nameof(MasterPiece))]
         public int MasterPieceId { get; set; }
-        public virtual MasterPiece? MasterPiece { get; set; }
+        public virtual MasterPiece MasterPiece { get; set; } = null!;
 
         public bool IsDeleted { get; set; } = false;
 
