@@ -28,11 +28,11 @@ namespace WoodMasters2.Core.Data.Configurations
                 ImageURL = "https://www.harvardmagazine.com/sites/default/files/styles/4x3_main/public/img/article/0613/ja13_page_31_02.jpg",
                 Price = 2000,
                 Quantity = 1,
-                Rating = 10,
                 IsDeleted = false,
                 MasterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 Description="A master-piece from an unknown master found on a garrage sale",
-                CategoryId = 1
+                CategoryId = 1,
+                WoodId = 5
             };
             masterPieces.Add(masterPiece);
 
@@ -46,11 +46,11 @@ namespace WoodMasters2.Core.Data.Configurations
                 ImageURL = "https://i0.wp.com/100things2do.ca/wp-content/uploads/2021/06/scrapwood-snowflake-12.jpg",
                 Price = 100,
                 Quantity = 2,
-                Rating = 5,
                 IsDeleted = false,
                 MasterId = "dea12856-c198-4129-b3f3-b893d8395082",
                 Description = "A beautiful tribal mosaics build from stained woods",
-                CategoryId = 4
+                CategoryId = 4,
+                WoodId = 3
             };
             masterPieces.Add(masterPiece);
 
@@ -64,11 +64,11 @@ namespace WoodMasters2.Core.Data.Configurations
                 ImageURL = "https://www.dougsturnings.com/wp-content/uploads/2020/04/Doug-Heck-Maryland-Woodturner-8636-1024x682-1.jpg",
                 Price = 50,
                 Quantity = 4,
-                Rating = 8,
                 IsDeleted = false,
                 MasterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                Description = "A wooden bowl from cherry tree",
-                CategoryId = 2
+                Description = "A wooden bowl from cedar tree",
+                CategoryId = 2,
+                WoodId =8
             };
             masterPieces.Add(masterPiece);
 
@@ -82,11 +82,11 @@ namespace WoodMasters2.Core.Data.Configurations
                 ImageURL = "https://www.ana-white.com/sites/default/files/wood-crate-how-to-build-1.jpg",
                 Price = 20,
                 Quantity = 100,
-                Rating = 9,
                 IsDeleted = false,
                 MasterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 Description = "A wooden crate to store your staff all around!!!",
-                CategoryId = 7
+                CategoryId = 7,
+                WoodId=3
             };
             masterPieces.Add(masterPiece);
 

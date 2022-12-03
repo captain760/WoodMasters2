@@ -10,7 +10,7 @@ namespace WoodMasters2.Core.Data.Entities
         [StringLength(50)]
         public string Type { get; set; } = null!;
 
-        public virtual List<MasterPieceWood> MasterPiecesWoods { get; set; } = new List<MasterPieceWood>();
+        public virtual List<MasterPiece> MasterPieces { get; set; } = new List<MasterPiece>();
 
 
     }

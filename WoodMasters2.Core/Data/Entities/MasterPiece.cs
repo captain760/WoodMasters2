@@ -34,9 +34,18 @@ namespace WoodMasters2.Core.Data.Entities
         [Required]
         [Range(0, 10000)]
         public int Quantity { get; set; }
-        [Required]
-        [Range(typeof(decimal), "0.1", "10.0", ConvertValueInInvariantCulture = true)]
-        public decimal Rating { get; set; }
+
+        public int RateCount
+        {
+            get { return ratings.Count; }
+        }
+
+        public int RateTotal
+        {
+            get { return ratings.Sum(m=>m.Rate); }
+        }
+
+        public virtual ICollection<StarRating> ratings { get; set; } = new List<StarRating>();
 
         [Required]
         [ForeignKey(nameof(Master))]
@@ -49,9 +58,14 @@ namespace WoodMasters2.Core.Data.Entities
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; } = null!;
 
+        [Required]
+        [ForeignKey(nameof(Wood))]
+        public int WoodId { get; set; }
+        public virtual Wood Wood { get; set; } = null!;
+
         public bool IsDeleted { get; set; } = false;
 
 
-        public virtual List<MasterPieceWood> MasterPiecesWoods { get; set; } = new List<MasterPieceWood>();
+        
     }
 }

@@ -28,9 +28,10 @@ body  {
                 <p class="mb-1">Category: @mp.Category</p>                
                 <p class="mb-1">Width/Length/Depth[cm]: @mp.Width/@mp.Length/@mp.Depth</p>                
                 <p class="mb-1">Description: @mp.Description</p>
+                <p class="mb-1">Wood: @mp.Wood</p>
                 <p class="mb-0">Price: @mp.Price $</p>
                 <p class="mb-1">Quantity: @mp.Quantity pcs.</p>
-                <p class="mb-0">Rating: @mp.Rating</p>
+               
             </div>
 
             <form class="input-group-sm"asp-route-Id="@mp.Id"asp-controller="MasterPiece"asp-action="Edit" method="get">
@@ -38,7 +39,8 @@ body  {
             </form>
 
             <form class="input-group-sm"asp-route-masterPieceId="@mp.Id"asp-controller="MasterPiece"asp-action="Delete"method="post">
-            <input class="fs-6 btn btn-danger mb-3 p-2"type="submit"value="Delete"/>
+            <input class="fs-6 btn btn-danger mb-3 p-2"type="submit"value="Delete"
+            onclick="return confirm('Are you sure you want to delete the MasterPiece: @mp.Name')"/>
             </form>
         </div>
     }

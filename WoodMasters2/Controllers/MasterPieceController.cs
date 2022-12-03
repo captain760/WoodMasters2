@@ -42,8 +42,7 @@ namespace WoodMasters2.Controllers
             var model = new AddMasterPieceViewModel()
             {
                 Categories = await masterPieceService.GetCategoriesAsync(),
-                Woods = await masterPieceService.GetWoodsAsync(),
-                Suppliers = await masterPieceService.GetSuppliersAsync()
+                Woods = await masterPieceService.GetWoodsAsync()                
             };
 
 

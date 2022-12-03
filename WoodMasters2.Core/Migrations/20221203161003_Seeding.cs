@@ -79,29 +79,16 @@ namespace WoodMasters2.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stains",
+                name: "Woods",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stains", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Suppliers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Suppliers", x => x.Id);
+                    table.PrimaryKey("PK_Woods", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -230,42 +217,6 @@ namespace WoodMasters2.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MasterPieces",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Width = table.Column<double>(type: "float", nullable: false),
-                    Length = table.Column<double>(type: "float", nullable: false),
-                    Depth = table.Column<double>(type: "float", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
-                    ImageURL = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Rating = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false),
-                    MasterId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MasterPieces", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MasterPieces_AspNetUsers_MasterId",
-                        column: x => x.MasterId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MasterPieces_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Addresses",
                 columns: table => new
                 {
@@ -286,57 +237,46 @@ namespace WoodMasters2.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Woods",
+                name: "MasterPieces",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    StainId = table.Column<int>(type: "int", nullable: true),
-                    SupplierId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Woods", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Woods_Stains_StainId",
-                        column: x => x.StainId,
-                        principalTable: "Stains",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Woods_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Author = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Body = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
-                    PostingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MasterPieceId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Width = table.Column<double>(type: "float", nullable: false),
+                    Length = table.Column<double>(type: "float", nullable: false),
+                    Depth = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    ImageURL = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(7,2)", precision: 7, scale: 2, nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false),
+                    MasterId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    WoodId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.PrimaryKey("PK_MasterPieces", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_Author",
-                        column: x => x.Author,
+                        name: "FK_MasterPieces_AspNetUsers_MasterId",
+                        column: x => x.MasterId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Comments_MasterPieces_MasterPieceId",
-                        column: x => x.MasterPieceId,
-                        principalTable: "MasterPieces",
+                        name: "FK_MasterPieces_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MasterPieces_Woods_WoodId",
+                        column: x => x.WoodId,
+                        principalTable: "Woods",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -364,27 +304,32 @@ namespace WoodMasters2.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MasterPieceWood",
+                name: "Comments",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MasterId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Body = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    PostingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MasterPieceId = table.Column<int>(type: "int", nullable: false),
-                    WoodId = table.Column<int>(type: "int", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MasterPieceWood", x => new { x.MasterPieceId, x.WoodId });
+                    table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MasterPieceWood_MasterPieces_MasterPieceId",
+                        name: "FK_Comments_AspNetUsers_MasterId",
+                        column: x => x.MasterId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_MasterPieces_MasterPieceId",
                         column: x => x.MasterPieceId,
                         principalTable: "MasterPieces",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MasterPieceWood_Woods_WoodId",
-                        column: x => x.WoodId,
-                        principalTable: "Woods",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.InsertData(
@@ -392,8 +337,8 @@ namespace WoodMasters2.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedOn", "Email", "EmailConfirmed", "Experience", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "714a3393-02ae-424a-afa7-2c13474cbe71", new DateTime(2022, 11, 26, 14, 6, 27, 776, DateTimeKind.Local).AddTicks(230), "b_eftimov@yahoo.com", false, 0, "Boris", "Eftimov", false, null, "B_EFTIMOV@YAHOO.COM", "CAPTAIN76", "AQAAAAEAACcQAAAAENcAi+ftFHfpf7rU6cvpRv+dqHs8cd+ldkVL3tHT00Cmh/vS7B5Mpg8ZnJF9NkRpsQ==", null, false, "38fcf561-10b6-4a69-a3b6-876811fbe5d3", false, "captain76" },
-                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "ce759c03-d077-41c0-8512-5288136f7811", new DateTime(2022, 11, 26, 14, 6, 27, 768, DateTimeKind.Local).AddTicks(4971), "m_eftimov@yahoo.com", false, 0, "Momchil", "Eftimov", false, null, "M_EFTIMOV@YAHOO.COM", "MOMO12", "AQAAAAEAACcQAAAAEAOMz+WrV7Vg80qb9fV7FYmtJwQZupC+DpdGoKfTbr29M9FgXdk7n4GxjlPdKtY1yg==", null, false, "12553aa0-c6d6-4c98-8362-2b1ff68a2cff", false, "Momo12" }
+                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "ba8fb183-7209-4d5e-ac61-a58b472bf6f5", new DateTime(2022, 12, 3, 18, 10, 3, 270, DateTimeKind.Local).AddTicks(6961), "b_eftimov@yahoo.com", false, 0, "Boris", "Eftimov", false, null, "B_EFTIMOV@YAHOO.COM", "CAPTAIN76", "AQAAAAEAACcQAAAAEDFuiUj98aBwNHqbiLuNaG8KFPCYr/m2wFTslUJsv8wh3mM2KcE333E/YtgqXR2RFQ==", null, false, "5adaef4f-4797-49a9-a5a1-bf5fcf890b8d", false, "captain76" },
+                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "574b8ec4-2d4f-4ff8-a56d-fc33e15b9bf5", new DateTime(2022, 12, 3, 18, 10, 3, 262, DateTimeKind.Local).AddTicks(8570), "m_eftimov@yahoo.com", false, 0, "Momchil", "Eftimov", false, null, "M_EFTIMOV@YAHOO.COM", "MOMO12", "AQAAAAEAACcQAAAAEM4GNEUW+VKSKEDywJvkwfm+RM1ar6SZy2/LPBOlf+PgyxQpUJLNilMrPgc0Ng4prw==", null, false, "eb69ec43-5fe1-453c-9d45-50ffad1205af", false, "Momo12" }
                 });
 
             migrationBuilder.InsertData(
@@ -430,61 +375,21 @@ namespace WoodMasters2.Core.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Stains",
-                columns: new[] { "Id", "Name" },
+                table: "Woods",
+                columns: new[] { "Id", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Clear Coat" },
-                    { 2, "Exotic Redwood" },
-                    { 3, "Vintage Modern" },
-                    { 4, "Golden Sunset" },
-                    { 5, "Mocha" },
-                    { 6, "Maroccan Red" },
-                    { 7, "Silk Grey" },
-                    { 8, "Whitish" }
+                    { 1, "Oak" },
+                    { 2, "Walnut" },
+                    { 3, "Pine" },
+                    { 4, "Beech" },
+                    { 5, "Linden" },
+                    { 6, "Poplar" },
+                    { 7, "Birch" },
+                    { 8, "Cedar" },
+                    { 9, "Ash" },
+                    { 10, "Acer" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Suppliers",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Bari Trans LTD" },
-                    { 2, "Ilza LTD" },
-                    { 3, "KoronaIm LTD" },
-                    { 4, "Hardi LTD" },
-                    { 5, "JAF Bulgaria" },
-                    { 6, "Centaur LTD" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Woods",
-                columns: new[] { "Id", "StainId", "SupplierId", "Type" },
-                values: new object[,]
-                {
-                    { 1, null, null, "Oak" },
-                    { 2, null, null, "Walnut" },
-                    { 3, null, null, "Pine" },
-                    { 4, null, null, "Beech" },
-                    { 5, null, null, "Linden" },
-                    { 6, null, null, "Poplar" },
-                    { 7, null, null, "Birch" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Woods",
-                columns: new[] { "Id", "StainId", "SupplierId", "Type" },
-                values: new object[] { 8, null, null, "Cedar" });
-
-            migrationBuilder.InsertData(
-                table: "Woods",
-                columns: new[] { "Id", "StainId", "SupplierId", "Type" },
-                values: new object[] { 9, null, null, "Ash" });
-
-            migrationBuilder.InsertData(
-                table: "Woods",
-                columns: new[] { "Id", "StainId", "SupplierId", "Type" },
-                values: new object[] { 10, null, null, "Acer" });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
@@ -492,19 +397,18 @@ namespace WoodMasters2.Core.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "Varna, 37 Evlogi Georgiev str." },
-                    { 2, 1, "Sofia, 3 Musala str." },
-                    { 3, 5, "Odrin, 7 Sultan Mehmed str." }
+                    { 2, 1, "Sofia, 3 Musala str." }
                 });
 
             migrationBuilder.InsertData(
                 table: "MasterPieces",
-                columns: new[] { "Id", "CategoryId", "Depth", "Description", "ImageURL", "IsDeleted", "Length", "MasterId", "Name", "Price", "Quantity", "Rating", "Width" },
+                columns: new[] { "Id", "CategoryId", "Depth", "Description", "ImageURL", "IsDeleted", "Length", "MasterId", "Name", "Price", "Quantity", "Rating", "Width", "WoodId" },
                 values: new object[,]
                 {
-                    { 1, 1, 10.0, "A master-piece from an unknown master found on a garrage sale", "https://www.harvardmagazine.com/sites/default/files/styles/4x3_main/public/img/article/0613/ja13_page_31_02.jpg", false, 40.0, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "Flowers", 2000m, 1, 10m, 60.0 },
-                    { 2, 4, 5.0, "A beautiful tribal mosaics build from stained woods", "https://i0.wp.com/100things2do.ca/wp-content/uploads/2021/06/scrapwood-snowflake-12.jpg", false, 50.0, "dea12856-c198-4129-b3f3-b893d8395082", "Tribal Mosaic", 100m, 2, 5m, 50.0 },
-                    { 3, 2, 12.0, "A wooden bowl from cherry tree", "https://www.dougsturnings.com/wp-content/uploads/2020/04/Doug-Heck-Maryland-Woodturner-8636-1024x682-1.jpg", false, 20.0, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "Wooden Bowl", 50m, 4, 8m, 20.0 },
-                    { 4, 7, 40.0, "A wooden crate to store your staff all around!!!", "https://www.ana-white.com/sites/default/files/wood-crate-how-to-build-1.jpg", false, 60.0, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "Crate", 20m, 100, 9m, 40.0 }
+                    { 1, 1, 10.0, "A master-piece from an unknown master found on a garrage sale", "https://www.harvardmagazine.com/sites/default/files/styles/4x3_main/public/img/article/0613/ja13_page_31_02.jpg", false, 40.0, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "Flowers", 2000m, 1, 10m, 60.0, 5 },
+                    { 2, 4, 5.0, "A beautiful tribal mosaics build from stained woods", "https://i0.wp.com/100things2do.ca/wp-content/uploads/2021/06/scrapwood-snowflake-12.jpg", false, 50.0, "dea12856-c198-4129-b3f3-b893d8395082", "Tribal Mosaic", 100m, 2, 5m, 50.0, 3 },
+                    { 3, 2, 12.0, "A wooden bowl from cedar tree", "https://www.dougsturnings.com/wp-content/uploads/2020/04/Doug-Heck-Maryland-Woodturner-8636-1024x682-1.jpg", false, 20.0, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "Wooden Bowl", 50m, 4, 8m, 20.0, 8 },
+                    { 4, 7, 40.0, "A wooden crate to store your staff all around!!!", "https://www.ana-white.com/sites/default/files/wood-crate-how-to-build-1.jpg", false, 60.0, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "Crate", 20m, 100, 9m, 40.0, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -562,9 +466,9 @@ namespace WoodMasters2.Core.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_Author",
+                name: "IX_Comments_MasterId",
                 table: "Comments",
-                column: "Author");
+                column: "MasterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_MasterPieceId",
@@ -592,19 +496,9 @@ namespace WoodMasters2.Core.Migrations
                 column: "MasterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MasterPieceWood_WoodId",
-                table: "MasterPieceWood",
+                name: "IX_MasterPieces_WoodId",
+                table: "MasterPieces",
                 column: "WoodId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Woods_StainId",
-                table: "Woods",
-                column: "StainId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Woods_SupplierId",
-                table: "Woods",
-                column: "SupplierId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -634,22 +528,13 @@ namespace WoodMasters2.Core.Migrations
                 name: "MasterAddress");
 
             migrationBuilder.DropTable(
-                name: "MasterPieceWood");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "MasterPieces");
 
             migrationBuilder.DropTable(
-                name: "Woods");
-
-            migrationBuilder.DropTable(
-                name: "Countries");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
@@ -658,10 +543,10 @@ namespace WoodMasters2.Core.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Stains");
+                name: "Woods");
 
             migrationBuilder.DropTable(
-                name: "Suppliers");
+                name: "Countries");
         }
     }
 }

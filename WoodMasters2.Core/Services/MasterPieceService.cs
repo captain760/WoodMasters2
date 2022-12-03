@@ -35,6 +35,7 @@ namespace WoodMasters2.Core.Services
                 Depth = model.Depth,
                 Description = model.Description,
                 CategoryId = model.CategoryId,
+                WoodId = model.WoodId,
                 MasterId = userId,
                 ImageURL = model.ImageURL,
                 Price = model.Price,
@@ -92,15 +93,6 @@ namespace WoodMasters2.Core.Services
         /// <exception cref="NotImplementedException"></exception>
         public async Task DeleteAsync(int masterPieceId)
         {
-            //var user = await context.Users
-            //       .Include(mp => mp.MasterPieces)                   
-            //       .Where(u => u.Id == userId)
-            //       .FirstOrDefaultAsync();
-
-            //if (user == null)
-            //{
-            //    throw new ArgumentException("Invalid user ID");
-            //}
             var masterPieceToDelete = await context.MasterPieces.FirstOrDefaultAsync(f => f.Id == masterPieceId);
 
             if (masterPieceToDelete != null)
@@ -114,17 +106,21 @@ namespace WoodMasters2.Core.Services
 
         public async Task EditMasterPieceAsync(EditMasterPieceViewModel model)
         {
-            var entity = await context.MasterPieces.FindAsync(model.Id);
-            entity.Name = model.Name;
-            entity.Width = model.Width;
-            entity.Length = model.Length;
-            entity.Depth = model.Depth;
-            entity.Description = model.Description;
-            entity.CategoryId = model.CategoryId;
+            MasterPiece? entity = await context.MasterPieces.FindAsync(model.Id);
+            if (entity != null)
+            {
+                entity.Name = model.Name;
+                entity.Width = model.Width;
+                entity.Length = model.Length;
+                entity.Depth = model.Depth;
+                entity.Description = model.Description;
+                entity.CategoryId = model.CategoryId;
+                entity.WoodId = model.WoodId;
+                entity.ImageURL = model.ImageURL;
+                entity.Price = model.Price;
+                entity.Quantity = model.Quantity;
+            }
             
-            entity.ImageURL = model.ImageURL;
-            entity.Price = model.Price;
-            entity.Quantity = model.Quantity;
 
             await context.SaveChangesAsync();
         }
@@ -139,6 +135,7 @@ namespace WoodMasters2.Core.Services
                 .Where(mp=>mp.IsDeleted==false)
                 .Include(x => x.Master)
                 .Include(x => x.Category)
+                .Include(x => x.Wood)
                 .ToListAsync();
 
             var result = entities.Select(m => new MasterPieceViewModel
@@ -147,9 +144,9 @@ namespace WoodMasters2.Core.Services
                 Master = m.Master.UserName,
                 Name = m.Name,
                 Description = m.Description,
-                ImageURL = m.ImageURL,
-                Rating = m.Rating,
+                ImageURL = m.ImageURL,                
                 Category = m.Category.Name,
+                Wood = m.Wood.Type,
                 Price = m.Price,
                 Width = m.Width,
                 Length = m.Length,
@@ -171,26 +168,27 @@ namespace WoodMasters2.Core.Services
         public async Task<EditMasterPieceViewModel> GetEditMasterPieceAsync(int id)
         {
             var masterPiece = await context.MasterPieces.FindAsync(id);
-            var model = new EditMasterPieceViewModel()
+            var model = new EditMasterPieceViewModel();
+            if (masterPiece!=null)
             {
-                Id = id,
-                Depth = masterPiece.Depth,
-                Width = masterPiece.Width,
-                Description = masterPiece.Description,
-                CategoryId = masterPiece.CategoryId,
-                Length = masterPiece.Length,
-                ImageURL = masterPiece.ImageURL,
-                Name = masterPiece.Name,
-                Price = masterPiece.Price,
-                Quantity = masterPiece.Quantity
+                model.Id = id;
+                model.Depth = masterPiece.Depth;
+                model.Width = masterPiece.Width;
+                model.Description = masterPiece.Description;
+                model.CategoryId = masterPiece.CategoryId;
+                model.WoodId = masterPiece.WoodId;
+                model.Length = masterPiece.Length;
+                model.ImageURL = masterPiece.ImageURL;
+                model.Name = masterPiece.Name;
+                model.Price = masterPiece.Price;
+                model.Quantity = masterPiece.Quantity;
             };
             model.Categories = await GetCategoriesAsync();
-            model.Suppliers = await GetSuppliersAsync();
             model.Woods = await GetWoodsAsync();
 
             return model;
         }
-
+                  
 
         /// <summary>
         /// Get Favorite MasterPieces List
@@ -201,9 +199,7 @@ namespace WoodMasters2.Core.Services
         public async Task<IEnumerable<MasterPieceViewModel>> GetFavoritesAsync(string userId)
         {
             var user = await context.Users
-                    .Where(u => u.Id == userId)
-                    .Include(mp => mp.MasterPieces)
-                    .ThenInclude(mp => mp.Category)
+                    .Where(u => u.Id == userId)                    
                     .Include(f => f.Favorites)
                     .FirstOrDefaultAsync();
 
@@ -214,27 +210,29 @@ namespace WoodMasters2.Core.Services
             var favoriteIds = user.Favorites.Select(u=>u.Value).ToList();
             var favoriteMasterPieces =  await context.MasterPieces
                 .Where(f => favoriteIds.Contains(f.Id))
+                .Include(mp => mp.Category)
+                .Include(mp => mp.Wood)
                 .ToListAsync();
                 
             
             return favoriteMasterPieces
-                .Where(mp => mp.IsDeleted == false)
-                .Select(m => new MasterPieceViewModel()
-            {
-                    Id = m.Id,
-                    Master = user.UserName,
-                    Name = m.Name,
-                    Description = m.Description,
-                    ImageURL = m.ImageURL,
-                    Rating = m.Rating,
-                    Category = m.Category?.Name,
-                    Price = m.Price,
-                    Width = m.Width,
-                    Length = m.Length,
-                    Depth = m.Depth,
-                    Quantity = m.Quantity
+                 .Where(mp => mp.IsDeleted == false)
+                 .Select(m => new MasterPieceViewModel()
+                 {
+                     Id = m.Id,
+                     Master = user.UserName,
+                     Name = m.Name,
+                     Description = m.Description,
+                     ImageURL = m.ImageURL,
+                     Category = m.Category.Name,
+                     Wood = m.Wood.Type,
+                     Price = m.Price,
+                     Width = m.Width,
+                     Length = m.Length,
+                     Depth = m.Depth,
+                     Quantity = m.Quantity
 
-            });
+                 });
 
         }
 
@@ -259,6 +257,8 @@ namespace WoodMasters2.Core.Services
             var user = await context.Users
                     .Include(mp => mp.MasterPieces)   
                     .ThenInclude(mp=>mp.Category)
+                    .Include(mp => mp.MasterPieces)
+                    .ThenInclude(mp => mp.Wood)
                     .Where(u => u.Id == userId)
                     .FirstOrDefaultAsync();
 
@@ -275,8 +275,8 @@ namespace WoodMasters2.Core.Services
                 Name = m.Name,
                 Description = m.Description,
                 ImageURL = m.ImageURL,
-                Rating = m.Rating,
                 Category = m.Category.Name,
+                Wood = m.Wood.Type,
                 Price = m.Price,
                 Width = m.Width,
                 Length = m.Length,
@@ -286,14 +286,7 @@ namespace WoodMasters2.Core.Services
             });
             return mineMasterPieces;
         }
-        /// <summary>
-        /// Get the Supplier of the wood for the MasterPiece
-        /// </summary>
-        /// <returns></returns>
-        public async Task<IEnumerable<Supplier>> GetSuppliersAsync()
-        {
-            return await context.Suppliers.ToListAsync();
-        }
+       
         /// <summary>
         /// Get the wood of the MasterPiece
         /// </summary>

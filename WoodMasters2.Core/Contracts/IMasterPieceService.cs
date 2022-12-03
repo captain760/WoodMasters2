@@ -17,7 +17,7 @@ namespace WoodMasters2.Core.Contracts
 
         Task<IEnumerable<Wood>> GetWoodsAsync();
         Task<IEnumerable<Category>> GetCategoriesAsync();
-        Task<IEnumerable<Supplier>> GetSuppliersAsync();
+        
         Task AddMasterPieceAsync(AddMasterPieceViewModel model, string userId);
         Task AddMasterPieceToFavoritesAsync(int masterPieceId, string userId);
 

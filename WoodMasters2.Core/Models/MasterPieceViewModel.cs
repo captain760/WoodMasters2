@@ -55,10 +55,7 @@
         /// MasterPiece quantity available
         /// </summary>
         public int Quantity { get; set; }
-        /// <summary>
-        /// MasterPiece users rating
-        /// </summary>
-        public decimal Rating { get; set; }
+        
 
 
 

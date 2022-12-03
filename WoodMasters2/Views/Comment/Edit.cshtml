@@ -19,7 +19,7 @@
                 <span asp-validation-for="@Model.Content" class="small text-danger"></span>
             </div>
         </div>
-        <form class="input-group-sm" asp-controller="Comment" asp-action="Edit" asp-route-model="@Model" asp-route-masterPieceId="@Model.MasterPieceId">
+        <form class="input-group-sm" asp-controller="Comment" asp-action="EditComment" asp-route-model="@Model" asp-route-masterPieceId="@Model.MasterPieceId">
         <input class="fs-6 btn btn-primary mb-3 p-2"type="submit"value="Edit Comment"/>
         </form>
         

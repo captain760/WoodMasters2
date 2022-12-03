@@ -29,9 +29,10 @@ body  {
                 <p class="mb-1">Category: @mp.Category</p>                
                 <p class="mb-1">Width/Length/Depth[cm]: @mp.Width/@mp.Length/@mp.Depth</p>                
                 <p class="mb-1">Description: @mp.Description</p>
+                <p class="mb-1">Wood: @mp.Wood</p>
                 <p class="mb-0">Price: @mp.Price $</p>
                 <p class="mb-1">Quantity: @mp.Quantity pcs.</p>
-                <p class="mb-0">Rating: @mp.Rating</p>
+                
         </div>
 
         <form class="input-group-sm" asp-controller="Comment" asp-action="AllComments" asp-route-masterPieceId="@mp.Id">

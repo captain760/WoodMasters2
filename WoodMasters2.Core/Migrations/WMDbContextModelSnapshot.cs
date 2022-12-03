@@ -193,12 +193,6 @@ namespace WoodMasters2.Core.Migrations
                             Id = 2,
                             CountryId = 1,
                             PlaceName = "Sofia, 3 Musala str."
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CountryId = 5,
-                            PlaceName = "Odrin, 7 Sultan Mehmed str."
                         });
                 });
 
@@ -480,8 +474,8 @@ namespace WoodMasters2.Core.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a42b0e2f-ce9b-4c7b-baee-3dd6653d0b38",
-                            CreatedOn = new DateTime(2022, 11, 30, 13, 9, 50, 476, DateTimeKind.Local).AddTicks(7680),
+                            ConcurrencyStamp = "45db605b-17d2-4959-a03f-9d12cc087441",
+                            CreatedOn = new DateTime(2022, 12, 3, 21, 26, 29, 840, DateTimeKind.Local).AddTicks(8769),
                             Email = "m_eftimov@yahoo.com",
                             EmailConfirmed = false,
                             Experience = 0,
@@ -490,9 +484,9 @@ namespace WoodMasters2.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M_EFTIMOV@YAHOO.COM",
                             NormalizedUserName = "MOMO12",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMxaB+7EF2c9VtYnT1N05iuuxT2mmgB3IPTZxR5pWP7OggiucxLgRMsPjimuYgjLzQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHk+RUxisga/VN9SsebplmYvZBwpzd7fVhKliq7wm+xwRwFmhqtJ4e2GjfcB8H/aig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1ed10c55-fc44-43ce-a122-3b50fc463f14",
+                            SecurityStamp = "db90f384-d501-4c45-a4ef-ede2085fa169",
                             TwoFactorEnabled = false,
                             UserName = "Momo12"
                         },
@@ -500,8 +494,8 @@ namespace WoodMasters2.Core.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d759a87a-1dc5-470c-b5f3-b9ae03cb4ef5",
-                            CreatedOn = new DateTime(2022, 11, 30, 13, 9, 50, 484, DateTimeKind.Local).AddTicks(2843),
+                            ConcurrencyStamp = "7ac61050-d989-4a22-8ad9-2bce36c2d31b",
+                            CreatedOn = new DateTime(2022, 12, 3, 21, 26, 29, 848, DateTimeKind.Local).AddTicks(4453),
                             Email = "b_eftimov@yahoo.com",
                             EmailConfirmed = false,
                             Experience = 0,
@@ -510,9 +504,9 @@ namespace WoodMasters2.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "B_EFTIMOV@YAHOO.COM",
                             NormalizedUserName = "CAPTAIN76",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEfn7m6fpG2lAFo7oa1L3ZWW6aaTx+O8n3rWYpUytaziyoblRMan0V53TbGwXITSJA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL6ot97TWscU92lAtu+a/6p9Xdbg4PkFonOoXJKVhv+ztIvPR3VrswAFnbBZmCEs6g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "28079895-43e7-4f07-84c9-6277790a2c5c",
+                            SecurityStamp = "3f4d4fe9-0ef3-4282-9f4c-961c619274bd",
                             TwoFactorEnabled = false,
                             UserName = "captain76"
                         });
@@ -591,18 +585,19 @@ namespace WoodMasters2.Core.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Rating")
-                        .HasPrecision(4, 2)
-                        .HasColumnType("decimal(4,2)");
-
                     b.Property<double>("Width")
                         .HasColumnType("float");
+
+                    b.Property<int>("WoodId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("MasterId");
+
+                    b.HasIndex("WoodId");
 
                     b.ToTable("MasterPieces");
 
@@ -620,8 +615,8 @@ namespace WoodMasters2.Core.Migrations
                             Name = "Flowers",
                             Price = 2000m,
                             Quantity = 1,
-                            Rating = 10m,
-                            Width = 60.0
+                            Width = 60.0,
+                            WoodId = 5
                         },
                         new
                         {
@@ -636,15 +631,15 @@ namespace WoodMasters2.Core.Migrations
                             Name = "Tribal Mosaic",
                             Price = 100m,
                             Quantity = 2,
-                            Rating = 5m,
-                            Width = 50.0
+                            Width = 50.0,
+                            WoodId = 3
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 2,
                             Depth = 12.0,
-                            Description = "A wooden bowl from cherry tree",
+                            Description = "A wooden bowl from cedar tree",
                             ImageURL = "https://www.dougsturnings.com/wp-content/uploads/2020/04/Doug-Heck-Maryland-Woodturner-8636-1024x682-1.jpg",
                             IsDeleted = false,
                             Length = 20.0,
@@ -652,8 +647,8 @@ namespace WoodMasters2.Core.Migrations
                             Name = "Wooden Bowl",
                             Price = 50m,
                             Quantity = 4,
-                            Rating = 8m,
-                            Width = 20.0
+                            Width = 20.0,
+                            WoodId = 8
                         },
                         new
                         {
@@ -668,134 +663,34 @@ namespace WoodMasters2.Core.Migrations
                             Name = "Crate",
                             Price = 20m,
                             Quantity = 100,
-                            Rating = 9m,
-                            Width = 40.0
+                            Width = 40.0,
+                            WoodId = 3
                         });
                 });
 
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPieceWood", b =>
+            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.StarRating", b =>
                 {
+                    b.Property<int>("RateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RateId"), 1L, 1);
+
+                    b.Property<string>("IpAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("MasterPieceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WoodId")
+                    b.Property<int>("Rate")
                         .HasColumnType("int");
 
-                    b.HasKey("MasterPieceId", "WoodId");
+                    b.HasKey("RateId");
 
-                    b.HasIndex("WoodId");
+                    b.HasIndex("MasterPieceId");
 
-                    b.ToTable("MasterPieceWood");
-                });
-
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Stain", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stains");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Clear Coat"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Exotic Redwood"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Vintage Modern"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Golden Sunset"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Mocha"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Maroccan Red"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Silk Grey"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Whitish"
-                        });
-                });
-
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Supplier", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Suppliers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Bari Trans LTD"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Ilza LTD"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "KoronaIm LTD"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Hardi LTD"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "JAF Bulgaria"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Centaur LTD"
-                        });
+                    b.ToTable("StarRating");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Wood", b =>
@@ -806,22 +701,12 @@ namespace WoodMasters2.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("StainId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StainId");
-
-                    b.HasIndex("SupplierId");
 
                     b.ToTable("Woods");
 
@@ -999,39 +884,28 @@ namespace WoodMasters2.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-
-                    b.Navigation("Master");
-                });
-
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPieceWood", b =>
-                {
-                    b.HasOne("WoodMasters2.Core.Data.Entities.MasterPiece", "MasterPiece")
-                        .WithMany("MasterPiecesWoods")
-                        .HasForeignKey("MasterPieceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WoodMasters2.Core.Data.Entities.Wood", "Wood")
-                        .WithMany("MasterPiecesWoods")
+                        .WithMany("MasterPieces")
                         .HasForeignKey("WoodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MasterPiece");
+                    b.Navigation("Category");
+
+                    b.Navigation("Master");
 
                     b.Navigation("Wood");
                 });
 
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Wood", b =>
+            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.StarRating", b =>
                 {
-                    b.HasOne("WoodMasters2.Core.Data.Entities.Stain", null)
-                        .WithMany("Woods")
-                        .HasForeignKey("StainId");
+                    b.HasOne("WoodMasters2.Core.Data.Entities.MasterPiece", "MasterPiece")
+                        .WithMany("ratings")
+                        .HasForeignKey("MasterPieceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("WoodMasters2.Core.Data.Entities.Supplier", null)
-                        .WithMany("Woods")
-                        .HasForeignKey("SupplierId");
+                    b.Navigation("MasterPiece");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Address", b =>
@@ -1062,22 +936,12 @@ namespace WoodMasters2.Core.Migrations
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPiece", b =>
                 {
-                    b.Navigation("MasterPiecesWoods");
-                });
-
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Stain", b =>
-                {
-                    b.Navigation("Woods");
-                });
-
-            modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Supplier", b =>
-                {
-                    b.Navigation("Woods");
+                    b.Navigation("ratings");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Wood", b =>
                 {
-                    b.Navigation("MasterPiecesWoods");
+                    b.Navigation("MasterPieces");
                 });
 #pragma warning restore 612, 618
         }

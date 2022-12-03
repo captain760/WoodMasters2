@@ -22,7 +22,7 @@ namespace WoodMasters2.Core.Services
 
         public async Task AddCommentAsync(CommentFormModel model, string authorId, int masterPieceId)
         {
-            MasterPiece masterPiece = await context.MasterPieces.FindAsync(model.MasterPieceId);
+            MasterPiece? masterPiece = await context.MasterPieces.FindAsync(model.MasterPieceId);
             if (masterPiece == null)
             {
                 throw new ArgumentException("MasterPiece Id not Found!");
@@ -59,9 +59,13 @@ namespace WoodMasters2.Core.Services
 
         public async Task EditCommentAsync(EditCommentViewModel model)
         {
-            var comment = await context.Comments.FindAsync(model.CommentId);
-            comment.Body = model.Content;
-            comment.PostingTime = DateTime.Now;           
+            Comment? comment = await context.Comments.FindAsync(model.CommentId);
+            if (comment != null)
+            {
+                comment.Body = model.Content;
+                comment.PostingTime = DateTime.Now;
+            }
+                       
             await context.SaveChangesAsync();
         }
 
@@ -72,6 +76,7 @@ namespace WoodMasters2.Core.Services
                 .Where(mp => mp.IsDeleted == false && mp.Id == masterPieceId)
                 .Include(x => x.Master)                
                 .Include(x => x.Category)
+                .Include(x => x.Wood)
                 .FirstOrDefaultAsync();
                 
             if (masterPiece==null)
@@ -91,13 +96,18 @@ namespace WoodMasters2.Core.Services
             return model;
         }
 
-        public async Task<EditCommentViewModel> GetEditCommentAsync(int id)
+        public async Task<EditCommentViewModel> GetEditCommentAsync(int CommentId)
         {
-            var comment = await context.Comments.FindAsync(id);
-            var model = new EditCommentViewModel()
+            Comment? comment = await context.Comments.FindAsync(CommentId);
+            var model = new EditCommentViewModel();
+            if (comment!=null)
             {
-                Content = comment.Body
-            };
+                
+                {
+                    model.Content = comment.Body;
+                };
+            }
+            
             return model;
         }
 

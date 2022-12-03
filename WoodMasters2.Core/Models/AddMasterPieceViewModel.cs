@@ -44,24 +44,14 @@ namespace WoodMasters2.Core.Models
         [Required]
         [StringLength(256, MinimumLength = 5)]
         public string ImageURL { get; set; } = null!;
-        /// <summary>
-        /// The number of woods used in the MasterPiece
-        /// </summary>
-        [Required]
-        [Range(1, 10)]
-        public int WoodsUsed { get; set; }
+        
 
         /// <summary>
         /// MasterPiece wood type
         /// </summary>
         [Required]
         public int WoodId { get; set; }
-        /// <summary>
-        /// MasterPiece wood supplier
-        /// </summary>
-        [Required]
-
-        public int SupplierId { get; set; }
+        
         /// <summary>
         /// MasterPiece craft type
         /// </summary>
@@ -82,7 +72,7 @@ namespace WoodMasters2.Core.Models
 
         public IEnumerable<Category> Categories { get; set; } = new List<Category>();
         public IEnumerable<Wood> Woods { get; set; } = new List<Wood>();
-        public IEnumerable<Supplier> Suppliers { get; set; } = new List<Supplier>();
+       
 
     }
 }

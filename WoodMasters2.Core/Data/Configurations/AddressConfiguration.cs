@@ -34,13 +34,7 @@ namespace WoodMasters2.Core.Data.Configurations
             };
             addresses.Add(address);
 
-            address = new Address()
-            {
-                Id = 3,
-                PlaceName = "Odrin, 7 Sultan Mehmed str.",
-                CountryId = 5
-            };
-            addresses.Add(address);
+            
 
             return addresses;
         }
