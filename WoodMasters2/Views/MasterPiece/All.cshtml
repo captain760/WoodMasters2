@@ -1,6 +1,7 @@
 ﻿
 @model IEnumerable<MasterPieceViewModel>
 
+
 @{
     ViewBag.Title = "All Masterpieces";
 }
@@ -26,12 +27,22 @@ body  {
     <div class="text-center row">
         @foreach (var mp in Model)
         {
+            
             <div class="card col-4" style="width: 20rem; ">
             <img class="card-img-top" style="width: 18rem;"
              src="@mp.ImageURL" alt="Masterpiece Image">
             <div class="card-body">
 
-                <h5 class="card-title mt-1">@mp.Name</h5>
+                <div class="card-title mt-1">@mp.Name<br />
+                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="1" class="rating" mid="@mp.Id" />
+                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="2" class="rating" mid="@mp.Id"  />
+                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="3" class="rating" mid="@mp.Id" />
+                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="4" class="rating" mid="@mp.Id" />
+                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="5" class="rating" mid="@mp.Id" />
+                        (@mp.RateCount votes) @{if (@mp.RateCount > 0)
+                            { decimal a= @mp.RateTotal / @mp.RateCount; <span class="avr">@a</span> } }<br />
+                        <div class="result"></div>
+                </div>
                 <p class="mb-1">Category: @mp.Category</p>
                 <p class="mb-1">Master: @mp.Master</p>
                 <p class="mb-1">Width/Length/Depth[cm]: @mp.Width/@mp.Length/@mp.Depth</p>                
@@ -55,7 +66,48 @@ body  {
                 </form>            
             
         </div>
+        
         }
     </div>
     
+    @section Scripts {
 
+    
+    <script type="text/javascript">
+        
+    
+
+    $(function () {
+        $("img.rating").mouseover(function () {
+            giveRating($(this), "FilledStar.gif");
+            $(this).css("cursor", "pointer");
+        });
+
+        $("img.rating").mouseout(function () {
+            giveRating($(this), "EmptyStar.gif");
+            refilRating($(this));
+        });
+        $("img.rating").click(function (e) {
+           // $("img.rating").unbind("mouseout mouseover click");
+            $(this).css('color', 'red');
+           // alert(e.currentTarget + ' was clicked!');
+            // call ajax methods to update database
+            var url = "/MasterPiece/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
+            $.post(url, null, function (data) {
+                $(e.currentTarget).closest('div').find('div.result').text(data).css('color','red') // $("#result").text(data);
+            });
+        });
+    });
+    function giveRating(img, image) {
+        img.attr("src", "/Images/" + image)
+            .prevAll("img.rating").attr("src", "/Images/" + image);
+    }
+    function refilRating(img1)
+    {
+        var rt = $(img1).closest('div').find("span.avr").text();
+        var img = $(img1).closest('div').find("img[id='" + parseInt(rt) + "']");
+        img.attr("src", "/Images/FilledStar.gif").prevAll("img.rating").attr("src", "/Images/FilledStar.gif");
+    }    
+     
+</script>
+}

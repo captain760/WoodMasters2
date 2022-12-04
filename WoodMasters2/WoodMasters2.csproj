@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\Images\all-background.jpeg" />
-    <None Include="wwwroot\Images\StarGlow.gif" />
+    <None Include="wwwroot\Images\FilledStar.gif" />
   </ItemGroup>
 
   <ItemGroup>

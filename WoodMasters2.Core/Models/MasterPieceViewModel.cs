@@ -55,8 +55,10 @@
         /// MasterPiece quantity available
         /// </summary>
         public int Quantity { get; set; }
-        
 
+        public int RateCount { get; set; }
+        public int RateTotal { get; set; }
+        
 
 
     }

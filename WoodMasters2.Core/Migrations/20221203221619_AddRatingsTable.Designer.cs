@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WoodMasters2.Core.Data;
 
@@ -11,9 +12,10 @@ using WoodMasters2.Core.Data;
 namespace WoodMasters2.Core.Migrations
 {
     [DbContext(typeof(WMDbContext))]
-    partial class WMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221203221619_AddRatingsTable")]
+    partial class AddRatingsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -474,8 +476,8 @@ namespace WoodMasters2.Core.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "92111590-c455-4ac6-8458-0bb89c10ecc8",
-                            CreatedOn = new DateTime(2022, 12, 4, 0, 40, 42, 802, DateTimeKind.Local).AddTicks(8438),
+                            ConcurrencyStamp = "8023e3b6-0dc5-4104-942e-ad62ed977e1b",
+                            CreatedOn = new DateTime(2022, 12, 4, 0, 16, 18, 883, DateTimeKind.Local).AddTicks(4977),
                             Email = "m_eftimov@yahoo.com",
                             EmailConfirmed = false,
                             Experience = 0,
@@ -484,9 +486,9 @@ namespace WoodMasters2.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M_EFTIMOV@YAHOO.COM",
                             NormalizedUserName = "MOMO12",
-                            PasswordHash = "AQAAAAEAACcQAAAAECS166G66+vmYV2WPDuI8L1StJfF8Sw9vCBUTzyX0+rwrMJEa02fYtoaJkFW8DcKEw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF8tpyP3rACH3xLKVFvHo4rHJlkk0r+ZM7ReAZNVrH/iu27UMIWuEMhDXX+54lSFHQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1b11bf52-ed00-4a80-82e7-7d9d130015ac",
+                            SecurityStamp = "89b29c8a-8dd7-4863-9dd3-2d51c647c212",
                             TwoFactorEnabled = false,
                             UserName = "Momo12"
                         },
@@ -494,8 +496,8 @@ namespace WoodMasters2.Core.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a5cfa6b6-99f2-4b59-b20a-41906dd604a0",
-                            CreatedOn = new DateTime(2022, 12, 4, 0, 40, 42, 810, DateTimeKind.Local).AddTicks(5502),
+                            ConcurrencyStamp = "bfd5e072-bbf1-492f-91ae-69d604f3ad12",
+                            CreatedOn = new DateTime(2022, 12, 4, 0, 16, 18, 890, DateTimeKind.Local).AddTicks(5218),
                             Email = "b_eftimov@yahoo.com",
                             EmailConfirmed = false,
                             Experience = 0,
@@ -504,9 +506,9 @@ namespace WoodMasters2.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "B_EFTIMOV@YAHOO.COM",
                             NormalizedUserName = "CAPTAIN76",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMeX03IGRDWsMbKmuLSzlFx0P0pmpRixZs9lFFqu78bqZSPZmhXTC9oBYRtnNPHhTQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFxHKlbv1xeAl65hBQ/SzCXt5rvJGiTz8/lq6J5koTOobv9gSMPvrbyW9NVrSYgBGg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b3de068b-a874-4094-8667-4da4e14d460c",
+                            SecurityStamp = "d51f0a75-7b04-4936-bcb9-948ab4ae87c1",
                             TwoFactorEnabled = false,
                             UserName = "captain76"
                         });
@@ -675,6 +677,10 @@ namespace WoodMasters2.Core.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RateId"), 1L, 1);
+
+                    b.Property<string>("IpAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MasterPieceId")
                         .HasColumnType("int");

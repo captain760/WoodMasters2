@@ -17,6 +17,7 @@ namespace WoodMasters2.Core.Data
         public DbSet<MasterPiece> MasterPieces { get; set; } = null!;       
         public DbSet<Wood> Woods { get; set; } = null!;
         public DbSet<Comment> Comments { get; set; } = null!;
+        public DbSet<StarRating> Ratings { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

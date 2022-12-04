@@ -96,10 +96,11 @@
             MasterPiece controller
             </summary>
         </member>
-        <member name="M:WoodMasters2.Controllers.MasterPieceController.#ctor(WoodMasters2.Core.Contracts.IMasterPieceService)">
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.#ctor(WoodMasters2.Core.Data.WMDbContext,WoodMasters2.Core.Contracts.IMasterPieceService)">
             <summary>
-            Injecting MasterPieceService
+            Injecting MasterPieceService and context
             </summary>
+            <param name="_context"></param>
             <param name="_masterPieceService"></param>
         </member>
         <member name="M:WoodMasters2.Controllers.MasterPieceController.All">
@@ -166,6 +167,14 @@
             Post for Editing a MasterPiece
             </summary>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.PostRating(System.Int32,System.Int32)">
+            <summary>
+            PostRating method
+            </summary>
+            <param name="rating"></param>
+            <param name="mid"></param>
             <returns></returns>
         </member>
         <member name="T:WoodMasters2.Controllers.UserController">

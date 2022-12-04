@@ -15,8 +15,7 @@ namespace WoodMasters2.Core.Data.Entities
 
         public int Rate { get; set; }
 
-        public string IpAddress { get; set; } = null!;
-        
+             
         public int MasterPieceId { get; set; }
 
         [ForeignKey(nameof(MasterPieceId))]

@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 
 using System.Security.Claims;
+using System.Web;
 using WoodMasters2.Core.Contracts;
+using WoodMasters2.Core.Data;
+using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Models;
 
 namespace WoodMasters2.Controllers
@@ -13,13 +16,18 @@ namespace WoodMasters2.Controllers
     public class MasterPieceController : BaseController
     {
         private readonly IMasterPieceService masterPieceService;
+        
+        private readonly WMDbContext context;
+
         /// <summary>
-        /// Injecting MasterPieceService
+        /// Injecting MasterPieceService and context
         /// </summary>
+        /// <param name="_context"></param>
         /// <param name="_masterPieceService"></param>
-        public MasterPieceController(IMasterPieceService _masterPieceService)
+        public MasterPieceController(WMDbContext _context, IMasterPieceService _masterPieceService)
         {
             masterPieceService = _masterPieceService;
+            context = _context;
         }
         /// <summary>
         /// showing all MasterPieces
@@ -159,5 +167,29 @@ namespace WoodMasters2.Controllers
 
             return RedirectToAction(nameof(Mine));
         }
+        /// <summary>
+        /// PostRating method
+        /// </summary>
+        /// <param name="rating"></param>
+        /// <param name="mid"></param>
+        /// <returns></returns>
+        [HttpPost]
+       public JsonResult PostRating(int rating, int mid)
+       {
+           //save data into the database
+ 
+           StarRating rt = new StarRating();
+          
+           rt.Rate = rating;
+           
+           rt.MasterPieceId = mid;
+ 
+           //save into the database
+           context.Ratings.Add(rt);
+           context.SaveChanges();
+  
+           return Json("You rated this " + rating.ToString() + " star(s)");
+       }
+        
     }
 }

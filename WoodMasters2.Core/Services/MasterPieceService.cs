@@ -135,7 +135,8 @@ namespace WoodMasters2.Core.Services
                 .Where(mp=>mp.IsDeleted==false)
                 .Include(x => x.Master)
                 .Include(x => x.Category)
-                .Include(x => x.Wood)
+                .Include(x => x.Wood)   
+                .Include(x=>x.ratings)
                 .ToListAsync();
 
             var result = entities.Select(m => new MasterPieceViewModel
@@ -151,7 +152,9 @@ namespace WoodMasters2.Core.Services
                 Width = m.Width,
                 Length = m.Length,
                 Depth = m.Depth,
-                Quantity = m.Quantity
+                Quantity = m.Quantity,
+                RateCount = m.RateCount,
+                RateTotal = m.RateTotal
             });
             return result;
         }
