@@ -1,0 +1,36 @@
+﻿
+@model MasterPieceViewModel
+
+<div class="col-md-4">
+<div class="card mb-3">
+<img class="card-img-top"src="@Model.ImageURL"alt="MasterPiece Image">
+<div class="card-body text-center">
+<h4>@Model.Name</h4>
+<h6>Master: <b>@Model.Master</b></h6>
+<h6>
+                Price :
+<b>@String.Format("{0:f2}", Model.Price) USD</b>
+</h6>
+<p><b>@Model.Quantity</b> more piece(s) available</p>
+<p class="mb-1">Width: <b>@Model.Width</b> cm</p>
+<p class="mb-1">Length: <b>@Model.Length</b> cm</p>
+<p class="mb-1">Depth: <b>@Model.Depth</b> cm</p>
+
+<h6>@Model.Description</h6>
+<h6>Made of <b>@Model.Wood</b> wood</h6>
+<p>Category: <b>@Model.Category</b></p>
+<br/>
+<a asp-controller="MasterPiece"asp-action="Details"asp-route-masterPieceId="@Model.Id"
+class="btn btn-success">Details</a>
+            @if (this.User?.Identity?.IsAuthenticated ?? false)
+            {
+                <a asp-controller="MasterPiece"asp-action="Edit"asp-route-Id="@Model.Id"
+                class="btn btn-warning">Edit</a>
+                <a asp-controller="MasterPiece"asp-action="Delete"asp-route-masterPieceId="@Model.Id"
+                class="btn btn-danger" onclick="return confirm('Are you sure you want to delete the comment: @Model.Name')">Delete </a>
+                <p></p>
+               
+            }
+</div>
+</div>
+</div>

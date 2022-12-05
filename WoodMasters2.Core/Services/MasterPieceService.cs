@@ -3,6 +3,7 @@ using System.Net;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
 using WoodMasters2.Core.Data.Entities;
+using WoodMasters2.Core.Data.Enums;
 using WoodMasters2.Core.Models;
 
 namespace WoodMasters2.Core.Services
@@ -84,6 +85,73 @@ namespace WoodMasters2.Core.Services
             }
 
         }
+
+        public IEnumerable<string> AllCategoriesNames()
+        {
+            var categories = context.Categories
+            .Select(c => c.Name)
+            .Distinct()
+            .ToList();
+            return categories;
+        }
+
+
+        public MasterPieceQueryModel AllCrafts(string? category = null, string? searchKey = null, MasterPieceSorting sorting = MasterPieceSorting.Newest, int currentPage = 1, int craftsPerPage = 1)
+        {
+            var masterPiecesQuery =  context.MasterPieces
+                .Where(mp => mp.IsDeleted == false)
+                .AsQueryable();
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                masterPiecesQuery = context.MasterPieces
+                    .Where(m => m.Category.Name == category);
+            }
+            if (!string.IsNullOrWhiteSpace(searchKey))
+            {
+                masterPiecesQuery = masterPiecesQuery
+                    .Where(m=>
+                    m.Name.ToLower().Contains(searchKey.ToLower()) ||
+                    m.Description.ToLower().Contains(searchKey.ToLower()) ||
+                    m.Wood.Type.ToLower().Contains(searchKey.ToLower()) 
+                        );
+            }
+            masterPiecesQuery = sorting switch
+            {
+                MasterPieceSorting.Price => masterPiecesQuery.OrderBy(m => m.Price),
+                MasterPieceSorting.Rating => masterPiecesQuery.OrderBy(m => (m.RateTotal/m.RateCount)).ThenByDescending(m => m.Id),
+                _=>masterPiecesQuery.OrderByDescending(m=>m.Id)
+            };
+            var crafts = masterPiecesQuery
+                .Skip((currentPage-1)*craftsPerPage)
+                .Take(craftsPerPage)
+                .Select(m=> new MasterPieceViewModel
+                {
+                    Id = m.Id,
+                    Master = m.Master.UserName,
+                    Name = m.Name,
+                    Description = m.Description,
+                    ImageURL = m.ImageURL,
+                    Category = m.Category.Name,
+                    Wood = m.Wood.Type,
+                    Price = m.Price,
+                    Width = m.Width,
+                    Length = m.Length,
+                    Depth = m.Depth,
+                    Quantity = m.Quantity,
+                    RateCount = m.RateCount,
+                    RateTotal = m.RateTotal
+                })
+                .ToList();
+            var totalCrafts = masterPiecesQuery.Count();
+
+            return new MasterPieceQueryModel
+            {
+                TotalMasterPieces = totalCrafts,
+                CraftPieces = crafts
+            };
+        }
+        
+
         /// <summary>
         /// Deleting MasterPiece By the master
         /// </summary>
@@ -280,6 +348,8 @@ namespace WoodMasters2.Core.Services
                 {
                     Id = entity.Id,
                     Master = entity.Master.UserName,
+                    MasterEmail = entity.Master.Email,
+                    MasterPhone = entity.Master.PhoneNumber,
                     Name = entity.Name,
                     Description = entity.Description,
                     ImageURL = entity.ImageURL,

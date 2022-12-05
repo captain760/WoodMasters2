@@ -22,7 +22,7 @@ namespace WoodMasters2.Controllers
         /// <summary>
         /// Injecting MasterPieceService and context
         /// </summary>
-        /// <param name="_context"></param>
+        
         /// <param name="_masterPieceService"></param>
         public MasterPieceController(IMasterPieceService _masterPieceService)
         {
@@ -41,6 +41,32 @@ namespace WoodMasters2.Controllers
             return View(model);
         }
 
+
+        /// <summary>
+        /// AllCrafts method
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AllCrafts([FromQuery] AllMasterPiecesQueryModel query)
+        {
+            var queryResult = masterPieceService.AllCrafts(
+                query. Category,
+                query.SearchKey,
+                query.Sorting,
+                query.CurrentPage,
+                AllMasterPiecesQueryModel.CraftsPerPage);
+            query.TotalCrafts = queryResult.TotalMasterPieces;
+            query.Crafts = queryResult.CraftPieces;
+            var masterPieceCategories = this.masterPieceService.AllCategoriesNames();
+            query.Categories = masterPieceCategories;
+
+                return View(query);
+        }
+            
+
+
+
         /// <summary>
         /// Get method for the last 3 MasterPieces
         /// </summary>
@@ -53,7 +79,13 @@ namespace WoodMasters2.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Get method for the Details of a MasterPiece
+        /// </summary>
+        /// <param name="masterPieceId"></param>
+        /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int masterPieceId)
         {
             var model = await masterPieceService.GetMasterPieceViewByIdAsync(masterPieceId);
@@ -157,13 +189,13 @@ namespace WoodMasters2.Controllers
         /// </summary>
         /// <param name="masterPieceId"></param>
         /// <returns></returns>
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> Delete(int masterPieceId)
         {
-            //var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await masterPieceService.DeleteAsync(masterPieceId);
 
             return RedirectToAction(nameof(Mine));
+
         }/// <summary>
         /// Get for Editing a MasterPiece
         /// </summary>

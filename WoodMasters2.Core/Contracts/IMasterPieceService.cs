@@ -1,4 +1,5 @@
 ﻿using WoodMasters2.Core.Data.Entities;
+using WoodMasters2.Core.Data.Enums;
 using WoodMasters2.Core.Models;
 
 namespace WoodMasters2.Core.Contracts
@@ -34,6 +35,14 @@ namespace WoodMasters2.Core.Contracts
 
         Task <MasterPiece> GetMasterPieceByIdAsync(int id);
         Task<MasterPieceViewModel> GetMasterPieceViewByIdAsync(int id);
+        MasterPieceQueryModel AllCrafts(
+            string? category = null,
+            string? searchKey = null,
+            MasterPieceSorting sorting = MasterPieceSorting.Newest,
+            int currentPage = 1,
+            int craftsPerPage = 1
+            );
+        IEnumerable<string> AllCategoriesNames();
     }
 }
 

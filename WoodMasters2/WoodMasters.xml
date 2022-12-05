@@ -100,7 +100,6 @@
             <summary>
             Injecting MasterPieceService and context
             </summary>
-            <param name="_context"></param>
             <param name="_masterPieceService"></param>
         </member>
         <member name="M:WoodMasters2.Controllers.MasterPieceController.All">
@@ -109,10 +108,23 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.AllCrafts(WoodMasters2.Core.Models.AllMasterPiecesQueryModel)">
+            <summary>
+            AllCrafts method
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WoodMasters2.Controllers.MasterPieceController.Index">
             <summary>
             Get method for the last 3 MasterPieces
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.Details(System.Int32)">
+            <summary>
+            Get method for the Details of a MasterPiece
+            </summary>
+            <param name="masterPieceId"></param>
             <returns></returns>
         </member>
         <member name="M:WoodMasters2.Controllers.MasterPieceController.Add">

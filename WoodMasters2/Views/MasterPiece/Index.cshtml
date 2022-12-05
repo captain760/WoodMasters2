@@ -4,24 +4,33 @@
     ViewData["Title"] = "Home Page";
 var masterPieces = Model.ToList();
 }
-
+<head>
+<style>
+body  {
+  background-image: url("/Images/home-bg.jpg");
+  background-color:dimgrey;
+}
+</style>
+</head>
+<div class="text-center p-1 bg-muted">
+    <h1 class="display-1 center"><b>Welcome to your WoodWorld!</b></h1>
+    </div>
 @if (!masterPieces.Any())
 {
-<div class="mt-4 p-5 bg-light">
-<h1 class="display-4">Welcome to your craft place!</h1>
-<p class="lead">
-            There are no items to show in the system currently available
-            so why don't you just add one?
-</p>
-<hr class="my-4">
-<p class="lead">
-            @if (User?.Identity?.IsAuthenticated ?? false)
-            {
-<a asp-controller="MasterPiece"asp-action="Add"class="btn btn-primary btn-lg"
-role="button">Add a Master Piece</a>
-            }
-</p>
-</div>
+    
+    <p class="lead">
+                There are no items to show in the system currently available
+                so why don't you just add one?
+    </p>
+    <hr class="my-4">
+    <p class="lead">
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                    <a asp-controller="MasterPiece"asp-action="Add"class="btn btn-primary btn-lg"
+                    role="button">Add a Master Piece</a>
+                }
+    </p>
+    
 }
 
 <div class="mb-5"></div>
@@ -30,17 +39,20 @@ role="button">Add a Master Piece</a>
 <div class="carousel-inner">
         @for (int i = 0; i < masterPieces.Count(); i++)
         {
-var masterPiece = masterPieces[i];
-<div class="carousel-item @(i == 0 ? "active" : string.Empty)">
-<img class="d-block w-100"style="height:500px"
-src="@masterPiece.ImageURL"alt="@masterPiece.Name">
-<div class="carousel-caption d-none d-md-block">
-<h5>
-<a class="btn btn-primary"asp-controller="MasterPiece"asp-action="Details"
-asp-route-masterPieceId="@masterPiece.Id"> @masterPiece.Name</a>
-</h5>
-</div>
-</div>
+            var masterPiece = masterPieces[i];
+            <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+            <img class="d-block w-100"style="height:500px"
+            src="@masterPiece.ImageURL"alt="@masterPiece.Name">
+            <div class="carousel-caption d-none d-md-block">
+            @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                <h5>
+                     <a class="btn btn-primary"asp-controller="MasterPiece"asp-action="Details"
+                     asp-route-masterPieceId="@masterPiece.Id"> @masterPiece.Name</a>
+                </h5>
+                }
+            </div>
+            </div>
         }
 </div>
 <button class="carousel-control-prev"type="button"data-bs-target="#carouselExampleControls"data-bs-slide="prev">

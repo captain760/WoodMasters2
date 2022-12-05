@@ -1,6 +1,4 @@
 ﻿@model MasterPieceViewModel
-
-
 @{
     ViewBag.Title = "Details";
 }
@@ -18,33 +16,49 @@ body  {
 <h2 class="text-center text-white">@ViewBag.Title</h2>
 <hr class="border border-warning border-3 opacity-75">
 
-<div class="text-center row">
-    
-        <div class="card col-4"style="width: 20rem; ">
-            <img class="card-img-top"style="width: 18rem;"
-            src="@Model.ImageURL"alt="MasterPiece Image">
-            <div class="card-body">
+<div class="container"style="display:inline">
+<div class="row">
+<div class="col-4">
+<img class="card-img-top"style="width: 20rem;"
+src="@Model.ImageURL"alt="MasterPiece Image">
+<div class="form-inline center">
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                if(User?.Identity?.Name == Model.Master)
+                {
+<a class="btn btn-warning"asp-controller="MasterPiece"asp-action="Edit"
+asp-route-id="@Model.Id">Edit</a>
+<a class="ml-2 btn btn-danger"asp-controller="MasterPieces"asp-action="Delete"
+asp-route-masterPieceId="@Model.Id">Delete</a>
+                   
+                }
+</div>
+</div>
+<div class="card col-8 border-0">
+<p style="font-size:25px;"><u><b>@Model.Name</b></u></p>
+<p>Crafted by: <b>@Model.Master</b></p>
+<p>
+                Price Per Piece:
+<b>@String.Format("{0:f2}", Model.Price) </b>USD
+</p>
+<p><b>@Model.Quantity</b> more piece(s) available</p>
+<p class="mb-1">Width: <b>@Model.Width</b> cm</p>
+<p class="mb-1">Length: <b>@Model.Length</b> cm</p>
+<p class="mb-1">Depth: <b>@Model.Depth</b> cm</p>
 
-                <h5 class="card-title mt-1">@Model.Name</h5>
-                <p class="mb-1">Category: @Model.Category</p>                
-                <p class="mb-1">Width/Length/Depth[cm]: @Model.Width/@Model.Length/@Model.Depth</p>                
-                <p class="mb-1">Description: @Model.Description</p>
-                <p class="mb-1">Wood: @Model.Wood</p>
-                <p class="mb-0">Price: @Model.Price $</p>
-                <p class="mb-1">Quantity: @Model.Quantity pcs.</p>
-               
-            </div>
-            @if (User?.Identity?.IsAuthenticated ?? false && User?.Identity?.Name == Model.Master)
-            {
-            <form class="input-group-sm"asp-route-Id="@Model.Id"asp-controller="MasterPiece"asp-action="Edit" method="get">
-                <input class="fs-6 btn btn-warning mb-3 p-2"type="submit"value="Edit"/>
-            </form>
+<h6>@Model.Description</h6>
+<h6>Made of <b>@Model.Wood</b> wood</h6>
+<p>Category: <b>@Model.Category</b></p>
+            
+</div>
+<p></p>
+<div class="card"style="width: 18rem;">
+<div class="card-body">
+<h5 class="card-title">Crafter Info</h5>
+<p class="card-text">Email:  @Model.MasterEmail</p>
+<p class="card-text">Phone Number: @Model.MasterPhone</p>
+</div>
+</div>
+</div>
 
-            <form class="input-group-sm"asp-route-masterPieceId="@Model.Id"asp-controller="MasterPiece"asp-action="Delete"method="post">
-                <input class="fs-6 btn btn-danger mb-3 p-2"type="submit"value="Delete"
-            onclick="return confirm('Are you sure you want to delete the MasterPiece: @Model.Name')"/>
-            </form>
-            }
-        </div>
-    
+
 </div>

@@ -42,7 +42,7 @@ body  {
                         <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="5" class="rating" mid="@mp.Id" />
                         (@mp.RateCount votes) 
                         @{if (@mp.RateCount > 0)
-                            { decimal a= @mp.RateTotal / @mp.RateCount; <span class="avr" style="color:green"> <br /> @a Stars</span> <span style="color:black">average rating</span>} 
+                            { decimal a=@mp.RateTotal / @mp.RateCount; <span class="avr" style="color:green"> <br /> @a:f2 Stars</span> <span style="color:black">average rating</span>} 
                         }
                     <br>
                         <div class="result"></div>

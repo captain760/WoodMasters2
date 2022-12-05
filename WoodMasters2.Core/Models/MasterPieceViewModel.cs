@@ -18,6 +18,11 @@
         /// </summary>
         public string Master { get; set; } = null!;
         /// <summary>
+        /// Master's Email
+        /// </summary>
+        public string MasterEmail { get; set; } = null!;
+        public string? MasterPhone { get; set; }
+        /// <summary>
         /// MasterPiece width
         /// </summary>
         public double Width { get; set; }
