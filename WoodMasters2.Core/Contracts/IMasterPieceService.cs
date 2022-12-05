@@ -14,6 +14,7 @@ namespace WoodMasters2.Core.Contracts
         /// </summary>
         /// <returns>List of MasterPieces</returns>
         Task<IEnumerable<MasterPieceViewModel>> GetAllMasterPiecesAsync();
+        Task<IEnumerable<MasterPieceViewModel>> GetLast3MasterPiecesAsync();
 
         Task<IEnumerable<Wood>> GetWoodsAsync();
         Task<IEnumerable<Category>> GetCategoriesAsync();
@@ -32,6 +33,7 @@ namespace WoodMasters2.Core.Contracts
         Task EditMasterPieceAsync(EditMasterPieceViewModel model);
 
         Task <MasterPiece> GetMasterPieceByIdAsync(int id);
+        Task<MasterPieceViewModel> GetMasterPieceViewByIdAsync(int id);
     }
 }
 

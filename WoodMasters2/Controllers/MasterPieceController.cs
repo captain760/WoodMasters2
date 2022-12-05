@@ -17,17 +17,17 @@ namespace WoodMasters2.Controllers
     {
         private readonly IMasterPieceService masterPieceService;
         
-        private readonly WMDbContext context;
+        
 
         /// <summary>
         /// Injecting MasterPieceService and context
         /// </summary>
         /// <param name="_context"></param>
         /// <param name="_masterPieceService"></param>
-        public MasterPieceController(WMDbContext _context, IMasterPieceService _masterPieceService)
+        public MasterPieceController(IMasterPieceService _masterPieceService)
         {
             masterPieceService = _masterPieceService;
-            context = _context;
+            
         }
         /// <summary>
         /// showing all MasterPieces
@@ -40,6 +40,30 @@ namespace WoodMasters2.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// Get method for the last 3 MasterPieces
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
+        {
+            var model = await masterPieceService.GetLast3MasterPiecesAsync();
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int masterPieceId)
+        {
+            var model = await masterPieceService.GetMasterPieceViewByIdAsync(masterPieceId);
+            
+
+            return View(model);
+        }
+
+
+
         /// <summary>
         /// Add MasterPiece control on GET
         /// </summary>
@@ -167,29 +191,7 @@ namespace WoodMasters2.Controllers
 
             return RedirectToAction(nameof(Mine));
         }
-        /// <summary>
-        /// PostRating method
-        /// </summary>
-        /// <param name="rating"></param>
-        /// <param name="mid"></param>
-        /// <returns></returns>
-        [HttpPost]
-       public JsonResult PostRating(int rating, int mid)
-       {
-           //save data into the database
- 
-           StarRating rt = new StarRating();
-          
-           rt.Rate = rating;
-           
-           rt.MasterPieceId = mid;
- 
-           //save into the database
-           context.Ratings.Add(rt);
-           context.SaveChanges();
-  
-           return Json("You rated this " + rating.ToString() + " star(s)");
-       }
+        
         
     }
 }

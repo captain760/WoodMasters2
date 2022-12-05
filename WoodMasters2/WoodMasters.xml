@@ -96,7 +96,7 @@
             MasterPiece controller
             </summary>
         </member>
-        <member name="M:WoodMasters2.Controllers.MasterPieceController.#ctor(WoodMasters2.Core.Data.WMDbContext,WoodMasters2.Core.Contracts.IMasterPieceService)">
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.#ctor(WoodMasters2.Core.Contracts.IMasterPieceService)">
             <summary>
             Injecting MasterPieceService and context
             </summary>
@@ -106,6 +106,12 @@
         <member name="M:WoodMasters2.Controllers.MasterPieceController.All">
             <summary>
             showing all MasterPieces
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.Index">
+            <summary>
+            Get method for the last 3 MasterPieces
             </summary>
             <returns></returns>
         </member>
@@ -169,7 +175,18 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:WoodMasters2.Controllers.MasterPieceController.PostRating(System.Int32,System.Int32)">
+        <member name="T:WoodMasters2.Controllers.RatingController">
+            <summary>
+            Controller for the rating of the MasterPieces
+            </summary>
+        </member>
+        <member name="M:WoodMasters2.Controllers.RatingController.#ctor(WoodMasters2.Core.Contracts.IRatingService)">
+            <summary>
+            Injecting RatingService
+            </summary>
+            <param name="_ratingService"></param>
+        </member>
+        <member name="M:WoodMasters2.Controllers.RatingController.PostRating(System.Int32,System.Int32)">
             <summary>
             PostRating method
             </summary>

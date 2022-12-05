@@ -30,7 +30,7 @@ namespace WoodMasters2.Core.Data.Configurations
                 Quantity = 1,
                 IsDeleted = false,
                 MasterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                Description="A master-piece from an unknown master found on a garrage sale",
+                Description="Flowers and leaves carved as a 3D model",
                 CategoryId = 1,
                 WoodId = 5
             };

@@ -1,0 +1,50 @@
+﻿@model MasterPieceViewModel
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<head>
+<style>
+body  {
+  background-image: url("/Images/all-background.jpeg");
+  background-color: #cccccc;
+}
+</style>
+</head>
+<hr class="border border-warning border-2 opacity-75">
+
+<h2 class="text-center text-white">@ViewBag.Title</h2>
+<hr class="border border-warning border-3 opacity-75">
+
+<div class="text-center row">
+    
+        <div class="card col-4"style="width: 20rem; ">
+            <img class="card-img-top"style="width: 18rem;"
+            src="@Model.ImageURL"alt="MasterPiece Image">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@Model.Name</h5>
+                <p class="mb-1">Category: @Model.Category</p>                
+                <p class="mb-1">Width/Length/Depth[cm]: @Model.Width/@Model.Length/@Model.Depth</p>                
+                <p class="mb-1">Description: @Model.Description</p>
+                <p class="mb-1">Wood: @Model.Wood</p>
+                <p class="mb-0">Price: @Model.Price $</p>
+                <p class="mb-1">Quantity: @Model.Quantity pcs.</p>
+               
+            </div>
+            @if (User?.Identity?.IsAuthenticated ?? false && User?.Identity?.Name == Model.Master)
+            {
+            <form class="input-group-sm"asp-route-Id="@Model.Id"asp-controller="MasterPiece"asp-action="Edit" method="get">
+                <input class="fs-6 btn btn-warning mb-3 p-2"type="submit"value="Edit"/>
+            </form>
+
+            <form class="input-group-sm"asp-route-masterPieceId="@Model.Id"asp-controller="MasterPiece"asp-action="Delete"method="post">
+                <input class="fs-6 btn btn-danger mb-3 p-2"type="submit"value="Delete"
+            onclick="return confirm('Are you sure you want to delete the MasterPiece: @Model.Name')"/>
+            </form>
+            }
+        </div>
+    
+</div>

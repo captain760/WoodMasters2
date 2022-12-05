@@ -239,6 +239,23 @@ namespace WoodMasters2.Core.Services
 
         }
 
+        public async Task<IEnumerable<MasterPieceViewModel>> GetLast3MasterPiecesAsync()
+        {
+            var last3MasterPieces = await context
+                .MasterPieces
+                .OrderByDescending(mp => mp.Id)
+                .Select(mp => new MasterPieceViewModel
+                {
+                    Id = mp.Id,
+                    Name = mp.Name,
+                    ImageURL = mp.ImageURL
+                })
+                .Take(3)
+                .ToListAsync();
+            return last3MasterPieces;
+
+        }
+
         public async Task<MasterPiece> GetMasterPieceByIdAsync(int id)
         {
             var entity = await context.MasterPieces.FindAsync(id);
@@ -247,6 +264,37 @@ namespace WoodMasters2.Core.Services
                 throw new ArgumentException("Invalid MasterPiece ID");
             }
             return entity;
+        }
+        public async Task<MasterPieceViewModel> GetMasterPieceViewByIdAsync(int id)
+        {
+            var entity = await context.MasterPieces
+                .Include(m=>m.Wood)
+                .Include(m=>m.Category)
+                .Include(m=>m.Master)
+                .FirstOrDefaultAsync(m=>m.Id == id);
+            if (entity == null)
+            {
+                throw new ArgumentException("Invalid MasterPiece ID");
+            }
+            var modelView = new MasterPieceViewModel()
+                {
+                    Id = entity.Id,
+                    Master = entity.Master.UserName,
+                    Name = entity.Name,
+                    Description = entity.Description,
+                    ImageURL = entity.ImageURL,
+                    Category = entity.Category.Name,
+                    Wood = entity.Wood.Type,
+                    Price = entity.Price,
+                    Width = entity.Width,
+                    Length = entity.Length,
+                    Depth = entity.Depth,
+                    Quantity = entity.Quantity,
+                    RateCount = entity.RateCount,
+                    RateTotal = entity.RateTotal
+
+                };
+            return modelView;
         }
 
         /// <summary>

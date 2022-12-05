@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MasterPieceViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+var masterPieces = Model.ToList();
+}
+
+@if (!masterPieces.Any())
+{
+<div class="mt-4 p-5 bg-light">
+<h1 class="display-4">Welcome to your craft place!</h1>
+<p class="lead">
+            There are no items to show in the system currently available
+            so why don't you just add one?
+</p>
+<hr class="my-4">
+<p class="lead">
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+<a asp-controller="MasterPiece"asp-action="Add"class="btn btn-primary btn-lg"
+role="button">Add a Master Piece</a>
+            }
+</p>
+</div>
+}
+
+<div class="mb-5"></div>
+
+<div id="carouselExampleControls"class="carousel slide"data-bs-ride="carousel">
+<div class="carousel-inner">
+        @for (int i = 0; i < masterPieces.Count(); i++)
+        {
+var masterPiece = masterPieces[i];
+<div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+<img class="d-block w-100"style="height:500px"
+src="@masterPiece.ImageURL"alt="@masterPiece.Name">
+<div class="carousel-caption d-none d-md-block">
+<h5>
+<a class="btn btn-primary"asp-controller="MasterPiece"asp-action="Details"
+asp-route-masterPieceId="@masterPiece.Id"> @masterPiece.Name</a>
+</h5>
+</div>
+</div>
+        }
+</div>
+<button class="carousel-control-prev"type="button"data-bs-target="#carouselExampleControls"data-bs-slide="prev">
+<span class="carousel-control-prev-icon"aria-hidden="true"></span>
+<span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next"type="button"data-bs-target="#carouselExampleControls"data-bs-slide="next">
+<span class="carousel-control-next-icon"aria-hidden="true"></span>
+<span class="visually-hidden">Next</span>
+</button>
+</div>
+

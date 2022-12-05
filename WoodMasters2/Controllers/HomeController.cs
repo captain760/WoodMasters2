@@ -22,7 +22,7 @@ namespace WoodMasters2.Controllers
             {
                 return RedirectToAction("All", "MasterPiece");
             }
-            return View();
+            return RedirectToAction("Index", "MasterPiece");
         }
         /// <summary>
         /// Privacy controller
