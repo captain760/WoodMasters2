@@ -110,6 +110,7 @@ body  {
     {
         var rt = $(img1).closest('div').find("span.avr").text();
         var img = $(img1).closest('div').find("img[id='" + parseInt(rt) + "']");
+        
         img.attr("src", "/Images/FilledStar.gif").prevAll("img.rating").attr("src", "/Images/FilledStar.gif");
     }    
      

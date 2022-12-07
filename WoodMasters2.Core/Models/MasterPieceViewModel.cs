@@ -18,6 +18,10 @@
         /// </summary>
         public string Master { get; set; } = null!;
         /// <summary>
+        /// Master's address
+        /// </summary>
+        public string MasterAddress { get; set; } = null!;
+        /// <summary>
         /// Master's Email
         /// </summary>
         public string MasterEmail { get; set; } = null!;

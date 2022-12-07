@@ -29,11 +29,11 @@ namespace WoodMasters2.Core.Data.Configurations
                 Email = "m_eftimov@yahoo.com",
                 NormalizedEmail = "M_EFTIMOV@YAHOO.COM",
                 FirstName = "Momchil",
-                LastName = "Eftimov"
+                LastName = "Eftimov"                
             };
 
             master.PasswordHash =
-            hasher.HashPassword(master, "12momo");
+            hasher.HashPassword(master, "12momo");            
             masters.Add(master);
 
             master = new Master()

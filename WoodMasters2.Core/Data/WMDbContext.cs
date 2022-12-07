@@ -57,7 +57,7 @@ namespace WoodMasters2.Core.Data
             
 
             
-            //Seeding Masters, Categories, Woods,  Countries, MasterPieces and Addresses example
+            //Seeding Masters, Categories, Woods, Rating, Countries, MasterPieces and Addresses example
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new WoodConfiguration());           
@@ -65,6 +65,7 @@ namespace WoodMasters2.Core.Data
             builder.ApplyConfiguration(new MasterPieceConfiguration());
             builder.ApplyConfiguration(new AddressConfiguration());
             builder.ApplyConfiguration(new MasterAddressConfiguration());        
+            builder.ApplyConfiguration(new RatingConfiguration());        
 
             base.OnModelCreating(builder);
         }

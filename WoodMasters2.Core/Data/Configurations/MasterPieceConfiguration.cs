@@ -32,7 +32,8 @@ namespace WoodMasters2.Core.Data.Configurations
                 MasterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 Description="Flowers and leaves carved as a 3D model",
                 CategoryId = 1,
-                WoodId = 5
+                WoodId = 5,
+                
             };
             masterPieces.Add(masterPiece);
 
@@ -44,7 +45,7 @@ namespace WoodMasters2.Core.Data.Configurations
                 Length = 50,
                 Depth = 5,
                 ImageURL = "https://i0.wp.com/100things2do.ca/wp-content/uploads/2021/06/scrapwood-snowflake-12.jpg",
-                Price = 100,
+                Price = 50,
                 Quantity = 2,
                 IsDeleted = false,
                 MasterId = "dea12856-c198-4129-b3f3-b893d8395082",
@@ -62,7 +63,7 @@ namespace WoodMasters2.Core.Data.Configurations
                 Length = 20,
                 Depth = 12,
                 ImageURL = "https://www.dougsturnings.com/wp-content/uploads/2020/04/Doug-Heck-Maryland-Woodturner-8636-1024x682-1.jpg",
-                Price = 50,
+                Price = 100,
                 Quantity = 4,
                 IsDeleted = false,
                 MasterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",

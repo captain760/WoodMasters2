@@ -99,6 +99,10 @@ namespace WoodMasters2.Core.Services
         public MasterPieceQueryModel AllCrafts(string? category = null, string? searchKey = null, MasterPieceSorting sorting = MasterPieceSorting.Newest, int currentPage = 1, int craftsPerPage = 1)
         {
             var masterPiecesQuery =  context.MasterPieces
+                .Include(m=>m.Master)
+                .ThenInclude(m=>m.MastersAddresses)
+                .ThenInclude(m=>m.Address)
+                .ThenInclude(m=>m.Country)
                 .Where(mp => mp.IsDeleted == false)
                 .AsQueryable();
             if (!string.IsNullOrWhiteSpace(category))
@@ -128,7 +132,7 @@ namespace WoodMasters2.Core.Services
                 {
                     Id = m.Id,
                     Master = m.Master.UserName,
-                    Name = m.Name,
+                    MasterAddress = m.Master.MastersAddresses.FirstOrDefault(a=>a.MasterId == m.Master.Id),
                     Description = m.Description,
                     ImageURL = m.ImageURL,
                     Category = m.Category.Name,

@@ -62,6 +62,7 @@ namespace WoodMasters2.Core.Data.Entities
         [ForeignKey(nameof(Wood))]
         public int WoodId { get; set; }
         public virtual Wood Wood { get; set; } = null!;
+        
 
         public bool IsDeleted { get; set; } = false;
 
