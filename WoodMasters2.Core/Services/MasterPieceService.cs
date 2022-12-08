@@ -99,15 +99,16 @@ namespace WoodMasters2.Core.Services
         public MasterPieceQueryModel AllCrafts(string? category = null, string? searchKey = null, MasterPieceSorting sorting = MasterPieceSorting.Newest, int currentPage = 1, int craftsPerPage = 1)
         {
             var masterPiecesQuery =  context.MasterPieces
-                .Include(m=>m.Master)
-                .ThenInclude(m=>m.MastersAddresses)
-                .ThenInclude(m=>m.Address)
-                .ThenInclude(m=>m.Country)
+                .Include(x => x.Master)
+                .Include(x => x.Category)
+                .Include(x => x.Wood)
+                .Include(x => x.Rating)
                 .Where(mp => mp.IsDeleted == false)
                 .AsQueryable();
             if (!string.IsNullOrWhiteSpace(category))
             {
-                masterPiecesQuery = context.MasterPieces
+                masterPiecesQuery = context.MasterPieces                    
+                    .Include(x => x.Category)                    
                     .Where(m => m.Category.Name == category);
             }
             if (!string.IsNullOrWhiteSpace(searchKey))
@@ -122,17 +123,17 @@ namespace WoodMasters2.Core.Services
             masterPiecesQuery = sorting switch
             {
                 MasterPieceSorting.Price => masterPiecesQuery.OrderBy(m => m.Price),
-                MasterPieceSorting.Rating => masterPiecesQuery.OrderBy(m => (m.RateTotal/m.RateCount)).ThenByDescending(m => m.Id),
+                MasterPieceSorting.Rating => masterPiecesQuery.OrderByDescending(m => (m.Rating.Count)).ThenByDescending(m => m.Id),
                 _=>masterPiecesQuery.OrderByDescending(m=>m.Id)
             };
             var crafts = masterPiecesQuery
                 .Skip((currentPage-1)*craftsPerPage)
                 .Take(craftsPerPage)
+                .ToList()
                 .Select(m=> new MasterPieceViewModel
                 {
                     Id = m.Id,
                     Master = m.Master.UserName,
-                    MasterAddress = m.Master.MastersAddresses.FirstOrDefault(a=>a.MasterId == m.Master.Id),
                     Description = m.Description,
                     ImageURL = m.ImageURL,
                     Category = m.Category.Name,
@@ -208,7 +209,7 @@ namespace WoodMasters2.Core.Services
                 .Include(x => x.Master)
                 .Include(x => x.Category)
                 .Include(x => x.Wood)   
-                .Include(x=>x.ratings)
+                .Include(x=>x.Rating)
                 .ToListAsync();
 
             var result = entities.Select(m => new MasterPieceViewModel
@@ -343,6 +344,8 @@ namespace WoodMasters2.Core.Services
                 .Include(m=>m.Wood)
                 .Include(m=>m.Category)
                 .Include(m=>m.Master)
+                .ThenInclude(m=>m.MastersAddresses)
+                .ThenInclude(m=>m.Address)
                 .FirstOrDefaultAsync(m=>m.Id == id);
             if (entity == null)
             {
@@ -352,8 +355,11 @@ namespace WoodMasters2.Core.Services
                 {
                     Id = entity.Id,
                     Master = entity.Master.UserName,
+                    MasterAddress = entity.Master.MastersAddresses.Select(x => x.Address.PlaceName).FirstOrDefault(),
+                    MasterFullName = entity.Master.FirstName+" "+entity.Master.LastName,
                     MasterEmail = entity.Master.Email,
-                    MasterPhone = entity.Master.PhoneNumber,
+                    MasterPhone = entity.Master.PhoneNumber ?? "(not provided)",
+                    
                     Name = entity.Name,
                     Description = entity.Description,
                     ImageURL = entity.ImageURL,
@@ -368,6 +374,22 @@ namespace WoodMasters2.Core.Services
                     RateTotal = entity.RateTotal
 
                 };
+            var timeSpanExperience = (DateTime.Now - entity.Master.CreatedOn).Days;
+            if (timeSpanExperience<1)
+            {
+                modelView.MasterExperience = Experience.Apprentice.ToString();
+            }
+            else if (timeSpanExperience < 2 && timeSpanExperience>=1)
+            {
+                modelView.MasterExperience = Experience.Junior.ToString();
+            }
+            else if (timeSpanExperience < 3 && timeSpanExperience>=2)
+            {
+                modelView.MasterExperience = Experience.Senior.ToString();
+            }
+            else
+                modelView.MasterExperience = Experience.Master.ToString();
+
             return modelView;
         }
 

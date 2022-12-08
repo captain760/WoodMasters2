@@ -74,9 +74,10 @@ namespace WoodMasters2.Controllers
                     }
                 },
                 Email = model.Email,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                
             };
-
+            
             var result = await userManager.CreateAsync(user, model.Password);
 
             await userManager.AddClaimAsync(user, new System.Security.Claims.Claim(ClaimTypeConstants.FirstName, user.FirstName));

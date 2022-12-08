@@ -26,6 +26,8 @@
         /// </summary>
         public string MasterEmail { get; set; } = null!;
         public string? MasterPhone { get; set; }
+        public string? MasterExperience { get; set; }
+        public string? MasterFullName { get; set; }
         /// <summary>
         /// MasterPiece width
         /// </summary>

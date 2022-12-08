@@ -35,6 +35,7 @@ asp-route-masterPieceId="@Model.Id">Delete</a>
 </div>
 <div class="card col-8 border-0">
 <p style="font-size:25px;"><u><b>@Model.Name</b></u></p>
+<p>Category: <b>@Model.Category</b></p>
 <p>Crafted by: <b>@Model.Master</b></p>
 <p>
                 Price Per Piece:
@@ -47,16 +48,18 @@ asp-route-masterPieceId="@Model.Id">Delete</a>
 
 <h6>@Model.Description</h6>
 <h6>Made of <b>@Model.Wood</b> wood</h6>
-<p>Category: <b>@Model.Category</b></p>
+
             
 </div>
 <p></p>
 <div class="card"style="width: 18rem;">
 <div class="card-body">
-<h5 class="card-title">Crafter Info</h5>
-<p class="card-text">Email:  @Model.MasterEmail</p>
-<p class="card-text">Phone Number: @Model.MasterPhone</p>
-<p class="card-text">Address: @Model.MasterAddress</p>
+<h5 class="card-title center"><b><u>Crafter Info</u></b></h5>
+<p class="card-text">Full Name: <b> @Model.MasterFullName</b></p>
+<p class="card-text">Experience: <b> @Model.MasterExperience</b></p>
+<p class="card-text">Email: <b> @Model.MasterEmail</b></p>
+<p class="card-text">Phone Number: <b>@Model.MasterPhone</b></p>
+<p class="card-text">Address: <b>@Model.MasterAddress</b></p>
 </div>
 </div>
 </div>

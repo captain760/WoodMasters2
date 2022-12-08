@@ -25,9 +25,7 @@
 <b>@String.Format("{0:f2}", Model.Price) USD</b>
 </h6>
 <p><b>@Model.Quantity</b> more piece(s) available</p>
-<p class="mb-1">Width: <b>@Model.Width</b> cm</p>
-<p class="mb-1">Length: <b>@Model.Length</b> cm</p>
-<p class="mb-1">Depth: <b>@Model.Depth</b> cm</p>
+<p class="mb-1">Width/Length/Depth: <b>@Model.Width / @Model.Length / @Model.Depth</b> cm</p>
 
 <h6>@Model.Description</h6>
 <h6>Made of <b>@Model.Wood</b> wood</h6>
@@ -44,47 +42,19 @@ class="btn btn-success">Details</a>
                 <p></p>
                
             }
+            @if (User?.Identity?.Name!= Model.Master)
+            {
+                
+                <form class="input-group-sm" asp-controller="MasterPiece" asp-action="AddToFavorites" asp-route-masterPieceId="@Model.Id">
+                    <input type="submit" value="Add to Favorites" class="fs-6 btn btn-warning mb-3 p-2" />
+                </form>
+                                   
+            }
+            <form class="input-group-sm" asp-controller="Comment" asp-action="AllComments"  asp-route-masterPieceId="@Model.Id">
+                    <input type="submit" value="Comments" class="fs-6 btn btn-secondary mb-3 p-2" />
+                </form>            
+            
 </div>
 </div>
 </div>
-@section Scripts {
 
-    
-    <script type="text/javascript">
-        
-    
-
-    $(function () {
-        $("img.rating").mouseover(function () {
-            giveRating($(this), "FilledStar.gif");
-            $(this).css("cursor", "pointer");
-        });
-
-        $("img.rating").mouseout(function () {
-            giveRating($(this), "EmptyStar.gif");
-            refilRating($(this));
-        });
-        $("img.rating").click(function (e) {
-           // $("img.rating").unbind("mouseout mouseover click");
-            $(this).css('color', 'red');
-           // alert(e.currentTarget + ' was clicked!');
-            // call ajax methods to update database
-            var url = "/Rating/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
-            $.post(url, null, function (data) {
-                $(e.currentTarget).closest('div').find('div.result').text(data).css('color','red') // $("#result").text(data);
-            });
-        });
-    });
-    function giveRating(img, image) {
-        img.attr("src", "/Images/" + image)
-            .prevAll("img.rating").attr("src", "/Images/" + image);
-    }
-    function refilRating(img1)
-    {
-        var rt = $(img1).closest('div').find("span.avr").text();
-        var img = $(img1).closest('div').find("img[id='" + parseInt(rt) + "']");
-        img.attr("src", "/Images/FilledStar.gif").prevAll("img.rating").attr("src", "/Images/FilledStar.gif");
-    }    
-     
-</script>
-}

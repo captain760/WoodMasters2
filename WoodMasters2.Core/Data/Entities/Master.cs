@@ -26,8 +26,8 @@ namespace WoodMasters2.Core.Data.Entities
         /// List of favorite MasterPiece's Ids
         /// </summary>
 
-        public List<Favorite> Favorites { get; set; } = new List<Favorite>();
-        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual List<Favorite> Favorites { get; set; } = new List<Favorite>();
+        public virtual List<Comment> Comments { get; set; } = new List<Comment>();
 
     }
 }

@@ -37,15 +37,15 @@ namespace WoodMasters2.Core.Data.Entities
 
         public int RateCount
         {
-            get { return ratings.Count; }
+            get { return Rating.Count; }
         }
 
         public int RateTotal
         {
-            get { return ratings.Sum(m=>m.Rate); }
+            get { return Rating.Sum(m=>m.Rate); }
         }
 
-        public virtual ICollection<StarRating> ratings { get; set; } = new List<StarRating>();
+        public virtual ICollection<StarRating> Rating { get; set; } = new List<StarRating>();
 
         [Required]
         [ForeignKey(nameof(Master))]

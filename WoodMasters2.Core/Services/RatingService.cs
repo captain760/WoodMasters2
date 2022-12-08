@@ -24,7 +24,6 @@ namespace WoodMasters2.Core.Services
             rt.Rate = rating;
             rt.MasterPieceId = mid;
 
-            //save into the database
             await context.Ratings.AddAsync(rt);
             await context.SaveChangesAsync();
         }

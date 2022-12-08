@@ -22,13 +22,15 @@ builder.Services.AddDefaultIdentity<Master>(options =>
     
 })
     .AddEntityFrameworkStores<WMDbContext>();
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/User/Login";
+       options.LoginPath = "/User/Login";
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IMasterPieceService, MasterPieceService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IRatingService, RatingService>();
 
 var app = builder.Build();
 
