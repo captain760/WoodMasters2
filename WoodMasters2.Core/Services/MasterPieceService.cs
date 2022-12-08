@@ -347,6 +347,7 @@ namespace WoodMasters2.Core.Services
                 .Include(m=>m.Master)
                 .ThenInclude(m=>m.MastersAddresses)
                 .ThenInclude(m=>m.Address)
+                .ThenInclude(m=>m.Country)
                 .FirstOrDefaultAsync(m=>m.Id == id);
             if (entity == null)
             {
@@ -356,7 +357,9 @@ namespace WoodMasters2.Core.Services
                 {
                     Id = entity.Id,
                     Master = entity.Master.UserName,
-                    MasterAddress = entity.Master.MastersAddresses.Select(x => x.Address.PlaceName).FirstOrDefault(),
+                    MasterAddress = entity.Master.MastersAddresses.Select(x => x.Address.PlaceName).FirstOrDefault() 
+                    +", "
+                    + entity.Master.MastersAddresses.Select(x=>x.Address.Country.Name).FirstOrDefault(),
                     MasterFullName = entity.Master.FirstName+" "+entity.Master.LastName,
                     MasterEmail = entity.Master.Email,
                     MasterPhone = entity.Master.PhoneNumber ?? "(not provided)",

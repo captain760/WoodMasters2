@@ -35,13 +35,13 @@ body  {
                 
         </div>
 
-        <form class="input-group-sm" asp-controller="Comment" asp-action="AllComments" asp-route-masterPieceId="@mp.Id">
-                    <input type="submit" value="Comments" class="fs-6 btn btn-secondary mb-3 p-2" />
-                </form>    
-
-        <form class="input-group-sm"asp-route-masterPieceId="@mp.Id"asp-controller="MasterPiece"asp-action="Remove"method="post">
-        <input class="fs-6 btn btn-danger mb-3 p-2"type="submit"value="Remove from Favorites"/>
-        </form>
+        <a asp-controller="Comment" asp-action="AllComments"  asp-route-masterPieceId="@mp.Id"
+                class="btn btn-secondary">Comments</a> 
+        <a asp-controller="MasterPiece" asp-action="Remove"  asp-route-masterPieceId="@mp.Id"
+                class="btn btn-danger">Remove from Favorites
+                <onclick="return confirm('Are you sure you want to remove MasterPiece: @mp.Name from your Favorites?')"/></a> 
+        
+      
         </div>
     }
 </div>

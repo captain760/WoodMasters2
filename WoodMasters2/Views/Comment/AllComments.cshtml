@@ -23,13 +23,13 @@ body  {
               <img class="center card-img-top" style="width: 18rem;"
              src="@Model.MasterPiece.ImageURL" alt="Masterpiece Image">
               <div class="card-body">
-                  <h4 class="card-title mt-1 text-center">@Model.MasterPiece.Name</h4>
-                   <p class="mb-1">Category: @Model.MasterPiece.Category.Name</p>
-                   <p class="mb-1">Master: @Model.MasterPiece.Master.UserName</p>
-                   <p class="mb-1">Width/Length/Depth[cm]: @Model.MasterPiece.Width/@Model.MasterPiece.Length/@Model.MasterPiece.Depth</p>                
+                  <h4 class="card-title mt-1 text-center"><b><u>@Model.MasterPiece.Name</u></b></h4>
+                   <p class="mb-1">Category: <b>@Model.MasterPiece.Category.Name</b></p>
+                   <p class="mb-1">Master: <b>@Model.MasterPiece.Master.UserName</b></p>
+                   <p class="mb-1">Width/Length/Depth[cm]: <b>@Model.MasterPiece.Width/@Model.MasterPiece.Length/@Model.MasterPiece.Depth</b></p>                
                    <p class="mb-1">Description: @Model.MasterPiece.Description</p>
-                   <p class="mb-0">Price: @Model.MasterPiece.Price $</p>
-                   <p class="mb-1">Quantity: @Model.MasterPiece.Quantity pcs.</p>                   
+                   <p class="mb-0">Price: <b>@Model.MasterPiece.Price></b> $</p>
+                   <p class="mb-1">Quantity: <b>@Model.MasterPiece.Quantity</b> pcs.</p>                   
                    <hr class="border border-primary border-2 opacity-75">
                     @if (Model.Comments.Count() > 0)
                     {

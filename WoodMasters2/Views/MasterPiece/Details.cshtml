@@ -23,14 +23,20 @@ body  {
 src="@Model.ImageURL"alt="MasterPiece Image">
 <div class="form-inline center">
                 @if (User?.Identity?.IsAuthenticated ?? false)
-                if(User?.Identity?.Name == Model.Master)
                 {
-<a class="btn btn-warning"asp-controller="MasterPiece"asp-action="Edit"
-asp-route-id="@Model.Id">Edit</a>
-<a class="ml-2 btn btn-danger"asp-controller="MasterPieces"asp-action="Delete"
-asp-route-masterPieceId="@Model.Id">Delete</a>
+                    <a asp-controller="Comment" asp-action="AllComments"  asp-route-masterPieceId="@Model.Id"
+                     class="btn btn-secondary">Comments</a> 
+
+                   if(User?.Identity?.Name == Model.Master)
+                    {
+                        <a class="btn btn-warning"asp-controller="MasterPiece"asp-action="Edit"
+                        asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger"asp-controller="MasterPieces"asp-action="Delete"
+                        asp-route-masterPieceId="@Model.Id">Delete</a>
                    
+                    } 
                 }
+                
 </div>
 </div>
 <div class="card col-8 border-0">
