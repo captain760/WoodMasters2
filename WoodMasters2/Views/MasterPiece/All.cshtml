@@ -1,7 +1,4 @@
-﻿
-@model IEnumerable<MasterPieceViewModel>
-
-
+﻿@model AllMasterPiecesQueryModel
 @{
     ViewBag.Title = "All Masterpieces";
 }
@@ -19,67 +16,113 @@ body  {
 <h2 class="text-center text-white">@ViewBag.Title</h2>
 <hr class="border border-warning border-3 opacity-75">
 
+<form method="get">
+<div class="row">
+<div class="form-group col-md-3 d-flex justify-content-between">
+<div class="form-group">
+<label class="text-white" asp-for="Category"></label>
+<select asp-for="Category"class="form-control">
+<option value="">AllCraft</option>
+                    @foreach (var category in Model.Categories)
+                    {
+<option value="@category">@category</option>
+                    }
+</select>
+</div>
+</div>
 
-  
-  
+<div class="form-group col-md-3">
+<label class="text-white" asp-for="SearchKey"></label>
+<input asp-for="SearchKey"class="form-control"placeholder="...">
+</div>
 
+<div class="form-group col-md-3 ">
+<div class="form-group">
+<label class="text-white" asp-for="Sorting"></label>
+<select asp-for="Sorting"class="form-control">
+<option value="0">Newest first</option>
+<option value="1">Price(ascending)</option>
+<option value="2">Votes(descending)</option>
+</select>
+</div>
+</div>
 
-    <div class="text-center row">
-        @foreach (var mp in Model)
-        {
-            
-            <div class="card col-4" style="width: 20rem; ">
-            <img class="card-img-top" style="width: 18rem;"
-             src="@mp.ImageURL" alt="Masterpiece Image">
-            <div class="card-body">
+<div class="col-md-3">
+<div class="form-group mt-4 p-0">
+<input type="submit"value="Search"class="btn btn-success"/>
+</div>
+</div>
+</div>
+</form>
+<br />
 
-                <div class="card-title mt-1">@mp.Name
-                    <br />                    
-                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="1" class="rating" mid="@mp.Id" />
-                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="2" class="rating" mid="@mp.Id" />
-                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="3" class="rating" mid="@mp.Id" />
-                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="4" class="rating" mid="@mp.Id" />
-                        <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="5" class="rating" mid="@mp.Id" />
-                        (@mp.RateCount votes) 
-                        @{if (@mp.RateCount > 0)
-                            { decimal a=@mp.RateTotal / @mp.RateCount; <span class="avr" style="color:green"> <br /> @a:f2 Stars</span> <span style="color:black">average rating</span>} 
-                        }
-                    <br>
-                        <div class="result"></div>
-                </div>
-                <p class="mb-1">Category: @mp.Category</p>
-                <p class="mb-1">Master: @mp.Master</p>
-                <p class="mb-1">Width/Length/Depth[cm]: @mp.Width/@mp.Length/@mp.Depth</p>                
-                <p class="mb-1">Description: @mp.Description</p>
-                <p class="mb-1">Wood: @mp.Wood</p>
-                <p class="mb-0">Price: @mp.Price $</p>
-                <p class="mb-1">Quantity: @mp.Quantity pcs.</p>
-               
-                
-            </div>
-            @if (User?.Identity?.Name!= mp.Master)
-            {
-                
-                <form class="input-group-sm" asp-controller="MasterPiece" asp-action="AddToFavorites" asp-route-masterPieceId="@mp.Id">
-                    <input type="submit" value="Add to Favorites" class="fs-6 btn btn-warning mb-3 p-2" />
-                </form>
-                                   
-            }
-            <form class="input-group-sm" asp-controller="Comment" asp-action="AllComments"  asp-route-masterPieceId="@mp.Id">
-                    <input type="submit" value="Comments" class="fs-6 btn btn-secondary mb-3 p-2" />
-                </form>            
-            
-        </div>
-        
-        }
-    </div>
-    
-    @section Scripts {
+@if (!Model.Crafts.Any())
+{
+<h2 class="text-center">No crafts found by the given criteria!</h2>
+}
+
+<div class="row">
+    @foreach (var masterPiece in Model.Crafts)
+    {
+     <partial name="_MasterPiecePartial"model="@masterPiece"/>
+    }
+</div>
+@{
+var previousPage = Model.CurrentPage - 1;
+if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+var maxPage = Math.Ceiling((double)Model.TotalCrafts /
+AllMasterPiecesQueryModel.CraftsPerPage);
+}
+
+<div class="row mb-5">
+<div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
+<a class="btn btn-warning @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+asp-controller="MasterPiece"
+asp-action="AllCrafts"
+asp-route-currentPage="@previousPage"
+asp-route-category="@Model.Category"
+asp-route-searchTerm="@Model.SearchKey"
+asp-route-sorting="@((int)Model.Sorting)"><<</a>
+</div>
+
+    @{
+var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+        !Model.Crafts.Any();
+    }
+
+<div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
+<a class="btn btn-warning
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+asp-controller="MasterPiece"
+asp-action="AllCrafts"
+asp-route-currentPage="@(Model.CurrentPage + 1)"
+asp-route-category="@Model.Category"
+asp-route-searchTerm="@Model.SearchKey"
+asp-route-sorting="@((int)Model.Sorting)">>></a>
+</div>
+</div>
+
+@section Scripts {
 
     
     <script type="text/javascript">
         
-    
+    $('div').each(function () {
+ 
+           var av = $(this).find("span.avr").text();
+           if (av != "" || av != null)
+           {
+               //alert(av);
+               //fillRating(parseInt(av));
+               var img = $(this).find("img[id='" + parseInt(av) + "']");
+               img.attr("src", "/Images/FilledStar.gif").prevAll("img.rating").attr("src", "/Images/FilledStar.gif");
+           }
+        });
+
 
     $(function () {
         $("img.rating").mouseover(function () {
@@ -92,7 +135,7 @@ body  {
             refilRating($(this));
         });
         $("img.rating").click(function (e) {
-            //$("img.rating").unbind("mouseout mouseover click");
+           // $("img.rating").unbind("mouseout mouseover click");
             $(this).css('color', 'red');
            // alert(e.currentTarget + ' was clicked!');
             // call ajax methods to update database
@@ -110,7 +153,6 @@ body  {
     {
         var rt = $(img1).closest('div').find("span.avr").text();
         var img = $(img1).closest('div').find("img[id='" + parseInt(rt) + "']");
-        
         img.attr("src", "/Images/FilledStar.gif").prevAll("img.rating").attr("src", "/Images/FilledStar.gif");
     }    
      

@@ -5,8 +5,15 @@
 @{
     ViewBag.Title = "Comments:";
 }
-
-<h2 class="text-center">@ViewBag.Title</h2>
+<head>
+<style>
+body  {
+  background-image: url("/Images/comments-bg.jpg");
+  background-color: #cccccc;
+}
+</style>
+</head>
+<h2 class="text-center text-warning">@ViewBag.Title</h2>
 <hr class="border border-primary border-2 opacity-75">
 
     <div class="row">        
@@ -52,7 +59,7 @@
                     else
                     {
                         <p class="text-center text-danger">No comments yet!</p>
-                        <p class="text-center text-primary"> Be the first one!</p>                        
+                        <p class="text-center text-primary"> Be the first one to share Your toughts on it!</p>                        
                     }
                     <div class="d-grid gap-2 mb-2">
                             <a class="btn btn-primary btn-lg" asp-controller="Comment" asp-action="Add" asp-route-masterPieceId="@Model.MasterPiece.Id">Add Comment</a>

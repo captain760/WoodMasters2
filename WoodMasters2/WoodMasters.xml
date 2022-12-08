@@ -102,13 +102,7 @@
             </summary>
             <param name="_masterPieceService"></param>
         </member>
-        <member name="M:WoodMasters2.Controllers.MasterPieceController.All">
-            <summary>
-            showing all MasterPieces
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:WoodMasters2.Controllers.MasterPieceController.AllCrafts(WoodMasters2.Core.Models.AllMasterPiecesQueryModel)">
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.All(WoodMasters2.Core.Models.AllMasterPiecesQueryModel)">
             <summary>
             AllCrafts method
             </summary>

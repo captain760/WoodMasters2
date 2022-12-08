@@ -14,8 +14,9 @@ namespace WoodMasters2.Core.Models
         public const int CraftsPerPage = 3;
         public string? Category { get; init; }
 
-        [Display(Name = "Search by text")]
+        [Display(Name = "Search by Keyword")]
         public string? SearchKey { get; init; }
+        [Display(Name = "Sorting by:")]
         public MasterPieceSorting Sorting { get; init; }
         public int CurrentPage { get; init; } = 1;
         public int TotalCrafts { get; set; }

@@ -29,17 +29,7 @@ namespace WoodMasters2.Controllers
             masterPieceService = _masterPieceService;
             
         }
-        /// <summary>
-        /// showing all MasterPieces
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<IActionResult> All()
-        {
-            var model = await masterPieceService.GetAllMasterPiecesAsync();
-
-            return View(model);
-        }
+       
 
 
         /// <summary>
@@ -48,7 +38,7 @@ namespace WoodMasters2.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult AllCrafts([FromQuery] AllMasterPiecesQueryModel query)
+        public IActionResult All([FromQuery] AllMasterPiecesQueryModel query)
         {
             var queryResult = masterPieceService.AllCrafts(
                 query. Category,
@@ -85,7 +75,7 @@ namespace WoodMasters2.Controllers
         /// <param name="masterPieceId"></param>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
+        
         public async Task<IActionResult> Details(int masterPieceId)
         {
             var model = await masterPieceService.GetMasterPieceViewByIdAsync(masterPieceId);

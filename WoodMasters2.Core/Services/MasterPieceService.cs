@@ -133,6 +133,7 @@ namespace WoodMasters2.Core.Services
                 .Select(m=> new MasterPieceViewModel
                 {
                     Id = m.Id,
+                    Name = m.Name,
                     Master = m.Master.UserName,
                     Description = m.Description,
                     ImageURL = m.ImageURL,

@@ -1,12 +1,12 @@
 ﻿@model MasterPieceViewModel
 
 <div class="col-md-4">
-<div class="card mb-3">
-<img class="card-img-top"src="@Model.ImageURL"alt="MasterPiece Image">
-<div class="card-body text-center">
-<h4>@Model.Name</h4>
-<div>
-<br />                    
+<div class="card col-4" style="width: 25rem; ">
+<img class="card-img-top center"style="width: 24rem;"src="@Model.ImageURL"alt="MasterPiece Image">
+<div class="card-body">
+        <div class="card-title mt-1"><u><b>@Model.Name</b></u> 
+        
+        <br />                    
                         <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="1" class="rating" mid="@Model.Id" />
                         <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="2" class="rating" mid="@Model.Id" />
                         <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="3" class="rating" mid="@Model.Id" />
@@ -18,43 +18,29 @@
                         }
                     <br>
                         <div class="result"></div>
-</div>
+       </div>
+ <h6>Category: <b>@Model.Category</b></h6>
+ <h6>Made of <b>@Model.Wood</b> wood</h6>
+ <h6>@Model.Description</h6>
+ <p class="mb-1">Width/Length/Depth: <b>@Model.Width / @Model.Length / @Model.Depth</b> cm</p>
 <h6>Master: <b>@Model.Master</b></h6>
-<h6>
-                Price :
-<b>@String.Format("{0:f2}", Model.Price) USD</b>
-</h6>
-<p><b>@Model.Quantity</b> more piece(s) available</p>
-<p class="mb-1">Width/Length/Depth: <b>@Model.Width / @Model.Length / @Model.Depth</b> cm</p>
+<h6>Price :<b>@String.Format("{0:f2}", Model.Price) USD</b></h6>
+<h6><b>@Model.Quantity</b> more piece(s) available</h6>
 
-<h6>@Model.Description</h6>
-<h6>Made of <b>@Model.Wood</b> wood</h6>
-<p>Category: <b>@Model.Category</b></p>
 <br/>
 <a asp-controller="MasterPiece"asp-action="Details"asp-route-masterPieceId="@Model.Id"
 class="btn btn-success">Details</a>
             @if (this.User?.Identity?.IsAuthenticated ?? false)
             {
-                <a asp-controller="MasterPiece"asp-action="Edit"asp-route-Id="@Model.Id"
-                class="btn btn-warning">Edit</a>
-                <a asp-controller="MasterPiece"asp-action="Delete"asp-route-masterPieceId="@Model.Id"
-                class="btn btn-danger" onclick="return confirm('Are you sure you want to delete the comment: @Model.Name')">Delete </a>
-                <p></p>
-               
-            }
-            @if (User?.Identity?.Name!= Model.Master)
-            {
-                
-                <form class="input-group-sm" asp-controller="MasterPiece" asp-action="AddToFavorites" asp-route-masterPieceId="@Model.Id">
-                    <input type="submit" value="Add to Favorites" class="fs-6 btn btn-warning mb-3 p-2" />
-                </form>
-                                   
-            }
-            <form class="input-group-sm" asp-controller="Comment" asp-action="AllComments"  asp-route-masterPieceId="@Model.Id">
-                    <input type="submit" value="Comments" class="fs-6 btn btn-secondary mb-3 p-2" />
-                </form>            
-            
-</div>
-</div>
-</div>
+                @if (User?.Identity?.Name!= Model.Master)
+                {                
+                <a asp-controller="MasterPiece" asp-action="AddToFavorites" asp-route-masterPieceId="@Model.Id"
+                class="btn btn-warning">Add to Favorites</a>                                   
+                }
+                <a asp-controller="Comment" asp-action="AllComments"  asp-route-masterPieceId="@Model.Id"
+                class="btn btn-secondary">Comments</a> 
 
+            }           
+</div>
+</div>
+</div>
