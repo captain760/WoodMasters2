@@ -4,21 +4,29 @@
 @{
     ViewBag.Title = "Add Comment";
 }
+<head>
+<style>
+body  {
+  background-image: url("/Images/add-comment-bg.jpg");
+  background-color: #cccccc;
+}
+</style>
+</head>
+<h1 class="text-center text-primary">@ViewBag.Title</h1>
+<hr class="border border-primary border-2 opacity-75">
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
 
 <div class="row">
     <form method="post">
-        <div class="form-group">
+        <div class="text-primary">
             
-            <div class="mb-3">
-                <label asp-for="Content"></label>
-                <input asp-for="Content" class="form-control" placeholder="Write your comment here...">
+            <div class="mb-1">
+                <label asp-for="Content"><b>Your comment:</b></label>
+                <input asp-for="Content" class="form-control text-primary" placeholder="Write your comment here...">
                 <span asp-validation-for="@Model.Content" class="small text-danger"></span>
             </div>
         </div>
-        <input class="btn btn-primary mt-3" type="submit" value="Add" />
+        <input class="btn btn-success mt-3" type="submit" value="Publish my comment" />
     </form>
 </div>
 

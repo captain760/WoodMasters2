@@ -13,8 +13,7 @@
                         <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="3" class="rating" mid="@Model.Id" />
                         <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="4" class="rating" mid="@Model.Id" />
                         <img src="~/Images/EmptyStar.gif" alt="Star Rating" align="middle" id="5" class="rating" mid="@Model.Id" />
-                        (@Model.RateCount votes) 
-                        @{if (@Model.RateCount > 0)
+                        (@Model.RateCount votes) @{if (@Model.RateCount > 0)
                             { decimal a=@Model.RateTotal / @Model.RateCount; <span class="avr" style="color:green"> <br /> @a Stars</span> <span style="color:black">average rating</span>} 
                         }
                     <br>

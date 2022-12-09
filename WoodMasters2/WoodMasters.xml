@@ -53,6 +53,13 @@
             <param name="masterPieceId"></param>
             <returns></returns>
         </member>
+        <member name="M:WoodMasters2.Controllers.CommentController.Edit(System.Int32)">
+            <summary>
+            Get method for Edit
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:WoodMasters2.Controllers.CommentController.Edit(WoodMasters2.Core.Models.Comments.EditCommentViewModel)">
             <summary>
             Post method for editing comment

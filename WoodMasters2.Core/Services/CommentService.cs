@@ -102,11 +102,10 @@ namespace WoodMasters2.Core.Services
             Comment? comment = await context.Comments.FindAsync(CommentId);
             var model = new EditCommentViewModel();
             if (comment!=null)
-            {
-                
-                {
-                    model.Content = comment.Body;
-                };
+            {  
+                model.CommentId = comment.Id;
+               model.Content = comment.Body;
+                model.MasterPieceId = comment.MasterPieceId;
             }
             
             return model;

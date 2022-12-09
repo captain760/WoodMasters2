@@ -29,8 +29,8 @@ body  {
                    <p class="mb-1">Master: <b>@Model.MasterPiece.Master.UserName</b></p>
                    <p class="mb-1">Width/Length/Depth[cm]: <b>@Model.MasterPiece.Width/@Model.MasterPiece.Length/@Model.MasterPiece.Depth</b></p>                
                    <p class="mb-1">Description: @Model.MasterPiece.Description</p>
-                   <p class="mb-0">Price: <b>@Model.MasterPiece.Price></b> $</p>
-                   <p class="mb-1">Quantity: <b>@Model.MasterPiece.Quantity</b> pcs.</p>                   
+                   <p class="mb-0">Price: <b>@Model.MasterPiece.Price</b>$</p>
+                   <p class="mb-1">Quantity: <b>@Model.MasterPiece.Quantity</b>pcs.</p>                   
                    <hr class="border border-primary border-2 opacity-75">
                     @if (Model.Comments.Count() > 0)
                     {
@@ -39,14 +39,14 @@ body  {
                             <div class="card-body">
                         
                                 <h5 class="card-title mt-1">@cmp.Master.UserName</h5>
-                                <p  class="mb-1">-->@cmp.Body</p>
+                                <p  class="mb-1">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp--> @cmp.Body</p>
                                 <p class="mb-0" style="font-style:italic ; font-size: 10px">Posted on: @cmp.PostingTime</p>
                                 
                             </div>                    
                         
                         @if (User?.Identity?.Name == cmp.Master.UserName)
                           {                                            
-                           <form class="form-check-inline input-group-sm"asp-route-commentId="@cmp.Id" asp-route-masterPieceId="@Model.MasterPiece.Id" asp-controller="Comment" asp-action="Edit"  method="post" >
+                           <form class="form-check-inline input-group-sm"asp-route-id="@cmp.Id" asp-route-masterPieceId="@Model.MasterPiece.Id" asp-controller="Comment" asp-action="Edit"  method="get" >
                            <input class="fs-6 btn btn-sm btn-primary mb-1 p-1"type="submit" value="Edit"/>
                            </form>
                            <form class="form-check-inline input-group-sm"asp-route-commentId="@cmp.Id" asp-route-masterPieceId="@Model.MasterPiece.Id" asp-controller="Comment" asp-action="Delete" method="post">

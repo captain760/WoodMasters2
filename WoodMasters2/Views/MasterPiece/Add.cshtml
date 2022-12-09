@@ -2,54 +2,54 @@
 @model AddMasterPieceViewModel
 
 @{
-    ViewBag.Title = "Add MasterPiece";
+    ViewBag.Title = "Add a MasterPiece";
 }
 <head>
 <style>
 body  {
-  
+  background-image: url("/Images/add-bg.jpg");
   background-color: #cccccc;
 }
 </style>
 </head>
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+<h2 class="text-left text-primary">@ViewBag.Title</h2>
+<hr class="border border-primary border-2 opacity-75">
 
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+<div class="row ">
+    <div class="col offset-lg-2 col-lg-8 offset-xl-0 col-xl-5">
         <form method="post">
             <div class="mb-3">
-                <label asp-for="@Model.Name" class="form-label">Name</label>
+                <label asp-for="@Model.Name" class="form-label text-primary"><b>Name it, please:</b></label>
                 <input asp-for="@Model.Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Width" class="form-label">Width</label>
+                <label asp-for="@Model.Width" class="form-label text-primary"><b>Width[cm]</b></label>
                 <input asp-for="@Model.Width" class="form-control" aria-required="true" />
                 <span asp-validation-for="Width" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Length" class="form-label">Length</label>
+                <label asp-for="@Model.Length" class="form-label text-primary"><b>Length[cm]</b></label>
                 <input asp-for="@Model.Length" class="form-control" aria-required="true" />
                 <span asp-validation-for="Length" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Depth" class="form-label">Depth</label>
+                <label asp-for="@Model.Depth" class="form-label text-primary"><b>Depth[cm]</b></label>
                 <input asp-for="@Model.Depth" class="form-control" aria-required="true" />
                 <span asp-validation-for="Depth" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Description" class="form-label">Description</label>
+                <label asp-for="@Model.Description" class="form-label text-primary"><b>Short description:</b></label>
                 <input asp-for="@Model.Description" class="form-control" aria-required="true" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.ImageURL" class="form-label">Image URL</label>
+                <label asp-for="@Model.ImageURL" class="form-label text-primary"><b>Image URL</b></label>
                 <input asp-for="@Model.ImageURL" class="form-control" aria-required="true" />
                 <span asp-validation-for="ImageURL" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.CategoryId" class="form-label">Category</label>
+                <label asp-for="@Model.CategoryId" class="form-label text-primary"><b>Category:</b></label>
                 <select asp-for="@Model.CategoryId" class="form-control">
                     @foreach (var category in Model.Categories)
                     {
@@ -60,7 +60,7 @@ body  {
             </div>
             
             <div class="mb-3">
-                <label asp-for="@Model.WoodId" class="form-label">Wood</label>
+                <label asp-for="@Model.WoodId" class="form-label text-primary"><b>Wood used:</b></label>
                 <select asp-for="@Model.WoodId" class="form-control">
                     @foreach (var wood in Model.Woods)
                     {
@@ -71,17 +71,17 @@ body  {
             </div>
             
             <div class="mb-3">
-                <label asp-for="@Model.Price" class="form-label">Price</label>
+                <label asp-for="@Model.Price" class="form-label text-primary"><b>Requested Price [USD]</b></label>
                 <input asp-for="@Model.Price" class="form-control" aria-required="true" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Quantity" class="form-label">Quantity</label>
+                <label asp-for="@Model.Quantity" class="form-label text-primary"><b>Quantity available [pcs]</b></label>
                 <input asp-for="@Model.Quantity" class="form-control" aria-required="true" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="Add" />
+                <input class="btn btn-primary" type="submit" value="Add to my collection" />
             </div>
         </form>
     </div>

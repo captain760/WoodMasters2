@@ -64,14 +64,18 @@ namespace WoodMasters2.Controllers
             return RedirectToAction(nameof(AllComments), new { masterPieceId });
         }
 
-        //To do...(commentId is not coming from the View...)
-        
-        //[HttpGet]
-        //public async Task<IActionResult> Edit(int commentId)
-        //{
-        //    var model = await commentService.GetEditCommentAsync(commentId);
-        //    return View(model);
-        //}
+
+        /// <summary>
+        /// Get method for Edit
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await commentService.GetEditCommentAsync(id);
+            return View(model);
+        }
 
 
         /// <summary>
@@ -80,7 +84,6 @@ namespace WoodMasters2.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        
         public async Task<IActionResult> Edit(EditCommentViewModel model)
         {
             if (!ModelState.IsValid)

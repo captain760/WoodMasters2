@@ -16,14 +16,14 @@ namespace WoodMasters2.Core.Services
         {
             this.context = _context;
         }
-    
+
         public async Task PostRatingAsync(int rating, int mid)
         {
-            StarRating rt = new StarRating();
-
-            rt.Rate = rating;
-            rt.MasterPieceId = mid;
-
+            var rt = new StarRating()
+            {
+                Rate = rating,
+                MasterPieceId = mid
+            };
             await context.Ratings.AddAsync(rt);
             await context.SaveChangesAsync();
         }

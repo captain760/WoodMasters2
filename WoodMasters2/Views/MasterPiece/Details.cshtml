@@ -20,9 +20,9 @@ body  {
 <div class="container"style="display:inline">
 <div class="row">
 <div class="col-4">
-<img class="card-img-top"style="width: 20rem;"
+<img class="card-img-top mb-3"style="width: 20rem;"
 src="@Model.ImageURL"alt="MasterPiece Image">
-<div class="form-inline center">
+<div class="form-inline">
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
                     <a asp-controller="Comment" asp-action="AllComments"  asp-route-masterPieceId="@Model.Id"
@@ -61,7 +61,7 @@ src="@Model.ImageURL"alt="MasterPiece Image">
 <p></p>
 <div class="card"style="width: 18rem;">
 <div class="card-body">
-<h5 class="card-title center"><b><u>Crafter Info</u></b></h5>
+<h5 class="card-title  text-primary center"><b><u>Crafter Info</u></b></h5>
 <p class="card-text">Full Name: <b> @Model.MasterFullName</b></p>
 <p class="card-text">Experience: <b> @Model.MasterExperience</b></p>
 <p class="card-text">Email: <b> @Model.MasterEmail</b></p>
