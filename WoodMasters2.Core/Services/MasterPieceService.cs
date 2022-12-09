@@ -4,7 +4,7 @@ using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
 using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Data.Enums;
-using WoodMasters2.Core.Models;
+using WoodMasters2.Core.Models.MasterPieces;
 
 namespace WoodMasters2.Core.Services
 {
@@ -335,10 +335,13 @@ namespace WoodMasters2.Core.Services
             var entity = await context.MasterPieces.FindAsync(id);
             if (entity==null)
             {
-                throw new ArgumentException("Invalid MasterPiece ID");
+                throw new Exception("Bad Request");
             }
             return entity;
         }
+
+       
+
         public async Task<MasterPieceViewModel> GetMasterPieceViewByIdAsync(int id)
         {
             var entity = await context.MasterPieces

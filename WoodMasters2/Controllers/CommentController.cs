@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WoodMasters2.Core.Contracts;
-
-using WoodMasters2.Core.Models;
+using WoodMasters2.Core.Models.Comments;
 
 namespace WoodMasters2.Controllers
 {

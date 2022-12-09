@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WoodMasters2.Core.Models
+namespace WoodMasters2.Core.Models.User
 {
     public class RegisterViewModel
     {
@@ -29,8 +29,8 @@ namespace WoodMasters2.Core.Models
         public string Country { get; set; } = null!;
 
         [Required]
-        [StringLength(20, MinimumLength = 5,ErrorMessage = "The {0} must be at least {2} characters long")]
-        [DataType(DataType.Password)]        
+        [StringLength(20, MinimumLength = 5, ErrorMessage = "The {0} must be at least {2} characters long")]
+        [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 
         [Compare(nameof(Password), ErrorMessage = "Password and Confirmation string are not identical")]

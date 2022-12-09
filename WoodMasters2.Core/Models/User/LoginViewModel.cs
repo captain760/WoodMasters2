@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WoodMasters2.Core.Models
+namespace WoodMasters2.Core.Models.User
 {
     public class LoginViewModel
     {

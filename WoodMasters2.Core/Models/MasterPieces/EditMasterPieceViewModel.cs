@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WoodMasters2.Core.Models
+namespace WoodMasters2.Core.Models.MasterPieces
 {
-    public class EditMasterPieceViewModel:AddMasterPieceViewModel
+    public class EditMasterPieceViewModel : AddMasterPieceViewModel
     {
         public int Id { get; set; }
     }

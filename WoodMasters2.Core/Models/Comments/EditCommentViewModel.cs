@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WoodMasters2.Core.Models
+namespace WoodMasters2.Core.Models.Comments
 {
-    public class EditCommentViewModel:CommentFormModel
+    public class EditCommentViewModel : CommentFormModel
     {
         public int CommentId { get; set; }
     }

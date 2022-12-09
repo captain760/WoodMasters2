@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WoodMasters2.Core.Data.Entities;
-using WoodMasters2.Core.Models;
+using WoodMasters2.Core.Models.Comments;
 
 namespace WoodMasters2.Core.Contracts
 {

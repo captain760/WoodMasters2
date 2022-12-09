@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
 using WoodMasters2.Core.Data.Entities;
-using WoodMasters2.Core.Models;
+
+using WoodMasters2.Core.Models.Comments;
 
 namespace WoodMasters2.Core.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace WoodMasters2.Core.Models
+﻿namespace WoodMasters2.Core.Models.MasterPieces
 {
     /// <summary>
     /// MasterPiece Dto model
@@ -69,7 +69,7 @@
 
         public int RateCount { get; set; }
         public int RateTotal { get; set; }
-        
+
 
 
     }

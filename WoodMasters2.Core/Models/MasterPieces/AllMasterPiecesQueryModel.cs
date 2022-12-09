@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Data.Enums;
 
-namespace WoodMasters2.Core.Models
+namespace WoodMasters2.Core.Models.MasterPieces
 {
     public class AllMasterPiecesQueryModel
     {

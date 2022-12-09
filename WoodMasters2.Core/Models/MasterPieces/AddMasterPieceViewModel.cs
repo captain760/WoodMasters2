@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using WoodMasters2.Core.Data.Entities;
 
-namespace WoodMasters2.Core.Models
+namespace WoodMasters2.Core.Models.MasterPieces
 {
     public class AddMasterPieceViewModel
     {
@@ -44,14 +44,14 @@ namespace WoodMasters2.Core.Models
         [Required]
         [StringLength(256, MinimumLength = 5)]
         public string ImageURL { get; set; } = null!;
-        
+
 
         /// <summary>
         /// MasterPiece wood type
         /// </summary>
         [Required]
         public int WoodId { get; set; }
-        
+
         /// <summary>
         /// MasterPiece craft type
         /// </summary>
@@ -72,7 +72,7 @@ namespace WoodMasters2.Core.Models
 
         public IEnumerable<Category> Categories { get; set; } = new List<Category>();
         public IEnumerable<Wood> Woods { get; set; } = new List<Wood>();
-       
+
 
     }
 }

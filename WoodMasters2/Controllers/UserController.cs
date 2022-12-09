@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WoodMasters2.Core.Constants;
 using WoodMasters2.Core.Data.Entities;
-using WoodMasters2.Core.Models;
+using WoodMasters2.Core.Models.User;
 
 namespace WoodMasters2.Controllers
 {

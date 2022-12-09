@@ -6,7 +6,7 @@ using System.Web;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
 using WoodMasters2.Core.Data.Entities;
-using WoodMasters2.Core.Models;
+using WoodMasters2.Core.Models.MasterPieces;
 
 namespace WoodMasters2.Controllers
 {/// <summary>

@@ -13,12 +13,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<Master>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = false;
-    options.Password.RequiredLength = 5;
-    options.Password.RequireDigit = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireLowercase = false;
+    options.SignIn.RequireConfirmedAccount = builder.Configuration.GetValue<bool>("Identity:RequireConfirmedAccount");
+    options.Password.RequiredLength = builder.Configuration.GetValue<int>("Identity:RequiredLength"); ;
+    options.Password.RequireDigit = builder.Configuration.GetValue<bool>("Identity:RequireDigit"); ;
+    options.Password.RequireUppercase = builder.Configuration.GetValue<bool>("Identity:RequireUppercase"); ;
+    options.Password.RequireNonAlphanumeric = builder.Configuration.GetValue<bool>("Identity:RequireNonAlphanumeric"); ;
+    options.Password.RequireLowercase = builder.Configuration.GetValue<bool>("Identity:RequireLowercase"); ;
     
 })
     .AddEntityFrameworkStores<WMDbContext>();
@@ -41,7 +41,8 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Home/Error/500");
+    app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode = {0}");
     app.UseHsts();
 }
 app.UseHttpsRedirection();

@@ -1,6 +1,6 @@
 ﻿using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Data.Enums;
-using WoodMasters2.Core.Models;
+using WoodMasters2.Core.Models.MasterPieces;
 
 namespace WoodMasters2.Core.Contracts
 {

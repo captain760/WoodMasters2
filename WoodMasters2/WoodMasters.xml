@@ -45,7 +45,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WoodMasters2.Controllers.CommentController.Add(WoodMasters2.Core.Models.CommentFormModel,System.Int32)">
+        <member name="M:WoodMasters2.Controllers.CommentController.Add(WoodMasters2.Core.Models.Comments.CommentFormModel,System.Int32)">
             <summary>
             Post method for Add
             </summary>
@@ -53,7 +53,7 @@
             <param name="masterPieceId"></param>
             <returns></returns>
         </member>
-        <member name="M:WoodMasters2.Controllers.CommentController.Edit(WoodMasters2.Core.Models.EditCommentViewModel)">
+        <member name="M:WoodMasters2.Controllers.CommentController.Edit(WoodMasters2.Core.Models.Comments.EditCommentViewModel)">
             <summary>
             Post method for editing comment
             </summary>
@@ -85,7 +85,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WoodMasters2.Controllers.HomeController.Error">
+        <member name="M:WoodMasters2.Controllers.HomeController.Error(System.Int32)">
             <summary>
             Errors handling controller
             </summary>
@@ -102,7 +102,7 @@
             </summary>
             <param name="_masterPieceService"></param>
         </member>
-        <member name="M:WoodMasters2.Controllers.MasterPieceController.All(WoodMasters2.Core.Models.AllMasterPiecesQueryModel)">
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.All(WoodMasters2.Core.Models.MasterPieces.AllMasterPiecesQueryModel)">
             <summary>
             AllCrafts method
             </summary>
@@ -127,7 +127,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WoodMasters2.Controllers.MasterPieceController.Add(WoodMasters2.Core.Models.AddMasterPieceViewModel)">
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.Add(WoodMasters2.Core.Models.MasterPieces.AddMasterPieceViewModel)">
             <summary>
             Add MasterPiece on POST
             </summary>
@@ -174,7 +174,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:WoodMasters2.Controllers.MasterPieceController.Edit(WoodMasters2.Core.Models.EditMasterPieceViewModel)">
+        <member name="M:WoodMasters2.Controllers.MasterPieceController.Edit(WoodMasters2.Core.Models.MasterPieces.EditMasterPieceViewModel)">
             <summary>
             Post for Editing a MasterPiece
             </summary>
@@ -218,7 +218,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WoodMasters2.Controllers.UserController.Register(WoodMasters2.Core.Models.RegisterViewModel)">
+        <member name="M:WoodMasters2.Controllers.UserController.Register(WoodMasters2.Core.Models.User.RegisterViewModel)">
             <summary>
             Register Post
             </summary>
@@ -231,7 +231,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WoodMasters2.Controllers.UserController.Login(WoodMasters2.Core.Models.LoginViewModel)">
+        <member name="M:WoodMasters2.Controllers.UserController.Login(WoodMasters2.Core.Models.User.LoginViewModel)">
             <summary>
             Login Post
             </summary>
@@ -243,21 +243,6 @@
             LogOut control - redirect to Home/Index
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:WoodMasters2.Models.ErrorViewModel">
-            <summary>
-            Errors model
-            </summary>
-        </member>
-        <member name="P:WoodMasters2.Models.ErrorViewModel.RequestId">
-            <summary>
-            Request Id of the error
-            </summary>
-        </member>
-        <member name="P:WoodMasters2.Models.ErrorViewModel.ShowRequestId">
-            <summary>
-            Request Id to be available when not Null or Empty
-            </summary>
         </member>
     </members>
 </doc>
