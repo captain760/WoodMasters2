@@ -165,7 +165,7 @@ namespace WoodMasters2.Controllers
         /// </summary>
         /// <param name="masterPieceId"></param>
         /// <returns></returns>
-        [HttpPost]
+       
         public async Task<IActionResult> Remove(int masterPieceId)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -179,7 +179,7 @@ namespace WoodMasters2.Controllers
         /// </summary>
         /// <param name="masterPieceId"></param>
         /// <returns></returns>
-        //[HttpPost]
+        
         public async Task<IActionResult> Delete(int masterPieceId)
         {
             await masterPieceService.DeleteAsync(masterPieceId);

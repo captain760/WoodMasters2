@@ -21,18 +21,19 @@ body  {
 <div class="text-center row">
     @foreach (var mp in Model)
     {
-        <div class="card col-4"style="width: 20rem; ">
-        <img class="card-img-top"style="width: 18rem;"
+        <div class="card col-4"style="width: 25rem; ">
+        <img class="card-img-top"style="width: 20rem;"
         src="@mp.ImageURL"alt="MasterPiece Image">
         <div class="card-body">
 
-         <h5 class="card-title mt-1">@mp.Name</h5>
-                <p class="mb-1">Category: @mp.Category</p>                
-                <p class="mb-1">Width/Length/Depth[cm]: @mp.Width/@mp.Length/@mp.Depth</p>                
-                <p class="mb-1">Description: @mp.Description</p>
-                <p class="mb-1">Wood: @mp.Wood</p>
-                <p class="mb-0">Price: @mp.Price $</p>
-                <p class="mb-1">Quantity: @mp.Quantity pcs.</p>
+         <h5 class="card-title mt-1"><u><b>@mp.Name</b></u></h5>
+                <h6>Category: <b>@mp.Category</b></h6>
+ <h6>Made of <b>@mp.Wood</b> wood</h6>
+ <h6>@mp.Description</h6>
+ <p class="mb-1">Width/Length/Depth: <b>@mp.Width / @mp.Length / @mp.Depth</b> cm</p>
+<h6>Master: <b>@mp.Master</b></h6>
+<h6>Price :<b>@String.Format("{0:f2}", mp.Price) USD</b></h6>
+<h6><b>@mp.Quantity</b> more piece(s) available</h6>
                 
         </div>
 
