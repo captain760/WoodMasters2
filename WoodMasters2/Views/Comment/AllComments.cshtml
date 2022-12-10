@@ -4,18 +4,18 @@
 
 
 @{
-    ViewBag.Title = "Comments:";
+    ViewBag.Title = "Comments";
 }
 <head>
 <style>
 body  {
-  background-image: url("/Images/comments-bg.jpg");
+  background-image: url("/Images/comments-bg3.jpg");
   background-color: #cccccc;
 }
 </style>
 </head>
-<h2 class="text-center text-warning">@ViewBag.Title</h2>
-<hr class="border border-primary border-2 opacity-75">
+<h2 class="text-left text-white">@ViewBag.Title</h2>
+<hr class="border border-white border-2 opacity-75">
 
     <div class="row">        
       <div class="col-sm-6">
@@ -28,7 +28,7 @@ body  {
                    <p class="mb-1">Category: <b>@Model.MasterPiece.Category.Name</b></p>
                    <p class="mb-1">Master: <b>@Model.MasterPiece.Master.UserName</b></p>
                    <p class="mb-1">Width/Length/Depth[cm]: <b>@Model.MasterPiece.Width/@Model.MasterPiece.Length/@Model.MasterPiece.Depth</b></p>                
-                   <p class="mb-1">Description: @Model.MasterPiece.Description</p>
+                   <p class="mb-1">Description: <b>@Model.MasterPiece.Description</b></p>
                    <p class="mb-0">Price: <b>@Model.MasterPiece.Price</b>$</p>
                    <p class="mb-1">Quantity: <b>@Model.MasterPiece.Quantity</b>pcs.</p>                   
                    <hr class="border border-primary border-2 opacity-75">

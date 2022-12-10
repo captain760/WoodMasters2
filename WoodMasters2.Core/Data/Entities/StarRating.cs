@@ -11,14 +11,11 @@ namespace WoodMasters2.Core.Data.Entities
     public class StarRating
     {
         [Key]
-        public int RateId { get; set; }
+        public int Id { get; set; }
 
         public int Rate { get; set; }
-
-             
-        public int MasterPieceId { get; set; }
-
-        [ForeignKey(nameof(MasterPieceId))]
+        [ForeignKey(nameof(MasterPiece))]
+        public int MasterPieceId { get; set; }       
         public virtual MasterPiece MasterPiece { get; set; } = null!;
     }
 }

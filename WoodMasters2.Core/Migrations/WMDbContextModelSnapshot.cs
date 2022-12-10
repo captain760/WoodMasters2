@@ -474,8 +474,8 @@ namespace WoodMasters2.Core.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dcca26bd-e8b1-4cfe-9e31-55a53dee1496",
-                            CreatedOn = new DateTime(2022, 12, 8, 3, 46, 3, 648, DateTimeKind.Local).AddTicks(5208),
+                            ConcurrencyStamp = "7a777aae-0d31-48cf-9612-095e419c8769",
+                            CreatedOn = new DateTime(2022, 12, 10, 10, 23, 31, 47, DateTimeKind.Local).AddTicks(615),
                             Email = "m_eftimov@yahoo.com",
                             EmailConfirmed = false,
                             Experience = 0,
@@ -484,9 +484,9 @@ namespace WoodMasters2.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M_EFTIMOV@YAHOO.COM",
                             NormalizedUserName = "MOMO12",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJQVHQE9OasgUJ8GudgyQGeUNq1QQd2fmlUL6z8gHab3Ubx2ODOAYfgDyR0/fSw+JQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM9kiqBSkfdixbKFcy0OMDvURLmoDtRjKFwFPJjZHcNmpahDaDes8mnxPVIxM6/ZAQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "93f39de2-b429-4483-80a9-3a674e9e22e9",
+                            SecurityStamp = "92bb6fe5-837a-4d8e-a8a7-8caae7469042",
                             TwoFactorEnabled = false,
                             UserName = "Momo12"
                         },
@@ -494,8 +494,8 @@ namespace WoodMasters2.Core.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e8a553eb-9f18-4887-961b-566ff7687651",
-                            CreatedOn = new DateTime(2022, 12, 8, 3, 46, 3, 655, DateTimeKind.Local).AddTicks(5218),
+                            ConcurrencyStamp = "b7bfbc72-fac8-4a94-a713-d3a9148f8f1d",
+                            CreatedOn = new DateTime(2022, 12, 10, 10, 23, 31, 54, DateTimeKind.Local).AddTicks(6609),
                             Email = "b_eftimov@yahoo.com",
                             EmailConfirmed = false,
                             Experience = 0,
@@ -504,9 +504,9 @@ namespace WoodMasters2.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "B_EFTIMOV@YAHOO.COM",
                             NormalizedUserName = "CAPTAIN76",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFpDbi7oLGcRh/F2K+sOPWPx9xvvIxA2sxr5Pp2K5OTGNl/re+7/3fGzk3PnKe6QXQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC9WVmO2uw84Wnmn6j2qz2pzTEdetLY9GtTimU/uie0H90C7M9eEZ+pBN4dro6yV3w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "18908500-f6bc-49de-bdb9-b604104aad86",
+                            SecurityStamp = "fce8aed7-5018-47e7-9abb-7a8e2577dd64",
                             TwoFactorEnabled = false,
                             UserName = "captain76"
                         });
@@ -670,11 +670,11 @@ namespace WoodMasters2.Core.Migrations
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.StarRating", b =>
                 {
-                    b.Property<int>("RateId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RateId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("MasterPieceId")
                         .HasColumnType("int");
@@ -682,7 +682,7 @@ namespace WoodMasters2.Core.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("int");
 
-                    b.HasKey("RateId");
+                    b.HasKey("Id");
 
                     b.HasIndex("MasterPieceId");
 
@@ -691,37 +691,37 @@ namespace WoodMasters2.Core.Migrations
                     b.HasData(
                         new
                         {
-                            RateId = 1,
+                            Id = 1,
                             MasterPieceId = 1,
                             Rate = 3
                         },
                         new
                         {
-                            RateId = 2,
+                            Id = 2,
                             MasterPieceId = 2,
                             Rate = 4
                         },
                         new
                         {
-                            RateId = 3,
+                            Id = 3,
                             MasterPieceId = 3,
                             Rate = 5
                         },
                         new
                         {
-                            RateId = 4,
+                            Id = 4,
                             MasterPieceId = 4,
                             Rate = 3
                         },
                         new
                         {
-                            RateId = 5,
+                            Id = 5,
                             MasterPieceId = 1,
                             Rate = 5
                         },
                         new
                         {
-                            RateId = 6,
+                            Id = 6,
                             MasterPieceId = 3,
                             Rate = 2
                         });

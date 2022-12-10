@@ -27,6 +27,7 @@ namespace WoodMasters2.Core.Data
                     .UseSqlServer(Configuration.ConnectionString)
                     .UseLazyLoadingProxies();
             }
+            
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -36,9 +37,6 @@ namespace WoodMasters2.Core.Data
                 .HasKey(x => new { x.MasterId, x.AddressId });
 
             
-            
-
-
             builder.Entity<Master>()
                 .Property(m => m.UserName)
                 .HasMaxLength(20)

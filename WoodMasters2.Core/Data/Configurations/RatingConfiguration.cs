@@ -21,7 +21,7 @@ namespace WoodMasters2.Core.Data.Configurations
             var ratings = new List<StarRating>();
             var rating = new StarRating()
             {
-                RateId = 1,
+                Id = 1,
                 MasterPieceId = 1,
                 Rate = 3
             };
@@ -29,35 +29,35 @@ namespace WoodMasters2.Core.Data.Configurations
 
              rating = new StarRating()
             {
-                RateId = 2,
+                Id = 2,
                 MasterPieceId = 2,
                 Rate = 4
             };
             ratings.Add(rating);
              rating = new StarRating()
             {
-                RateId = 3,
+                Id = 3,
                 MasterPieceId = 3,
                 Rate = 5
             };
             ratings.Add(rating);
              rating = new StarRating()
             {
-                RateId = 4,
+                Id = 4,
                 MasterPieceId = 4,
                 Rate = 3
             };
             ratings.Add(rating);
              rating = new StarRating()
             {
-                RateId = 5,
+                Id = 5,
                 MasterPieceId = 1,
                 Rate = 5
             };
             ratings.Add(rating);
              rating = new StarRating()
             {
-                RateId = 6,
+                Id = 6,
                 MasterPieceId = 3,
                 Rate = 2
             };

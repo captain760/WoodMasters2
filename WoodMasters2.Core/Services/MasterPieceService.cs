@@ -317,6 +317,7 @@ namespace WoodMasters2.Core.Services
         {
             var last3MasterPieces = await context
                 .MasterPieces
+                .Where(mp=>mp.IsDeleted == false)
                 .OrderByDescending(mp => mp.Id)
                 .Select(mp => new MasterPieceViewModel
                 {

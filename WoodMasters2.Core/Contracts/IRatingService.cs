@@ -8,6 +8,6 @@ namespace WoodMasters2.Core.Contracts
 {
     public interface IRatingService
     {
-        Task PostRatingAsync(int rating, int mid);
+        void PostRatingAsync(int rating, int mid);
     }
 }

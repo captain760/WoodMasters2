@@ -14,20 +14,19 @@ namespace WoodMasters2.Core.Migrations
                 table: "MasterPieces");
 
             migrationBuilder.CreateTable(
-                name: "StarRating",
+                name: "Ratings",
                 columns: table => new
                 {
-                    RateId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Rate = table.Column<int>(type: "int", nullable: false),
-                    IpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MasterPieceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StarRating", x => x.RateId);
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StarRating_MasterPieces_MasterPieceId",
+                        name: "FK_Ratings_MasterPieces_MasterPieceId",
                         column: x => x.MasterPieceId,
                         principalTable: "MasterPieces",
                         principalColumn: "Id",
@@ -39,25 +38,59 @@ namespace WoodMasters2.Core.Migrations
                 keyColumn: "Id",
                 keyValue: "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 columns: new[] { "ConcurrencyStamp", "CreatedOn", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "7ac61050-d989-4a22-8ad9-2bce36c2d31b", new DateTime(2022, 12, 3, 21, 26, 29, 848, DateTimeKind.Local).AddTicks(4453), "AQAAAAEAACcQAAAAEL6ot97TWscU92lAtu+a/6p9Xdbg4PkFonOoXJKVhv+ztIvPR3VrswAFnbBZmCEs6g==", "3f4d4fe9-0ef3-4282-9f4c-961c619274bd" });
+                values: new object[] { "b7bfbc72-fac8-4a94-a713-d3a9148f8f1d", new DateTime(2022, 12, 10, 10, 23, 31, 54, DateTimeKind.Local).AddTicks(6609), "AQAAAAEAACcQAAAAEC9WVmO2uw84Wnmn6j2qz2pzTEdetLY9GtTimU/uie0H90C7M9eEZ+pBN4dro6yV3w==", "fce8aed7-5018-47e7-9abb-7a8e2577dd64" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "dea12856-c198-4129-b3f3-b893d8395082",
                 columns: new[] { "ConcurrencyStamp", "CreatedOn", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "45db605b-17d2-4959-a03f-9d12cc087441", new DateTime(2022, 12, 3, 21, 26, 29, 840, DateTimeKind.Local).AddTicks(8769), "AQAAAAEAACcQAAAAEHk+RUxisga/VN9SsebplmYvZBwpzd7fVhKliq7wm+xwRwFmhqtJ4e2GjfcB8H/aig==", "db90f384-d501-4c45-a4ef-ede2085fa169" });
+                values: new object[] { "7a777aae-0d31-48cf-9612-095e419c8769", new DateTime(2022, 12, 10, 10, 23, 31, 47, DateTimeKind.Local).AddTicks(615), "AQAAAAEAACcQAAAAEM9kiqBSkfdixbKFcy0OMDvURLmoDtRjKFwFPJjZHcNmpahDaDes8mnxPVIxM6/ZAQ==", "92bb6fe5-837a-4d8e-a8a7-8caae7469042" });
+
+            migrationBuilder.UpdateData(
+                table: "MasterPieces",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "Description",
+                value: "Flowers and leaves carved as a 3D model");
+
+            migrationBuilder.UpdateData(
+                table: "MasterPieces",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "Price",
+                value: 50m);
+
+            migrationBuilder.UpdateData(
+                table: "MasterPieces",
+                keyColumn: "Id",
+                keyValue: 3,
+                column: "Price",
+                value: 100m);
+
+            migrationBuilder.InsertData(
+                table: "Ratings",
+                columns: new[] { "Id", "MasterPieceId", "Rate" },
+                values: new object[,]
+                {
+                    { 1, 1, 3 },
+                    { 2, 2, 4 },
+                    { 3, 3, 5 },
+                    { 4, 4, 3 },
+                    { 5, 1, 5 },
+                    { 6, 3, 2 }
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_StarRating_MasterPieceId",
-                table: "StarRating",
+                name: "IX_Ratings_MasterPieceId",
+                table: "Ratings",
                 column: "MasterPieceId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "StarRating");
+                name: "Ratings");
 
             migrationBuilder.AddColumn<decimal>(
                 name: "Rating",
@@ -86,22 +119,22 @@ namespace WoodMasters2.Core.Migrations
                 table: "MasterPieces",
                 keyColumn: "Id",
                 keyValue: 1,
-                column: "Rating",
-                value: 10m);
+                columns: new[] { "Description", "Rating" },
+                values: new object[] { "A master-piece from an unknown master found on a garrage sale", 10m });
 
             migrationBuilder.UpdateData(
                 table: "MasterPieces",
                 keyColumn: "Id",
                 keyValue: 2,
-                column: "Rating",
-                value: 5m);
+                columns: new[] { "Price", "Rating" },
+                values: new object[] { 100m, 5m });
 
             migrationBuilder.UpdateData(
                 table: "MasterPieces",
                 keyColumn: "Id",
                 keyValue: 3,
-                column: "Rating",
-                value: 8m);
+                columns: new[] { "Price", "Rating" },
+                values: new object[] { 50m, 8m });
 
             migrationBuilder.UpdateData(
                 table: "MasterPieces",

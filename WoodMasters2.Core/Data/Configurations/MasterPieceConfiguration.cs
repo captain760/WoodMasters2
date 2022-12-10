@@ -44,7 +44,7 @@ namespace WoodMasters2.Core.Data.Configurations
                 Width = 50,
                 Length = 50,
                 Depth = 5,
-                ImageURL = "https://i0.wp.com/100things2do.ca/wp-content/uploads/2021/06/scrapwood-snowflake-12.jpg",
+                ImageURL = "https://i.etsystatic.com/24321679/r/il/e5edd8/3028680665/il_1140xN.3028680665_2c23.jpg",
                 Price = 50,
                 Quantity = 2,
                 IsDeleted = false,
@@ -91,6 +91,23 @@ namespace WoodMasters2.Core.Data.Configurations
             };
             masterPieces.Add(masterPiece);
 
+            masterPiece = new MasterPiece()
+            {
+                Id = 5,
+                Name = "Salt Pepper Shakers Set",
+                Width = 10,
+                Length = 15,
+                Depth = 10,
+                ImageURL = "https://i.etsystatic.com/21625965/r/il/cec166/3983272458/il_1140xN.3983272458_jh7a.jpg",
+                Price = 8,
+                Quantity = 40,
+                IsDeleted = false,
+                MasterId = "dea12856-c198-4129-b3f3-b893d8395082",
+                Description = "A wooden set for the kitchen table",
+                CategoryId = 3,
+                WoodId = 10
+            };
+            masterPieces.Add(masterPiece);
             return masterPieces;
         }
     }

@@ -12,8 +12,8 @@ using WoodMasters2.Core.Data;
 namespace WoodMasters2.Core.Migrations
 {
     [DbContext(typeof(WMDbContext))]
-    [Migration("20221203221619_AddRatingsTable")]
-    partial class AddRatingsTable
+    [Migration("20221210082331_Rating")]
+    partial class Rating
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -476,8 +476,8 @@ namespace WoodMasters2.Core.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8023e3b6-0dc5-4104-942e-ad62ed977e1b",
-                            CreatedOn = new DateTime(2022, 12, 4, 0, 16, 18, 883, DateTimeKind.Local).AddTicks(4977),
+                            ConcurrencyStamp = "7a777aae-0d31-48cf-9612-095e419c8769",
+                            CreatedOn = new DateTime(2022, 12, 10, 10, 23, 31, 47, DateTimeKind.Local).AddTicks(615),
                             Email = "m_eftimov@yahoo.com",
                             EmailConfirmed = false,
                             Experience = 0,
@@ -486,9 +486,9 @@ namespace WoodMasters2.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M_EFTIMOV@YAHOO.COM",
                             NormalizedUserName = "MOMO12",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF8tpyP3rACH3xLKVFvHo4rHJlkk0r+ZM7ReAZNVrH/iu27UMIWuEMhDXX+54lSFHQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM9kiqBSkfdixbKFcy0OMDvURLmoDtRjKFwFPJjZHcNmpahDaDes8mnxPVIxM6/ZAQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "89b29c8a-8dd7-4863-9dd3-2d51c647c212",
+                            SecurityStamp = "92bb6fe5-837a-4d8e-a8a7-8caae7469042",
                             TwoFactorEnabled = false,
                             UserName = "Momo12"
                         },
@@ -496,8 +496,8 @@ namespace WoodMasters2.Core.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bfd5e072-bbf1-492f-91ae-69d604f3ad12",
-                            CreatedOn = new DateTime(2022, 12, 4, 0, 16, 18, 890, DateTimeKind.Local).AddTicks(5218),
+                            ConcurrencyStamp = "b7bfbc72-fac8-4a94-a713-d3a9148f8f1d",
+                            CreatedOn = new DateTime(2022, 12, 10, 10, 23, 31, 54, DateTimeKind.Local).AddTicks(6609),
                             Email = "b_eftimov@yahoo.com",
                             EmailConfirmed = false,
                             Experience = 0,
@@ -506,9 +506,9 @@ namespace WoodMasters2.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "B_EFTIMOV@YAHOO.COM",
                             NormalizedUserName = "CAPTAIN76",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFxHKlbv1xeAl65hBQ/SzCXt5rvJGiTz8/lq6J5koTOobv9gSMPvrbyW9NVrSYgBGg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC9WVmO2uw84Wnmn6j2qz2pzTEdetLY9GtTimU/uie0H90C7M9eEZ+pBN4dro6yV3w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d51f0a75-7b04-4936-bcb9-948ab4ae87c1",
+                            SecurityStamp = "fce8aed7-5018-47e7-9abb-7a8e2577dd64",
                             TwoFactorEnabled = false,
                             UserName = "captain76"
                         });
@@ -609,7 +609,7 @@ namespace WoodMasters2.Core.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Depth = 10.0,
-                            Description = "A master-piece from an unknown master found on a garrage sale",
+                            Description = "Flowers and leaves carved as a 3D model",
                             ImageURL = "https://www.harvardmagazine.com/sites/default/files/styles/4x3_main/public/img/article/0613/ja13_page_31_02.jpg",
                             IsDeleted = false,
                             Length = 40.0,
@@ -631,7 +631,7 @@ namespace WoodMasters2.Core.Migrations
                             Length = 50.0,
                             MasterId = "dea12856-c198-4129-b3f3-b893d8395082",
                             Name = "Tribal Mosaic",
-                            Price = 100m,
+                            Price = 50m,
                             Quantity = 2,
                             Width = 50.0,
                             WoodId = 3
@@ -647,7 +647,7 @@ namespace WoodMasters2.Core.Migrations
                             Length = 20.0,
                             MasterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             Name = "Wooden Bowl",
-                            Price = 50m,
+                            Price = 100m,
                             Quantity = 4,
                             Width = 20.0,
                             WoodId = 8
@@ -672,15 +672,11 @@ namespace WoodMasters2.Core.Migrations
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.StarRating", b =>
                 {
-                    b.Property<int>("RateId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RateId"), 1L, 1);
-
-                    b.Property<string>("IpAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("MasterPieceId")
                         .HasColumnType("int");
@@ -688,11 +684,49 @@ namespace WoodMasters2.Core.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("int");
 
-                    b.HasKey("RateId");
+                    b.HasKey("Id");
 
                     b.HasIndex("MasterPieceId");
 
                     b.ToTable("Ratings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MasterPieceId = 1,
+                            Rate = 3
+                        },
+                        new
+                        {
+                            Id = 2,
+                            MasterPieceId = 2,
+                            Rate = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            MasterPieceId = 3,
+                            Rate = 5
+                        },
+                        new
+                        {
+                            Id = 4,
+                            MasterPieceId = 4,
+                            Rate = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            MasterPieceId = 1,
+                            Rate = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            MasterPieceId = 3,
+                            Rate = 2
+                        });
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Wood", b =>
@@ -902,7 +936,7 @@ namespace WoodMasters2.Core.Migrations
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.StarRating", b =>
                 {
                     b.HasOne("WoodMasters2.Core.Data.Entities.MasterPiece", "MasterPiece")
-                        .WithMany("ratings")
+                        .WithMany("Rating")
                         .HasForeignKey("MasterPieceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -938,7 +972,7 @@ namespace WoodMasters2.Core.Migrations
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.MasterPiece", b =>
                 {
-                    b.Navigation("ratings");
+                    b.Navigation("Rating");
                 });
 
             modelBuilder.Entity("WoodMasters2.Core.Data.Entities.Wood", b =>

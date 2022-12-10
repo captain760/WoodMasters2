@@ -29,7 +29,7 @@ namespace WoodMasters2.Controllers
             masterPieceService = _masterPieceService;
             
         }
-       
+
 
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace WoodMasters2.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        //[HttpPost]
+        [HttpPost]
         public async Task<IActionResult> Add(AddMasterPieceViewModel model)
         {
             if (!ModelState.IsValid)
@@ -125,7 +125,7 @@ namespace WoodMasters2.Controllers
         /// </summary>
         /// <param name="masterPieceId"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> AddToFavorites(int masterPieceId)
         {
 
