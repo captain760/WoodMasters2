@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-
+using WoodMasters2.Core.Constants;
 
 namespace WoodMasters2.Controllers
 {
@@ -22,6 +22,7 @@ namespace WoodMasters2.Controllers
             {
                 return RedirectToAction("All", "MasterPiece");
             }
+            TempData[MessageConstant.WarningMessage] = "Please log-in to enter!";
             return RedirectToAction("Index", "MasterPiece");
         }
         /// <summary>
@@ -41,6 +42,8 @@ namespace WoodMasters2.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int statusCode)
         {
+            TempData[MessageConstant.ErrorMessage] = "Ops, something went wrong!";
+
             if (statusCode == 400)
             {
                 return View("Error400");

@@ -19,7 +19,7 @@ namespace WoodMasters2.Core.Data.Entities
         public virtual Master Master { get; set; } = null!;
 
         [Required]
-        [StringLength(5000)]
+        [StringLength(1500)]
         public string Body { get; set; } = null!;
 
         public DateTime PostingTime { get; set; } 

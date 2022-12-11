@@ -179,7 +179,7 @@ namespace WoodMasters2.Controllers
         /// </summary>
         /// <param name="masterPieceId"></param>
         /// <returns></returns>
-        
+         
         public async Task<IActionResult> Delete(int masterPieceId)
         {
             await masterPieceService.DeleteAsync(masterPieceId);

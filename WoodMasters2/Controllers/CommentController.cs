@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using WoodMasters2.Core.Constants;
 using WoodMasters2.Core.Contracts;
+using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Models.Comments;
 
 namespace WoodMasters2.Controllers
@@ -55,11 +57,14 @@ namespace WoodMasters2.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData[MessageConstant.ErrorMessage] = "You entered some wrong data. Try again!";
                 return View(model);
             }
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             
             await commentService.AddCommentAsync(model, userId!,masterPieceId);
+
+            TempData[MessageConstant.SuccessMessage] = "Your comment has been published!";
 
             return RedirectToAction(nameof(AllComments), new { masterPieceId });
         }
@@ -88,11 +93,12 @@ namespace WoodMasters2.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData[MessageConstant.ErrorMessage] = "Please try again!";
                 return View(model);
             }
             await commentService.EditCommentAsync(model);
             int masterPieceId = model.MasterPieceId;
-
+            TempData[MessageConstant.SuccessMessage] = "Your comment has been edited!";
             return RedirectToAction(nameof(AllComments), new {masterPieceId });
                         
         }
@@ -107,7 +113,7 @@ namespace WoodMasters2.Controllers
         public async Task<IActionResult> Delete(int commentId, int masterPieceId)
         {
             await commentService.DeleteAsync(commentId, masterPieceId);
-
+            TempData[MessageConstant.WarningMessage] = "Your comment has been deleted!";
             return RedirectToAction(nameof(AllComments), new { masterPieceId });
         }
     }
