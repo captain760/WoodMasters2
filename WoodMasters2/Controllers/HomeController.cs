@@ -22,7 +22,7 @@ namespace WoodMasters2.Controllers
             {
                 return RedirectToAction("All", "MasterPiece");
             }
-            TempData[MessageConstant.WarningMessage] = "Please log-in to enter!";
+            
             return RedirectToAction("Index", "MasterPiece");
         }
         /// <summary>

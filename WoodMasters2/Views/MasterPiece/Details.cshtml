@@ -32,8 +32,12 @@ src="@Model.ImageURL"alt="MasterPiece Image">
                     {
                         <a class="btn btn-warning"asp-controller="MasterPiece"asp-action="Edit"
                         asp-route-id="@Model.Id">Edit</a>
-                        <a class="ml-2 btn btn-danger"asp-controller="MasterPieces"asp-action="Delete"
-                        asp-route-masterPieceId="@Model.Id">Delete</a>
+
+                        <a asp-controller="MasterPiece"asp-action="Delete"
+                        asp-route-masterPieceId="@Model.Id" method="post">
+                            <input class="btn btn-danger"type="submit" value="Delete"
+                                 onclick="return confirm('Are you sure you want to delete the masterpiece: @Model.Name')"/>
+                        </a>
                    
                     } 
                 }
@@ -73,3 +77,5 @@ src="@Model.ImageURL"alt="MasterPiece Image">
 
 
 </div>
+
+

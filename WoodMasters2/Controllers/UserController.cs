@@ -34,6 +34,7 @@ namespace WoodMasters2.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
+                TempData[MessageConstant.SuccessMessage] = "You're already logged-in!";
                 return RedirectToAction("All", "MasterPiece");
             }
             var model = new RegisterViewModel();
@@ -85,6 +86,7 @@ namespace WoodMasters2.Controllers
             if (result.Succeeded)
             {
                 await signInManager.SignInAsync(user, isPersistent: false);
+                TempData[MessageConstant.SuccessMessage] = "Welcome! Please Log-in!";
                 return RedirectToAction("Login", "User");
             }
 
@@ -92,7 +94,7 @@ namespace WoodMasters2.Controllers
             {
                 ModelState.AddModelError("", item.Description);
             }
-
+            TempData[MessageConstant.ErrorMessage] = "Registration failed!";
             return View(model);
         }
         /// <summary>
@@ -105,6 +107,7 @@ namespace WoodMasters2.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
+                TempData[MessageConstant.SuccessMessage] = "You're already logged-in!";
                 return RedirectToAction("All", "MasterPiece");
             }
             var model = new LoginViewModel();
@@ -122,6 +125,7 @@ namespace WoodMasters2.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData[MessageConstant.ErrorMessage] = "Login failed!";
                 return View(model);
             }
 
@@ -135,12 +139,12 @@ namespace WoodMasters2.Controllers
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 if (result.Succeeded)
                 {
-
+                    TempData[MessageConstant.SuccessMessage] = $"Welcome Master!!!";
                     return RedirectToAction("All", "MasterPiece");
                 }
             }
             ModelState.AddModelError("", "The Login process is invalid! Try again!");
-
+            TempData[MessageConstant.ErrorMessage] = "Login failed!";
             return View(model);
         }
         /// <summary>
@@ -151,7 +155,7 @@ namespace WoodMasters2.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-
+            TempData[MessageConstant.SuccessMessage] = $"Good bye {UserFirstName} !";
             return RedirectToAction("Index", "Home");
         }
     }

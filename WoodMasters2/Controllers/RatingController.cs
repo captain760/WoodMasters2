@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WoodMasters2.Core.Constants;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data.Entities;
 
@@ -28,7 +29,7 @@ namespace WoodMasters2.Controllers
         public JsonResult PostRating(int rating, int mid)
         {
             ratingService.PostRatingAsync(rating, mid);
-
+            TempData[MessageConstant.SuccessMessage] = "Thanks for your rating!";
             return Json("You rated this " + rating.ToString() + " star(s)");
         }
     }

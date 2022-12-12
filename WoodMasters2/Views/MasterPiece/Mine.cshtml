@@ -34,15 +34,16 @@ body  {
                 <p class="mb-1">Quantity: <b>@mp.Quantity</b> pcs.</p>
                
             </div>
+                <div class="form-inline">
+                        <a class="btn btn-warning"asp-controller="MasterPiece"asp-action="Edit"
+                        asp-route-id="@mp.Id">Edit</a>
 
-            <a asp-route-Id="@mp.Id"asp-controller="MasterPiece"asp-action="Edit"
-            method="get" class="btn btn-warning">Edit
-            </a>
-
-            <a asp-route-masterPieceId="@mp.Id"asp-controller="MasterPiece"asp-action="Delete"
-            method="post" class="btn btn-danger">Delete
-            <onclick="return confirm('Are you sure you want to delete the MasterPiece: @mp.Name')"/>
-            </a>
+                        <a asp-controller="MasterPiece"asp-action="Delete"
+                        asp-route-masterPieceId="@mp.Id" method="post">
+                            <input class="btn btn-danger"type="submit" value="Delete"
+                                 onclick="return confirm('Are you sure you want to delete the masterpiece: @mp.Name')"/>
+                        </a>
+                </div>
         </div>
     }
 </div>

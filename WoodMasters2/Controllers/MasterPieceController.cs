@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using System.Security.Claims;
 using System.Web;
+using WoodMasters2.Core.Constants;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
 using WoodMasters2.Core.Data.Entities;
@@ -66,6 +67,12 @@ namespace WoodMasters2.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await masterPieceService.GetLast3MasterPiecesAsync();
+            if (User?.Identity?.IsAuthenticated == false)
+            {
+
+                TempData[MessageConstant.WarningMessage] = "Please Login to see the details!";
+                
+            }
             return View(model);
         }
 
@@ -116,7 +123,7 @@ namespace WoodMasters2.Controllers
             }
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await masterPieceService.AddMasterPieceAsync(model, userId!);
-
+            TempData[MessageConstant.SuccessMessage] = "Masterpiece added!";
             return RedirectToAction(nameof(All));
 
         }
@@ -131,7 +138,7 @@ namespace WoodMasters2.Controllers
 
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await masterPieceService.AddMasterPieceToFavoritesAsync(masterPieceId, userId!);
-
+            TempData[MessageConstant.SuccessMessage] = "Masterpiece added to Favorites!";
 
             return RedirectToAction(nameof(All));
         }
@@ -170,7 +177,7 @@ namespace WoodMasters2.Controllers
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await masterPieceService.RemoveMasterPieceFromFavoritesAsync(masterPieceId, userId!);
-
+            TempData[MessageConstant.WarningMessage] = "Masterpiece removed from Favorites!";
             return RedirectToAction(nameof(Favorites));
         }
 
@@ -183,8 +190,8 @@ namespace WoodMasters2.Controllers
         public async Task<IActionResult> Delete(int masterPieceId)
         {
             await masterPieceService.DeleteAsync(masterPieceId);
-
-            return RedirectToAction(nameof(Mine));
+            TempData[MessageConstant.ErrorMessage] = "Masterpiece deleted!";
+            return RedirectToAction(nameof(All));
 
         }/// <summary>
         /// Get for Editing a MasterPiece
@@ -210,7 +217,7 @@ namespace WoodMasters2.Controllers
                 return View(model);
             }
             await masterPieceService.EditMasterPieceAsync(model);
-
+            TempData[MessageConstant.SuccessMessage] = "Masterpiece edited!";
             return RedirectToAction(nameof(Mine));
         }
         

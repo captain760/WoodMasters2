@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ganss.Xss;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace WoodMasters2.Core.Services
 
         public async Task AddCommentAsync(CommentFormModel model, string authorId, int masterPieceId)
         {
+            var sanitizer = new HtmlSanitizer();
             MasterPiece? masterPiece = await context.MasterPieces.FindAsync(model.MasterPieceId);
             if (masterPiece == null)
             {
@@ -33,7 +35,7 @@ namespace WoodMasters2.Core.Services
             {
                 MasterId = authorId,
                 MasterPieceId = model.MasterPieceId,
-                Body = model.Content,
+                Body = sanitizer.Sanitize(model.Content),
                 PostingTime = DateTime.Now,
                 IsDeleted = false
             };
@@ -60,10 +62,11 @@ namespace WoodMasters2.Core.Services
 
         public async Task EditCommentAsync(EditCommentViewModel model)
         {
+            var sanitizer = new HtmlSanitizer();
             Comment? comment = await context.Comments.FindAsync(model.CommentId);
             if (comment != null)
             {
-                comment.Body = model.Content;
+                comment.Body = sanitizer.Sanitize(model.Content);
                 comment.PostingTime = DateTime.Now;
             }
                        
