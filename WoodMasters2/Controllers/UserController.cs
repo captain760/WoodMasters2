@@ -162,22 +162,38 @@ namespace WoodMasters2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> CreateRoles()
-        {
-            await roleManager.CreateAsync(new IdentityRole(RoleConstants.Admin));
-            await roleManager.CreateAsync(new IdentityRole(RoleConstants.User));
-            return RedirectToAction("Index", "Home");
-        }
 
-        public async Task<IActionResult> AddUsersToRoles()
-        {
-            string emailAdmin = "b_eftimov@yahoo.com";
-            string emailUser = "m_eftimov@yahoo.com";
-            var admin =await userManager.FindByEmailAsync(emailAdmin);
-            var user =await userManager.FindByEmailAsync(emailUser);
-            await userManager.AddToRoleAsync(admin, RoleConstants.Admin);
-            await userManager.AddToRoleAsync(user, RoleConstants.User);
-            return RedirectToAction("Index", "Home");
-        }
+
+
+
+        //to be executed on initialization...
+
+
+        //public async Task<IActionResult> CreateClaims()
+        //{
+        //    var users = userManager.Users.ToList();
+        //    foreach (var us in users)
+        //    {
+        //        await userManager.AddClaimAsync(us, new System.Security.Claims.Claim(ClaimTypeConstants.FirstName, us.FirstName));
+        //    }
+        //    return RedirectToAction("Index", "Home");
+        //}
+        //public async Task<IActionResult> CreateRoles()
+        //{
+        //    await roleManager.CreateAsync(new IdentityRole(RoleConstants.Admin));
+        //    await roleManager.CreateAsync(new IdentityRole(RoleConstants.User));
+        //    return RedirectToAction("Index", "Home");
+        //}
+
+        //public async Task<IActionResult> AddUsersToRoles()
+        //{
+        //    string emailAdmin = "b_eftimov@yahoo.com";
+        //    string emailUser = "m_eftimov@yahoo.com";
+        //    var admin =await userManager.FindByEmailAsync(emailAdmin);
+        //    var user =await userManager.FindByEmailAsync(emailUser);
+        //    await userManager.AddToRoleAsync(admin, RoleConstants.Admin);
+        //    await userManager.AddToRoleAsync(user, RoleConstants.User);
+        //    return RedirectToAction("Index", "Home");
+        //}
     }
 }
