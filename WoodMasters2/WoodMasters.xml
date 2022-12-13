@@ -212,12 +212,13 @@
             Controller for the Accounts of the users
             </summary>
         </member>
-        <member name="M:WoodMasters2.Controllers.UserController.#ctor(Microsoft.AspNetCore.Identity.UserManager{WoodMasters2.Core.Data.Entities.Master},Microsoft.AspNetCore.Identity.SignInManager{WoodMasters2.Core.Data.Entities.Master})">
+        <member name="M:WoodMasters2.Controllers.UserController.#ctor(Microsoft.AspNetCore.Identity.UserManager{WoodMasters2.Core.Data.Entities.Master},Microsoft.AspNetCore.Identity.SignInManager{WoodMasters2.Core.Data.Entities.Master},Microsoft.AspNetCore.Identity.RoleManager{Microsoft.AspNetCore.Identity.IdentityRole})">
             <summary>
             Master's accounts controller
             </summary>
             <param name="_userManager"></param>
             <param name="_signInManager"></param>
+            <param name="_roleManager"></param>
         </member>
         <member name="M:WoodMasters2.Controllers.UserController.Register">
             <summary>

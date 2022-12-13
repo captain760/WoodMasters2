@@ -1,4 +1,5 @@
-﻿@using WoodMasters2.Core.Models.MasterPieces
+﻿@using WoodMasters2.Core.Constants
+@using WoodMasters2.Core.Models.MasterPieces
 @model MasterPieceViewModel
 @{
     ViewBag.Title = "Details";
@@ -28,7 +29,7 @@ src="@Model.ImageURL"alt="MasterPiece Image">
                     <a asp-controller="Comment" asp-action="AllComments"  asp-route-masterPieceId="@Model.Id"
                      class="btn btn-secondary">Comments</a> 
 
-                   if(User?.Identity?.Name == Model.Master)
+                   if((User?.Identity?.Name == Model.Master) || (User?.IsInRole(RoleConstants.Admin) == true))
                     {
                         <a class="btn btn-warning"asp-controller="MasterPiece"asp-action="Edit"
                         asp-route-id="@Model.Id">Edit</a>

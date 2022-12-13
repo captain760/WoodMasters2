@@ -14,15 +14,18 @@ namespace WoodMasters2.Controllers
     {
         private readonly UserManager<Master> userManager;
         private readonly SignInManager<Master> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         /// <summary>
         /// Master's accounts controller
         /// </summary>
         /// <param name="_userManager"></param>
         /// <param name="_signInManager"></param>
-        public UserController(UserManager<Master> _userManager, SignInManager<Master> _signInManager)
+        /// <param name="_roleManager"></param>
+        public UserController(UserManager<Master> _userManager, SignInManager<Master> _signInManager, RoleManager<IdentityRole> _roleManager)
         {
-            this.userManager = _userManager;
-            this.signInManager = _signInManager;
+            userManager = _userManager;
+            signInManager = _signInManager;
+            roleManager = _roleManager;
         }
         /// <summary>
         /// Register Get
@@ -156,6 +159,24 @@ namespace WoodMasters2.Controllers
         {
             await signInManager.SignOutAsync();
             TempData[MessageConstant.SuccessMessage] = $"Good bye {UserFirstName} !";
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> CreateRoles()
+        {
+            await roleManager.CreateAsync(new IdentityRole(RoleConstants.Admin));
+            await roleManager.CreateAsync(new IdentityRole(RoleConstants.User));
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> AddUsersToRoles()
+        {
+            string emailAdmin = "b_eftimov@yahoo.com";
+            string emailUser = "m_eftimov@yahoo.com";
+            var admin =await userManager.FindByEmailAsync(emailAdmin);
+            var user =await userManager.FindByEmailAsync(emailUser);
+            await userManager.AddToRoleAsync(admin, RoleConstants.Admin);
+            await userManager.AddToRoleAsync(user, RoleConstants.User);
             return RedirectToAction("Index", "Home");
         }
     }

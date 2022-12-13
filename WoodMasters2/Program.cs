@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
@@ -19,9 +20,11 @@ builder.Services.AddDefaultIdentity<Master>(options =>
     options.Password.RequireUppercase = builder.Configuration.GetValue<bool>("Identity:RequireUppercase"); ;
     options.Password.RequireNonAlphanumeric = builder.Configuration.GetValue<bool>("Identity:RequireNonAlphanumeric"); ;
     options.Password.RequireLowercase = builder.Configuration.GetValue<bool>("Identity:RequireLowercase"); ;
-    
+
 })
-    .AddEntityFrameworkStores<WMDbContext>();
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<WMDbContext>();    
+    
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
