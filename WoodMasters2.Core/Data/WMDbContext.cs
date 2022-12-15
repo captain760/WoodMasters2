@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WoodMasters2.Core.Data.Configurations;
 using WoodMasters2.Core.Data.Entities;
@@ -35,8 +36,8 @@ namespace WoodMasters2.Core.Data
 
             builder.Entity<MasterAddress>()
                 .HasKey(x => new { x.MasterId, x.AddressId });
-
             
+                       
             builder.Entity<Master>()
                 .Property(m => m.UserName)
                 .HasMaxLength(20)
@@ -52,10 +53,11 @@ namespace WoodMasters2.Core.Data
                 .HasColumnType("decimal")
                 .HasPrecision(7, 2);
 
-            
 
-            
+
+
             //Seeding Masters, Categories, Woods, Rating, Countries, MasterPieces and Addresses example
+          
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new WoodConfiguration());           
@@ -64,6 +66,7 @@ namespace WoodMasters2.Core.Data
             builder.ApplyConfiguration(new AddressConfiguration());
             builder.ApplyConfiguration(new MasterAddressConfiguration());        
             builder.ApplyConfiguration(new RatingConfiguration());        
+            
 
             base.OnModelCreating(builder);
         }

@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WoodMasters2.Core.Constants;
 using WoodMasters2.Core.Data.Entities;
 
 namespace WoodMasters2.Core.Data.Configurations
 {
     internal class UserConfiguration : IEntityTypeConfiguration<Master>
     {
+               
         public void Configure(EntityTypeBuilder<Master> builder)
         {
             builder.HasData(SeedUsers());
@@ -33,8 +35,12 @@ namespace WoodMasters2.Core.Data.Configurations
             };
 
             master.PasswordHash =
-            hasher.HashPassword(master, "12momo");            
+            hasher.HashPassword(master, "12momo");
+            
             masters.Add(master);
+           
+
+
 
             master = new Master()
             {
@@ -51,6 +57,7 @@ namespace WoodMasters2.Core.Data.Configurations
             hasher.HashPassword(master, "76captain");
             masters.Add(master);
 
+            
             return masters;
         }
 

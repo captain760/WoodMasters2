@@ -1,0 +1,55 @@
+﻿@using WoodMasters2.Areas.Administration.Models
+
+@model IEnumerable<UsersModel>
+@{
+    ViewBag.Title = "All Users";
+}
+
+<head>
+<style>
+body  {
+  
+  background-color: #cccccc;
+}
+</style>
+</head>
+@{
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<hr class="border border-danger border-2 opacity-75">
+
+<h2 class="text-center text-primary">@ViewBag.Title</h2>
+<hr class="border border-danger border-3 opacity-75">
+<body>
+
+<div class="container">
+
+  
+  <div class="table-responsive">
+      <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>E-mail</th>
+        <th>MasterPieces Owned</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.MasterUserName</td>
+                <td>@user.MasterFirstName</td>
+                <td>@user.MasterLastName</td>
+                <td>@user.MasterEmail</td>
+                <td>@user.MasterPiecesCount</td>
+            </tr>
+        } 
+    </tbody>
+  </table>
+</div>
+</div>
+
+</body>

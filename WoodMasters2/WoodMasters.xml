@@ -4,6 +4,33 @@
         <name>WoodMasters2</name>
     </assembly>
     <members>
+        <member name="T:WoodMasters2.Areas.Administration.Controllers.UsersController">
+            <summary>
+            Admin Controller
+            </summary>
+        </member>
+        <member name="M:WoodMasters2.Areas.Administration.Controllers.UsersController.#ctor(WoodMasters2.Core.Data.WMDbContext)">
+            <summary>
+            Home controller for administration
+            </summary>
+            <param name="_context"></param>
+        </member>
+        <member name="M:WoodMasters2.Areas.Administration.Controllers.UsersController.Index">
+            <summary>
+            Admin Index method
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:WoodMasters2.Areas.Administration.Models.UsersModel">
+            <summary>
+            Users Table Model
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Models.UsersModel.MasterPiecesCount">
+            <summary>
+            MP Count
+            </summary>
+        </member>
         <member name="T:WoodMasters2.Controllers.BaseController">
             <summary>
             Base controller inherited by all other controllers
@@ -249,6 +276,24 @@
         <member name="M:WoodMasters2.Controllers.UserController.Logout">
             <summary>
             LogOut control - redirect to Home/Index
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.UserController.CreateClaims">
+            <summary>
+            Create Claim - FirstName for all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.UserController.CreateRoles">
+            <summary>
+            Create the Roles
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Controllers.UserController.AddUsersToRoles">
+            <summary>
+            Add seeded users to roles
             </summary>
             <returns></returns>
         </member>

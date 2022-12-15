@@ -70,7 +70,7 @@ namespace WoodMasters2.Controllers
             if (User?.Identity?.IsAuthenticated == false)
             {
 
-                TempData[MessageConstant.WarningMessage] = "Please Login to see the details!";
+                TempData[MessageConstant.SuccessMessage] = "Welcome! Please Log-in!";
                 
             }
             return View(model);
@@ -121,12 +121,21 @@ namespace WoodMasters2.Controllers
             {
                 return View(model);
             }
+            if ((await masterPieceService.CategoryExists(model.CategoryId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
+            }
+            if ((await masterPieceService.WoodExists(model.WoodId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.WoodId), "Wood type does not exist");
+            }
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await masterPieceService.AddMasterPieceAsync(model, userId!);
             TempData[MessageConstant.SuccessMessage] = "Masterpiece added!";
             return RedirectToAction(nameof(All));
 
         }
+        
         /// <summary>
         /// Add to Favorites List
         /// </summary>

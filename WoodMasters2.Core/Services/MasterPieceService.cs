@@ -26,8 +26,6 @@ namespace WoodMasters2.Core.Services
         /// <returns>List of MasterPieces</returns>
         public async Task AddMasterPieceAsync(AddMasterPieceViewModel model, string userId)
         {
-
-
             var entity = new MasterPiece()
             {
                 Name = model.Name,
@@ -88,9 +86,10 @@ namespace WoodMasters2.Core.Services
 
         public IEnumerable<string> AllCategoriesNames()
         {
-            var categories = context.Categories
+            var categories = context.Categories            
             .Select(c => c.Name)
-            .Distinct()
+            .OrderBy(c=>c)
+            .Distinct()            
             .ToList();
             return categories;
         }
@@ -156,7 +155,13 @@ namespace WoodMasters2.Core.Services
                 CraftPieces = crafts
             };
         }
-        
+
+        public async Task<bool> CategoryExists(int categoryId)
+        {
+            return await context.Categories
+                .AnyAsync(c => c.Id == categoryId);
+        }
+
 
         /// <summary>
         /// Deleting MasterPiece By the master
@@ -238,7 +243,9 @@ namespace WoodMasters2.Core.Services
         /// <returns></returns>
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
-            return await context.Categories.ToListAsync();
+            return await context.Categories
+                .OrderBy(c=>c.Name)
+                .ToListAsync();
         }
 
         
@@ -448,7 +455,9 @@ namespace WoodMasters2.Core.Services
         /// <returns></returns>
         public async Task<IEnumerable<Wood>> GetWoodsAsync()
         {
-            return await context.Woods.ToListAsync();
+            return await context.Woods
+                .OrderBy(p => p.Type)
+                .ToListAsync();
         }
         /// <summary>
         /// Remove the MasterPiece from the Favorites list
@@ -481,6 +490,10 @@ namespace WoodMasters2.Core.Services
 
         }
 
-
+        public async Task<bool> WoodExists(int woodId)
+        {
+            return await context.Woods
+                .AnyAsync(c => c.Id == woodId);
+        }
     }
 }

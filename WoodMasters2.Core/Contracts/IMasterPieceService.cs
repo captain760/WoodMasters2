@@ -43,6 +43,8 @@ namespace WoodMasters2.Core.Contracts
             int craftsPerPage = 1
             );
         IEnumerable<string> AllCategoriesNames();
+        Task<bool> CategoryExists(int categoryId);
+        Task<bool> WoodExists(int woodId);
     }
 }
 
