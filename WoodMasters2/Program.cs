@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
+using WoodMasters2.Core.Data.Common;
 using WoodMasters2.Core.Data.Configurations;
 using WoodMasters2.Core.Data.Entities;
 using WoodMasters2.Core.Services;
@@ -35,6 +36,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddMvc(options=>options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+
+builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IMasterPieceService, MasterPieceService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IRatingService, RatingService>();

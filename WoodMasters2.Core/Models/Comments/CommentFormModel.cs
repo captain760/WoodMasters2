@@ -9,8 +9,7 @@ namespace WoodMasters2.Core.Models.Comments
 {
     public class CommentFormModel
     {
-        //[Required]        
-        //public int CommentId { get; set; }
+        
         [Required]
         public int MasterPieceId { get; set; }
         [Required]

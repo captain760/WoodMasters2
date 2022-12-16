@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WoodMasters2.Core.Contracts;
 using WoodMasters2.Core.Data;
+using WoodMasters2.Core.Data.Common;
 using WoodMasters2.Core.Data.Entities;
 
 using WoodMasters2.Core.Models.Comments;
@@ -16,16 +17,19 @@ namespace WoodMasters2.Core.Services
     public class CommentService: ICommentService
     {
         private readonly WMDbContext context;
-
+       
         public CommentService(WMDbContext _context)
         {
             context = _context;
+            
         }
 
         public async Task AddCommentAsync(CommentFormModel model, string authorId, int masterPieceId)
         {
             var sanitizer = new HtmlSanitizer();
             MasterPiece? masterPiece = await context.MasterPieces.FindAsync(model.MasterPieceId);
+            
+
             if (masterPiece == null)
             {
                 throw new ArgumentException("MasterPiece Id not Found!");

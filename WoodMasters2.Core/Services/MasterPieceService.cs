@@ -106,8 +106,7 @@ namespace WoodMasters2.Core.Services
                 .AsQueryable();
             if (!string.IsNullOrWhiteSpace(category))
             {
-                masterPiecesQuery = context.MasterPieces                    
-                    .Include(x => x.Category)                    
+                masterPiecesQuery = masterPiecesQuery
                     .Where(m => m.Category.Name == category);
             }
             if (!string.IsNullOrWhiteSpace(searchKey))
