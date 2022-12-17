@@ -32,8 +32,7 @@ namespace WoodMasters2.Core.Data.Configurations
                 MasterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 Description="Flowers and leaves carved as a 3D model",
                 CategoryId = 1,
-                WoodId = 5,
-                
+                WoodId = 5                
             };
             masterPieces.Add(masterPiece);
 
