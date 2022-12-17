@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodMasters2", "WoodMasters2\WoodMasters2.csproj", "{C66D5CD5-7A36-4CF4-A1E9-764EE0605B3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodMasters2", "WoodMasters2\WoodMasters2.csproj", "{C66D5CD5-7A36-4CF4-A1E9-764EE0605B3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodMasters2.Core", "WoodMasters2.Core\WoodMasters2.Core.csproj", "{F212AA01-D32D-4B4F-A08E-A81E9BDB612D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoodMasters2.Core", "WoodMasters2.Core\WoodMasters2.Core.csproj", "{F212AA01-D32D-4B4F-A08E-A81E9BDB612D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodMaster2.UnitTests", "WoodMaster2.UnitTests\WoodMaster2.UnitTests.csproj", "{C43040B0-BDC5-414C-A91F-F12CA28D1A79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F212AA01-D32D-4B4F-A08E-A81E9BDB612D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F212AA01-D32D-4B4F-A08E-A81E9BDB612D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F212AA01-D32D-4B4F-A08E-A81E9BDB612D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C43040B0-BDC5-414C-A91F-F12CA28D1A79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C43040B0-BDC5-414C-A91F-F12CA28D1A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C43040B0-BDC5-414C-A91F-F12CA28D1A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C43040B0-BDC5-414C-A91F-F12CA28D1A79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
