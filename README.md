@@ -6,7 +6,7 @@ This project is the defense project for ASP.NET Core course (part of the C# Web 
 ## Table of Contents
 1. [Technology stack](https://github.com/Captain760/WoodMasters2#stack)
 2. [Screenshots](https://github.com/Captain760/WoodMasters2#screenshots)
-3. [Application Configurations](https://github.com/Captain760/WoodMasters2#application-configurations)
+3. [Database](https://github.com/Captain760/WoodMasters2#database-screenshot)
 4. [Credits](https://github.com/Captain760/WoodMasters2#credits)
 
 ## Technology stack:
