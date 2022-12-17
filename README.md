@@ -55,6 +55,7 @@ This project is the defense project for ASP.NET Core course (part of the C# Web 
 
 ## Credits
  -Using programming techniques studdied at SoftUni
+ 
  -Using ASP.NET-MVC-Rating originally developed by:
     - [tajuddin](https://tajuddin.chittagong-it.com/implementing-a-simple-star-rating-in-the-asp-net-mvc-application-using-jquery/)
 
