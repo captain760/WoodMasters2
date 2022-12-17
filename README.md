@@ -44,7 +44,8 @@ This project is the defense project for ASP.NET Core course (part of the C# Web 
 ### MasterPiece Comments (user)
 <img width="945" alt="MasterPiece Comments" src="https://user-images.githubusercontent.com/92640161/208269626-f5b6ecd9-7211-4fe1-9b43-516782fdce6a.jpg">
 
-
+### DataBase Screenshot
+<img width="945" alt="Database Scheme" src="[https://user-images.githubusercontent.com/92640161/208269626-f5b6ecd9-7211-4fe1-9b43-516782fdce6a.jpg](https://user-images.githubusercontent.com/92640161/208269962-7a76925d-7dd4-4d6a-83e4-5a595474ac06.jpg)">
 
 
 1. Check connection string in appsettings.json.
