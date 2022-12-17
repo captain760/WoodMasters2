@@ -95,9 +95,10 @@ namespace WoodMasters2.Core.Services
         }
 
 
-        public MasterPieceQueryModel AllCrafts(string? category = null, string? searchKey = null, MasterPieceSorting sorting = MasterPieceSorting.Newest, int currentPage = 1, int craftsPerPage = 1)
+        public async Task<MasterPieceQueryModel> AllCrafts(string? category = null, string? searchKey = null, MasterPieceSorting sorting = MasterPieceSorting.Newest, int currentPage = 1, int craftsPerPage = 1)
         {
-            var masterPiecesQuery =  context.MasterPieces
+            var result = new MasterPieceQueryModel();
+            var masterPiecesQuery = context.MasterPieces
                 .Include(x => x.Master)
                 .Include(x => x.Category)
                 .Include(x => x.Wood)
@@ -124,10 +125,9 @@ namespace WoodMasters2.Core.Services
                 MasterPieceSorting.Rating => masterPiecesQuery.OrderByDescending(m => (m.Rating.Count)).ThenByDescending(m => m.Id),
                 _=>masterPiecesQuery.OrderByDescending(m=>m.Id)
             };
-            var crafts = masterPiecesQuery
+            result.CraftPieces = await masterPiecesQuery
                 .Skip((currentPage-1)*craftsPerPage)
                 .Take(craftsPerPage)
-                .ToList()
                 .Select(m=> new MasterPieceViewModel
                 {
                     Id = m.Id,
@@ -145,14 +145,10 @@ namespace WoodMasters2.Core.Services
                     RateCount = m.RateCount,
                     RateTotal = m.RateTotal
                 })
-                .ToList();
-            var totalCrafts = masterPiecesQuery.Count();
+                .ToListAsync();
+            result.TotalMasterPieces = await masterPiecesQuery.CountAsync();
 
-            return new MasterPieceQueryModel
-            {
-                TotalMasterPieces = totalCrafts,
-                CraftPieces = crafts
-            };
+            return result;
         }
 
         public async Task<bool> CategoryExists(int categoryId)
@@ -293,6 +289,7 @@ namespace WoodMasters2.Core.Services
             var favoriteIds = user.Favorites.Select(u=>u.Value).ToList();
             var favoriteMasterPieces =  await context.MasterPieces
                 .Where(f => favoriteIds.Contains(f.Id))
+                .Include(m=>m.Master)
                 .Include(mp => mp.Category)
                 .Include(mp => mp.Wood)
                 .ToListAsync();
@@ -303,7 +300,7 @@ namespace WoodMasters2.Core.Services
                  .Select(m => new MasterPieceViewModel()
                  {
                      Id = m.Id,
-                     Master = user.UserName,
+                     Master = m.Master.UserName,
                      Name = m.Name,
                      Description = m.Description,
                      ImageURL = m.ImageURL,

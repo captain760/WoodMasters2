@@ -1,0 +1,44 @@
+﻿@using WoodMasters2.Areas.Administration.Models
+@model CategoryModel
+
+@{
+    ViewBag.Title = "Add Category";
+}
+<head>
+<style>
+body  {
+  background-color: #cccccc;
+}
+</style>
+</head>
+<hr class="border border-primary border-2 opacity-75">
+
+<h2 class="text-left text-primary">@ViewBag.Title</h2>
+<hr class="border border-primary border-3 opacity-75">
+<br />
+
+<div class="row">
+    <form method="post">
+        <div class="text-primary">
+            @Html.HiddenFor(m=>m.Id)
+            <div class="mb-1">
+                <label asp-for="Name"><b>Category Name:</b></label>
+                <input asp-for="Name" class="form-control text-primary" placeholder="Write Category name here...">
+                <span asp-validation-for="@Model.Name" class="small text-danger"></span>
+            </div>
+        </div>
+        
+        <form class="input-group-sm" asp-controller="Users" asp-action="AddCategory" asp-route-model="@Model">
+        <input class="fs-6 btn btn-warning mb-3 p-2"type="submit"value="Add"/>
+        </form>
+       
+    </form>
+</div>
+
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
+

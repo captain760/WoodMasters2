@@ -47,8 +47,8 @@ namespace WoodMasters2.Controllers
                 query.Sorting,
                 query.CurrentPage,
                 AllMasterPiecesQueryModel.CraftsPerPage);
-            query.TotalCrafts = queryResult.TotalMasterPieces;
-            query.Crafts = queryResult.CraftPieces;
+            query.TotalCrafts = queryResult.Result.TotalMasterPieces;
+            query.Crafts = queryResult.Result.CraftPieces;
             var masterPieceCategories = this.masterPieceService.AllCategoriesNames();
             query.Categories = masterPieceCategories;
 

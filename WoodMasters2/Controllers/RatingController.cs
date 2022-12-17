@@ -25,7 +25,7 @@ namespace WoodMasters2.Controllers
         /// <param name="rating"></param>
         /// <param name="mid"></param>
         /// <returns></returns>
-        [HttpPost]
+        //[HttpGet]
         public JsonResult PostRating(int rating, int mid)
         {
             ratingService.PostRatingAsync(rating, mid);

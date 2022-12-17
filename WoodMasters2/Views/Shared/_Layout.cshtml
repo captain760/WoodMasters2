@@ -23,28 +23,34 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="Index"><b>Home</b></a>
                         </li>
                         
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="All">All</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="All"><b>All</b></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="Add">Add</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="Add"><b>Add</b></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="Mine">Owned</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="Mine"><b>Owned</b></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="Favorites">Favorites</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MasterPiece" asp-action="Favorites"><b>Favorites</b></a>
                             </li>
                             if (User.IsInRole(WoodMasters2.Core.Constants.RoleConstants.Admin))
                             {
-                               <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Users" asp-action="Index">Administration</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Admin" asp-action="Index">AllUsers</a>
+                                </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Admin" asp-action="AddCategory">AddCategory</a>
+                                </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Admin" asp-action="AddWood">AddWood</a>
+                                </li>
                             }
 
                         }

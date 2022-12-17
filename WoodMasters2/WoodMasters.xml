@@ -4,22 +4,79 @@
         <name>WoodMasters2</name>
     </assembly>
     <members>
-        <member name="T:WoodMasters2.Areas.Administration.Controllers.UsersController">
+        <member name="T:WoodMasters2.Areas.Administration.Controllers.AdminController">
             <summary>
             Admin Controller
             </summary>
         </member>
-        <member name="M:WoodMasters2.Areas.Administration.Controllers.UsersController.#ctor(WoodMasters2.Core.Data.WMDbContext)">
+        <member name="M:WoodMasters2.Areas.Administration.Controllers.AdminController.#ctor(WoodMasters2.Core.Data.WMDbContext)">
             <summary>
             Home controller for administration
             </summary>
             <param name="_context"></param>
         </member>
-        <member name="M:WoodMasters2.Areas.Administration.Controllers.UsersController.Index">
+        <member name="M:WoodMasters2.Areas.Administration.Controllers.AdminController.Index">
             <summary>
             Admin Index method
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Areas.Administration.Controllers.AdminController.AddCategory">
+            <summary>
+            Get method to add Category
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Areas.Administration.Controllers.AdminController.AddCategory(WoodMasters2.Areas.Administration.Models.CategoryModel)">
+            <summary>
+            Post Method to add Category
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Areas.Administration.Controllers.AdminController.AddWood">
+            <summary>
+            Get Method for adding type of Wood
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WoodMasters2.Areas.Administration.Controllers.AdminController.AddWood(WoodMasters2.Areas.Administration.Models.WoodModel)">
+            <summary>
+            Post method to add wood type
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WoodMasters2.Areas.Administration.Controllers.BaseController">
+            <summary>
+            Base controller for the Admin area
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Controllers.BaseController.UserFirstName">
+            <summary>
+            Creating Claim: UserFirstName
+            </summary>
+        </member>
+        <member name="M:WoodMasters2.Areas.Administration.Controllers.BaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            Attaching UserFirstName always to the ViewBag
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:WoodMasters2.Areas.Administration.Models.CategoryModel">
+            <summary>
+            New Category Model
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Models.CategoryModel.Id">
+            <summary>
+            Id of the Category
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Models.CategoryModel.Name">
+            <summary>
+            Name of the Category
+            </summary>
         </member>
         <member name="T:WoodMasters2.Areas.Administration.Models.UsersModel">
             <summary>
@@ -29,6 +86,41 @@
         <member name="P:WoodMasters2.Areas.Administration.Models.UsersModel.MasterPiecesCount">
             <summary>
             MP Count
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Models.UsersModel.MasterUserName">
+            <summary>
+            Master's UserName
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Models.UsersModel.MasterFirstName">
+            <summary>
+            Master's First Name
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Models.UsersModel.MasterLastName">
+            <summary>
+            Master's Last Name
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Models.UsersModel.MasterEmail">
+            <summary>
+            Master's Email
+            </summary>
+        </member>
+        <member name="T:WoodMasters2.Areas.Administration.Models.WoodModel">
+            <summary>
+            Wood adding model
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Models.WoodModel.Id">
+            <summary>
+            Id of the Wood
+            </summary>
+        </member>
+        <member name="P:WoodMasters2.Areas.Administration.Models.WoodModel.Type">
+            <summary>
+            Type of the Wood
             </summary>
         </member>
         <member name="T:WoodMasters2.Controllers.BaseController">

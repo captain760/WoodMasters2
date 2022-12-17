@@ -78,8 +78,8 @@ namespace WoodMasters2.Controllers
                     }
                 },
                 Email = model.Email,
-                EmailConfirmed = true,
-                
+                PhoneNumber = model.PhoneNumber,
+                EmailConfirmed = true                
             };
             
             var result = await userManager.CreateAsync(user, model.Password);

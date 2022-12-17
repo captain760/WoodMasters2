@@ -17,6 +17,12 @@ namespace WoodMasters2.Core.Models.User
         public string LastName { get; set; } = null!;
 
         [Required]
+        [StringLength(15, MinimumLength = 7)]
+        [Phone]
+        [Display(Name = "Phone number")]
+        public string PhoneNumber { get; set; } = null!;
+
+        [Required]
         [EmailAddress]
         [StringLength(60, MinimumLength = 10)]
         public string Email { get; set; } = null!;

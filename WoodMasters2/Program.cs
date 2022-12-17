@@ -69,6 +69,7 @@ app.MapAreaControllerRoute(
      areaName: "Administration",
      pattern: "Administration/{controller=Users}/{action=Index}/{id?}");
 
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -35,7 +35,7 @@ namespace WoodMasters2.Core.Contracts
 
         Task <MasterPiece> GetMasterPieceByIdAsync(int id);
         Task<MasterPieceViewModel> GetMasterPieceViewByIdAsync(int id);
-        MasterPieceQueryModel AllCrafts(
+        Task<MasterPieceQueryModel> AllCrafts(
             string? category = null,
             string? searchKey = null,
             MasterPieceSorting sorting = MasterPieceSorting.Newest,

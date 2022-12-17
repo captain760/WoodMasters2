@@ -12,19 +12,27 @@ namespace WoodMasters2.Areas.Administration.Models
         /// <summary>
         /// MP Count
         /// </summary>
-        
-        public int MasterPiecesCount { get; set; }
 
-        
-        public string MasterUserName { get; set; }
+        public int MasterPiecesCount { get; set; } 
 
-        
-        public string MasterFirstName { get; set; }
+        /// <summary>
+        /// Master's UserName
+        /// </summary>
+        public string MasterUserName { get; set; } = null!;
 
-       
-        public string MasterLastName { get; set; }
+        /// <summary>
+        /// Master's First Name
+        /// </summary>
+        public string MasterFirstName { get; set; } = null!;
 
-        
-        public string MasterEmail { get; set; }
+        /// <summary>
+        /// Master's Last Name
+        /// </summary>
+        public string MasterLastName { get; set; } = null!;
+
+        /// <summary>
+        /// Master's Email
+        /// </summary>
+        public string MasterEmail { get; set; } = null!;
     }
 }

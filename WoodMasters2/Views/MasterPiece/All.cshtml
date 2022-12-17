@@ -122,13 +122,13 @@ asp-route-sorting="@((int)Model.Sorting)">>></a>
             refilRating($(this));
         });
         $("img.rating").click(function (e) {
-           // $("img.rating").unbind("mouseout mouseover click");
+           
             $(this).css('color', 'red');
-           // alert(e.currentTarget + ' was clicked!');
+           
             // call ajax methods to update database
             var url = "/Rating/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
-            $.post(url, null, function (data) {
-                $(e.currentTarget).closest('div').find('div.result').text(data).css('color','red') // $("#result").text(data);
+            $.get(url, null, function (data) {
+                $(e.currentTarget).closest('div').find('div.result').text(data).css('color', 'red')
             });
         });
     });
