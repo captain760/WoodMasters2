@@ -1,6 +1,6 @@
 # WoodMasters2
 
-Web application for a simple social network between Woodworking hobbyists or professionals.
+Web application for a simple Woodworking exhibition of hobbyists or professionals, showing and commenting their masterpieces, being able to socialize or just sell their work.
 This project is the defense project for ASP.NET Core course (part of the C# Web Module at Software University).
 
 ## Table of Contents
