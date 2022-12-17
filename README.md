@@ -4,7 +4,7 @@ Web application for a simple social network between Woodworking hobbyists or pro
 This project is the defense project for ASP.NET Core course (part of the C# Web Module at Software University).
 
 ## Table of Contents
-1. [Technology stack](https://github.com/Captain760/WoodMasters2-stack)
+1. [Technology stack](https://github.com/Captain760/WoodMasters2#stack)
 2. [Screenshots](https://github.com/Captain760/WoodMasters2#screenshots)
 3. [Application Configurations](https://github.com/Captain760/WoodMasters2#application-configurations)
 4. [Credits](https://github.com/Captain760/WoodMasters2#credits)
